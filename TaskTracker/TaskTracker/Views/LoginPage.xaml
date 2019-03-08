@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TaskTracker.Views.LoginPage">
+    <ContentPage.Content>
+        <StackLayout Padding="5,50" Spacing="20">
+            <Frame>
+                <StackLayout Spacing="10">
+                    <Entry Text="{Binding Mail}" Placeholder="Mail" Keyboard="Email" TextColor="White" HeightRequest="50"></Entry>
+                    <Entry Text="{Binding Password}" Placeholder="Hasło" IsPassword="True" TextColor="White" HeightRequest="50"></Entry>
+                </StackLayout>
+            </Frame>
+            <Button Command="{Binding LoginCommand}" Text="Zaloguj" BackgroundColor="#4107a5" ></Button>
+            <Button Command="{Binding RegisterCommand}" Text="Zarejestruj"></Button>
+            <Button Command="{Binding ForgetPassword}" Text="Zapomniałem hasła" ></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

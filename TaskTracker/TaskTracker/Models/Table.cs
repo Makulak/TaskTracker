@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TaskTracker.Models
+﻿namespace TaskTracker.Models
 {
-    class Table
+    internal class Table
     {
+        public string Name { get; set; }
+        public Column Columns { get; set; }
+        public User[] AssignedUser { get; set; }
     }
 }
