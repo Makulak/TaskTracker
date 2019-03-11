@@ -12,7 +12,7 @@ namespace TaskTracker.ViewModels.Page
             set
             {
                 _mail = value;
-                OnPropertyChanged("Mail");
+                OnPropertyChanged("Login");
             }
         }
         private string _mail;

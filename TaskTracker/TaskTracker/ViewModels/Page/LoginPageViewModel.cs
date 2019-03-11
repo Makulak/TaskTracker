@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Windows.Input;
 using TaskTracker.Data;
+using TaskTracker.Exceptions;
+using TaskTracker.Models;
 using Xamarin.Forms;
 
 namespace TaskTracker.ViewModels.Page
 {
     class LoginPageViewModel : BaseViewModel
     {
-        public string Mail
+        public string Login
         {
-            get => _mail;
+            get => _login;
             set
             {
-                _mail = value;
-                OnPropertyChanged("Mail");
+                _login = value;
+                OnPropertyChanged("Login");
             }
         }
-        private string _mail;
+        private string _login;
 
         public string Password
         {
@@ -33,10 +35,10 @@ namespace TaskTracker.ViewModels.Page
         public ICommand RegisterCommand { get; set; }
         public ICommand ForgetPasswordCommand { get; set; }
 
-        public Action DisplayInvalidLoginMessage;
         public Action DisplayRegisterPage;
         public Action DisplayForgetPasswordPage;
         public Action DisplayMainPage;
+        public Action<string> DisplayExceptionMessage;
 
         private RestManager _manager;
 
@@ -45,31 +47,30 @@ namespace TaskTracker.ViewModels.Page
             LoginCommand = new Command(OnLogin);
             RegisterCommand = new Command(OnRegister);
             ForgetPasswordCommand = new Command(OnForgetPasswordCommand);
+
+            _manager = new RestManager(new RestService());
         }
 
         private void OnForgetPasswordCommand()
         {
-            throw new NotImplementedException();
+            DisplayForgetPasswordPage();
         }
 
         private void OnRegister()
         {
-            throw new NotImplementedException();
+            DisplayRegisterPage();
         }
 
-        private void OnLogin()
+        private async void OnLogin()
         {
-            _manager = new RestManager(new RestService(Mail,Password));
-
-            bool isLoginOk = true;
-
-            if (isLoginOk)
+            try
             {
+                await _manager.LogIn(new User(Login, Password));
                 DisplayMainPage();
             }
-            else
+            catch (RestException ex)
             {
-                DisplayInvalidLoginMessage();
+                DisplayExceptionMessage(ex.CompleteMessage);
             }
         }
     }

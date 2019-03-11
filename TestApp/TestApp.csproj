@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -55,6 +58,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="..\TaskTracker\TaskTracker\Data\GlobalValues.cs">
+      <Link>GlobalValues.cs</Link>
+    </Compile>
+    <Compile Include="..\TaskTracker\TaskTracker\Data\RestManager.cs">
+      <Link>RestManager.cs</Link>
+    </Compile>
+    <Compile Include="..\TaskTracker\TaskTracker\Data\RestService.cs">
+      <Link>RestService.cs</Link>
+    </Compile>
+    <Compile Include="..\TaskTracker\TaskTracker\Models\Column.cs">
+      <Link>Column.cs</Link>
+    </Compile>
+    <Compile Include="..\TaskTracker\TaskTracker\Models\Table.cs">
+      <Link>Table.cs</Link>
+    </Compile>
+    <Compile Include="..\TaskTracker\TaskTracker\Models\Task.cs">
+      <Link>Task.cs</Link>
+    </Compile>
+    <Compile Include="..\TaskTracker\TaskTracker\Models\User.cs">
+      <Link>User.cs</Link>
+    </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\VM\ColumnVM.cs" />
@@ -69,19 +93,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Data\GlobalValues.cs" />
-    <Compile Include="Data\RestManager.cs" />
-    <Compile Include="Data\RestService.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Column.cs" />
-    <Compile Include="Models\Table.cs" />
-    <Compile Include="Models\Task.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -99,6 +116,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

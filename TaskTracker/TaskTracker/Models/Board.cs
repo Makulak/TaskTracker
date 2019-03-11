@@ -1,6 +1,6 @@
 ﻿namespace TaskTracker.Models
 {
-    internal class Table
+    internal class Board
     {
         public string Name { get; set; }
         public Column Columns { get; set; }

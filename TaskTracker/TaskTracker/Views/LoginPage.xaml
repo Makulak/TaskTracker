@@ -6,11 +6,11 @@
         <StackLayout Padding="5,50" Spacing="20">
             <Frame>
                 <StackLayout Spacing="10">
-                    <Entry Text="{Binding Mail}" Placeholder="Mail" Keyboard="Email" TextColor="White" HeightRequest="50"></Entry>
-                    <Entry Text="{Binding Password}" Placeholder="Hasło" IsPassword="True" TextColor="White" HeightRequest="50"></Entry>
+                    <Entry Text="{Binding Login}" Placeholder="Login" Keyboard="Email" TextColor="Black" HeightRequest="50"></Entry>
+                    <Entry Text="{Binding Password}" Placeholder="Hasło" IsPassword="True" TextColor="Black" HeightRequest="50"></Entry>
                 </StackLayout>
             </Frame>
-            <Button Command="{Binding LoginCommand}" Text="Zaloguj" BackgroundColor="#4107a5" ></Button>
+            <Button Command="{Binding LoginCommand}" Text="Zaloguj" BackgroundColor="#4107a5" TextColor="White" ></Button>
             <Button Command="{Binding RegisterCommand}" Text="Zarejestruj"></Button>
             <Button Command="{Binding ForgetPassword}" Text="Zapomniałem hasła" ></Button>
         </StackLayout>

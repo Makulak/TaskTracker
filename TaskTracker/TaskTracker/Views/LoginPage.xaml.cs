@@ -10,11 +10,11 @@ namespace TaskTracker.Views
         public LoginPage()
         {
             LoginPageViewModel vm = new LoginPageViewModel();
-            vm.DisplayInvalidLoginMessage += () =>
-                DisplayAlert("Error kurła", "Spierdalaj, zły login albo hasło", "Spoczko");
 
-            vm.DisplayMainPage += () => Navigation.PushAsync(new MainPage());
-            vm.DisplayRegisterPage += () => Navigation.PushAsync(new RegisterPage());
+            vm.DisplayMainPage += () => Application.Current.MainPage = new NavigationPage(new MainPage());
+            vm.DisplayRegisterPage += async () => await Navigation.PushAsync(new RegisterPage());
+            vm.DisplayExceptionMessage += (exMessage) => DisplayAlert("Rest error", exMessage, "OK");
+            vm.DisplayForgetPasswordPage += () => DisplayAlert("Wypierdalaj", "Jeszcze tego nie zrobilem", "bez spiny");
 
             BindingContext = vm;
             InitializeComponent();

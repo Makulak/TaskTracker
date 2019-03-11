@@ -26,7 +26,7 @@ namespace TaskTracker.Data
         public async Task<List<User>> GetUsers()
         {
             List<User> List = new List<User>();
-            var uri = new Uri(string.Format(GlobalValues.RestUrl, string.Empty));
+            var uri = new Uri(GlobalValues.RestUrl + @"/users/all");
 
             try
             {
