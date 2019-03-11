@@ -14,11 +14,11 @@ namespace TaskTracker.Data
 {
     internal class RestService : IRestService
     {
-        private readonly HttpClient _client;
+        private static readonly HttpClient Client;
 
-        public RestService()
+        static RestService()
         {
-            _client = new HttpClient();
+            Client = new HttpClient();
         }
 
         public async Task LogIn(User user)
@@ -26,15 +26,15 @@ namespace TaskTracker.Data
             var uri = UriFactory.CreateEndpointUri("users/login");
             var param = JsonContentFactory.CreateContent(user);
 
-            var response = await _client.PostAsync(uri, param);
+            var response = await Client.PostAsync(uri, param);
 
             if (response.IsSuccessStatusCode)
             {
                 var authData = $"{user.Login}:{user.Password}";
                 var authHeaderValue = Convert.ToBase64String(Encoding.UTF8.GetBytes(authData));
 
-                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authHeaderValue);
-                _client.MaxResponseContentBufferSize = 256000;
+                Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authHeaderValue);
+                Client.MaxResponseContentBufferSize = 256000;
             }
             else
             {
@@ -47,7 +47,7 @@ namespace TaskTracker.Data
             var uri = UriFactory.CreateEndpointUri("users/register");
             var param = JsonContentFactory.CreateContent(user);
 
-            var response = await _client.PostAsync(uri, param);
+            var response = await Client.PostAsync(uri, param);
 
             if (response.IsSuccessStatusCode)
             {
@@ -65,7 +65,7 @@ namespace TaskTracker.Data
             List<User> List = new List<User>();
             var uri = new Uri(GlobalValues.RestUrl + @"users/all");
 
-            var response = await _client.GetAsync(uri);
+            var response = await Client.GetAsync(uri);
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();

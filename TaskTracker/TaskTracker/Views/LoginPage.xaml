@@ -10,9 +10,9 @@
                     <Entry Text="{Binding Password}" Placeholder="Hasło" IsPassword="True" TextColor="Black" HeightRequest="50"></Entry>
                 </StackLayout>
             </Frame>
-            <Button Command="{Binding LoginCommand}" Text="Zaloguj" BackgroundColor="#4107a5" TextColor="White" ></Button>
-            <Button Command="{Binding RegisterCommand}" Text="Zarejestruj"></Button>
-            <Button Command="{Binding ForgetPassword}" Text="Zapomniałem hasła" ></Button>
+            <Button Command="{Binding LoginCommand}" Text="Zaloguj" BackgroundColor="#4107a5" TextColor="White" />
+            <Button Command="{Binding RegisterCommand}" Text="Zarejestruj"/>
+            <Button Command="{Binding ForgetPasswordCommand}" Text="Zapomniałem hasła" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

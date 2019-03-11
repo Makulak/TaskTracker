@@ -8,7 +8,7 @@
                 <Entry Text="{Binding Login}" Placeholder="Login" Keyboard="Text" TextColor="Black" HeightRequest="50"></Entry>
                 <Entry Text="{Binding Mail}" Placeholder="Mail" Keyboard="Email" TextColor="Black" HeightRequest="50"></Entry>
                 <Entry Text="{Binding PasswordOne}" Placeholder="Hasło" IsPassword="True" TextColor="Black" HeightRequest="50"></Entry>
-                <Entry Text="{Binding PasswordTwo}" Placeholder="Hasło" IsPassword="True" TextColor="Black" HeightRequest="50"></Entry>
+                <Entry Text="{Binding PasswordTwo}" Placeholder="Powtórz hasło" IsPassword="True" TextColor="Black" HeightRequest="50"></Entry>
             </StackLayout>
 
             <Button Command="{Binding RegisterCommand}" Text="Zarejestruj"></Button>
