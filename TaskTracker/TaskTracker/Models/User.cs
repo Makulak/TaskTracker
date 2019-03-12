@@ -4,20 +4,28 @@ namespace TaskTracker.Models
 {
     internal class User
     {
+        [JsonProperty(PropertyName = "id")]
+        public int Id { get; set; }
+
         [JsonProperty(PropertyName = "login")]
         public string Login { get; set; }
 
         [JsonProperty(PropertyName = "password")]
         public string Password { get; set; }
 
-        [JsonProperty(PropertyName = "mail")]
+        [JsonProperty(PropertyName = "mail")] 
         public string Mail { get; set; }
 
-        [JsonProperty(PropertyName = "boards")]
-        public Board[] Boards { get; set; }
+        [JsonProperty(PropertyName = "boardIds")]
+        public int[] BoardIds { get; set; }
 
         public User()
+        {}
+
+        public User(int id, string login)
         {
+            Id = id;
+            Login = login;
         }
 
         public User(string login, string password)

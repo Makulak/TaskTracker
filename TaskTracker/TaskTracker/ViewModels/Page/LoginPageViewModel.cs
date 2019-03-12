@@ -40,7 +40,7 @@ namespace TaskTracker.ViewModels.Page
         public Action DisplayMainPage;
         public Action<string> DisplayExceptionMessage;
 
-        private RestManager _manager;
+        private readonly RestManager _manager;
 
         public LoginPageViewModel()
         {

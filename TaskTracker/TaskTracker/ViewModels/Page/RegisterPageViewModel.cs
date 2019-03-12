@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Windows.Input;
+using TaskTracker.Data;
+using TaskTracker.Exceptions;
+using TaskTracker.Models;
 using Xamarin.Forms;
 
 namespace TaskTracker.ViewModels.Page
@@ -52,25 +55,36 @@ namespace TaskTracker.ViewModels.Page
 
         public ICommand RegisterCommand { get; set; }
 
-        public Action DisplayMainPage;
         public Action DisplayInvalidPasswordMessage;
+        public Action DisplayLoginPage;
+        public Action<string> DisplayExceptionMessage;
+
+        private readonly RestManager _manager;
 
         public RegisterPageViewModel()
         {
             RegisterCommand = new Command(OnRegister);
+
+            _manager = new RestManager(new RestService());
         }
 
-        private void OnRegister()
+        private async void OnRegister()
         {
-            bool registerOk = true;
-
             if (PasswordOne != PasswordTwo)
             {
                 DisplayInvalidPasswordMessage();
             }
-            else if (registerOk)
+            else 
             {
-                DisplayMainPage();
+                try
+                {
+                    await _manager.Register(new User(Login, PasswordOne, Mail));
+                    DisplayLoginPage();
+                }
+                catch (RestException ex)
+                {
+                    DisplayExceptionMessage(ex.CompleteMessage);
+                }
             }
         }
     }

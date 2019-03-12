@@ -11,10 +11,13 @@ namespace TaskTracker.Views
 		{
             RegisterPageViewModel vm = new RegisterPageViewModel();
 
-            vm.DisplayMainPage += () => Navigation.PushAsync(new MainPage());
-            vm.DisplayInvalidPasswordMessage += () =>
-                DisplayAlert("Zjebałeś XD", "W dupe se pogrzeb tą rejestracją", "Ok, wypierdalam");
-			InitializeComponent ();
+            vm.DisplayInvalidPasswordMessage += () => DisplayAlert("Zjebałeś XD", "W dupe se pogrzeb tą rejestracją", "Ok, wypierdalam");
+            vm.DisplayExceptionMessage += (exMessage) => DisplayAlert("Rest error", exMessage, "OK");
+            vm.DisplayLoginPage += () => Navigation.PopAsync();
+
+            BindingContext = vm;
+
+            InitializeComponent ();
 		}
 	}
 }

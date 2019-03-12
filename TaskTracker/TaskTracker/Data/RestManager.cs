@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TaskTracker.Models;
 using Task = System.Threading.Tasks.Task;
@@ -19,14 +20,20 @@ namespace TaskTracker.Data
             await _restService.LogIn(user);
         }
 
-        public Task<User> Register(User user)
+        public Task Register(User user)
         {
             return _restService.Register(user);
         }
 
+        [Obsolete]
         public Task<List<User>> GetUsers()
         {
             return _restService.GetUsers();
+        }
+
+        public Task<List<Board>> GetLoggedUserBoards()
+        {
+            return _restService.GetLoggedUserBoards();
         }
     }
 }

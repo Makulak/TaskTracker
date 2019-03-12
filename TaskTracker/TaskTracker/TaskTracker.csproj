@@ -15,6 +15,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Xamarin.Forms.CarouselView">
+      <HintPath>..\..\..\..\..\..\.nuget\packages\xamarin.forms.carouselview\2.3.0-pre2\lib\MonoAndroid10\Xamarin.Forms.CarouselView.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\BoardPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

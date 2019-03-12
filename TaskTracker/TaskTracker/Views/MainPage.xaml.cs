@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using TaskTracker.ViewModels.Page;
+using Xamarin.Forms;
 
 namespace TaskTracker.Views
 {
@@ -6,6 +7,10 @@ namespace TaskTracker.Views
     {
         public MainPage()
         {
+            var vm = new MainPageViewModel();
+
+            BindingContext = vm;
+
             InitializeComponent();
         }
     }

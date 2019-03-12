@@ -2,13 +2,16 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:TaskTracker"
-             x:Class="TaskTracker.Views.MainPage">
+             x:Class="TaskTracker.Views.MainPage"
+             xmlns:control="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView">
 
     <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+        <control:CarouselView ItemsSource="{Binding SelectedBoard.Columns}">
+            <control:CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="asdf"></Label>
+                </DataTemplate>
+            </control:CarouselView.ItemTemplate>
+        </control:CarouselView>
     </StackLayout>
-
 </ContentPage>
