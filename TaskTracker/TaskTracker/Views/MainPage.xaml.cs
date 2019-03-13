@@ -1,11 +1,12 @@
-﻿using TaskTracker.ViewModels.Page;
+﻿using TaskTracker.Models;
+using TaskTracker.ViewModels.Page;
 using Xamarin.Forms;
 
 namespace TaskTracker.Views
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+        internal MainPage(Board selectedBoard)
         {
             var vm = new MainPageViewModel();
 

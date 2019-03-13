@@ -10,6 +10,7 @@ namespace TaskTracker.Views
 		public BoardPage ()
 		{
             BoardPageViewModel vm = new BoardPageViewModel();
+            vm.DisplayMainPage = (selectedBoard) => Navigation.PushAsync(new MainPage(selectedBoard));
 
             BindingContext = vm;
 

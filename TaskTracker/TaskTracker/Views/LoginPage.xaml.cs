@@ -11,7 +11,7 @@ namespace TaskTracker.Views
         {
             LoginPageViewModel vm = new LoginPageViewModel();
 
-            vm.DisplayMainPage += () => Application.Current.MainPage = new NavigationPage(new MainPage());
+            vm.DisplayMainPage += () => Application.Current.MainPage = new NavigationPage(new BoardPage());
             vm.DisplayRegisterPage += async () => await Navigation.PushAsync(new RegisterPage());
             vm.DisplayExceptionMessage += (exMessage) => DisplayAlert("Rest error", exMessage, "OK");
             vm.DisplayForgetPasswordPage += () => DisplayAlert("Wypierdalaj", "Jeszcze tego nie zrobilem", "bez spiny");

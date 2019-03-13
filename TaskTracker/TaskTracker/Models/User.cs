@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace TaskTracker.Models
 {
+    [Serializable]
     internal class User
     {
         [JsonProperty(PropertyName = "id")]

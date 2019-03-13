@@ -1,7 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace TaskTracker.Models
 {
+    [Serializable]
     internal class Board
     {
         [JsonProperty(PropertyName = "id")]
@@ -11,7 +14,7 @@ namespace TaskTracker.Models
         public string Name { get; set; }
 
         [JsonProperty(PropertyName = "columns")]
-        public Column Columns { get; set; }
+        public List<Column>Columns { get; set; }
 
         [JsonProperty(PropertyName = "assignedUserIds")]
         public int[] AssignedUsersIds { get; set; }

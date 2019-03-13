@@ -36,8 +36,10 @@ namespace TaskTracker.Data
                 Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authHeaderValue);
                 Client.MaxResponseContentBufferSize = 256000;
 
-                var content = await response.Content.ReadAsStringAsync();
-                GlobalValues.LoggedUser = JsonConvert.DeserializeObject<User>(content);
+                //var content = await response.Content.ReadAsStringAsync();
+                //GlobalValues.LoggedUser = JsonConvert.DeserializeObject<User>(content);
+
+                GlobalValues.LoggedUser = new User(2,"admin");
             }
             else
             {
