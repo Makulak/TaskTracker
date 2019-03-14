@@ -38,7 +38,6 @@ namespace TaskTracker.ViewModels.Page
         public Action DisplayRegisterPage;
         public Action DisplayForgetPasswordPage;
         public Action DisplayMainPage;
-        public Action<string> DisplayExceptionMessage;
 
         private readonly RestManager _manager;
 
@@ -46,19 +45,19 @@ namespace TaskTracker.ViewModels.Page
         {
             LoginCommand = new Command(OnLogin);
             RegisterCommand = new Command(OnRegister);
-            ForgetPasswordCommand = new Command(OnForgetPasswordCommand);
+            ForgetPasswordCommand = new Command(OnForgetPassword);
 
             _manager = new RestManager(new RestService());
         }
 
-        private void OnForgetPasswordCommand()
+        private void OnForgetPassword()
         {
-            DisplayForgetPasswordPage();
+            DisplayForgetPasswordPage?.Invoke();
         }
 
         private void OnRegister()
         {
-            DisplayRegisterPage();
+            DisplayRegisterPage?.Invoke();
         }
 
         private async void OnLogin()
@@ -66,11 +65,11 @@ namespace TaskTracker.ViewModels.Page
             try
             {
                 await _manager.LogIn(new User(Login, Password));
-                DisplayMainPage();
+                DisplayMainPage?.Invoke();
             }
             catch (RestException ex)
             {
-                DisplayExceptionMessage(ex.CompleteMessage);
+                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
             }
         }
     }

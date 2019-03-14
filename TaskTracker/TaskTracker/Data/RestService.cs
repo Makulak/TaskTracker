@@ -36,10 +36,8 @@ namespace TaskTracker.Data
                 Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authHeaderValue);
                 Client.MaxResponseContentBufferSize = 256000;
 
-                //var content = await response.Content.ReadAsStringAsync();
-                //GlobalValues.LoggedUser = JsonConvert.DeserializeObject<User>(content);
-
-                GlobalValues.LoggedUser = new User(2,"admin");
+                var content = await response.Content.ReadAsStringAsync();
+                GlobalValues.LoggedUser = JsonConvert.DeserializeObject<User>(content);
             }
             else
             {
@@ -79,7 +77,7 @@ namespace TaskTracker.Data
 
         public async Task<List<Board>> GetLoggedUserBoards()
         {
-            var uri = UriFactory.CreateEndpointUri("boards/all");
+            var uri = UriFactory.CreateEndpointUri("boards/show");
 
             var response = await Client.GetAsync(uri);
 
@@ -91,6 +89,19 @@ namespace TaskTracker.Data
                 return list;
             }
             else
+            {
+                throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
+            }
+        }
+
+        public async Task DeleteBoard(int id)
+        {
+            var uri = UriFactory.CreateEndpointUri("boards/delete");
+            var param = JsonContentFactory.CreateContent(id);
+
+            var response = await Client.PostAsync(uri, param);
+
+            if (!response.IsSuccessStatusCode)
             {
                 throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
             }

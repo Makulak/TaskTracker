@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using TaskTracker.Data;
+using TaskTracker.Exceptions;
 using TaskTracker.Models;
 using Xamarin.Forms;
 
@@ -45,8 +46,13 @@ namespace TaskTracker.ViewModels.Page
         private bool _isRefreshing;
 
         public ICommand RefreshCommand { get; set; }
+        public ICommand AddBoardCommand { get; set; }
+        public ICommand DeleteBoardCommand { get; set; }
+        public ICommand EditBoardCommand { get; set; }
 
         public Action<Board> DisplayMainPage;
+        public Action<Board> DisplayEditBoard;
+        public Action DisplayAddBoard;
 
         private readonly RestManager _manager;
 
@@ -55,13 +61,42 @@ namespace TaskTracker.ViewModels.Page
             _manager = new RestManager(new RestService());
 
             RefreshCommand = new Command(OnRefresh);
+            AddBoardCommand = new Command(OnAddBoard);
+            DeleteBoardCommand = new Command(OnDeleteBoard);
+            EditBoardCommand = new Command(OnEditBoard);
 
             SelectedBoard = null;
 
             GetUserBoards();
         }
 
-        private void OnRefresh(object obj)
+        private void OnEditBoard(object obj)
+        {
+            if (obj is Board board && DisplayAddBoard != null)
+                DisplayEditBoard?.Invoke(board);
+        }
+
+        private void OnDeleteBoard(object obj)
+        {
+            if (obj is Board board)
+            {
+                DeleteSelectedBoard(board);
+                GetUserBoards();
+            }
+        }
+
+        private void OnAddBoard()
+        {
+            DisplayAddBoard?.Invoke();
+        }
+
+        private void OnBoardSelected()
+        {
+            if (SelectedBoard != null)
+                DisplayMainPage?.Invoke(SelectedBoard);
+        }
+
+        private void OnRefresh()
         {
             GetUserBoards();
 
@@ -70,15 +105,28 @@ namespace TaskTracker.ViewModels.Page
 
         private async void GetUserBoards()
         {
-            List<Board> boards = await _manager.GetLoggedUserBoards();
+            try
+            {
+                List<Board> boards = await _manager.GetLoggedUserBoards();
 
-            UserBoards = new ObservableCollection<Board>(boards);
+                UserBoards = new ObservableCollection<Board>(boards);
+            }
+            catch (RestException ex)
+            {
+                DisplayExceptionMessage(ex.CompleteMessage);
+            }
         }
 
-        private void OnBoardSelected()
+        private async void DeleteSelectedBoard(Board board)
         {
-            if (SelectedBoard != null)
-                DisplayMainPage(SelectedBoard);
+            try
+            {
+                await _manager.DeleteBoard(board.Id);
+            }
+            catch (RestException ex)
+            {
+                DisplayExceptionMessage(ex.CompleteMessage);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace TaskTracker.ViewModels
 {
@@ -10,5 +11,7 @@ namespace TaskTracker.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public Action<string> DisplayExceptionMessage;
     }
 }

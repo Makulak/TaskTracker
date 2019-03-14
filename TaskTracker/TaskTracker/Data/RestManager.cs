@@ -35,5 +35,10 @@ namespace TaskTracker.Data
         {
             return _restService.GetLoggedUserBoards();
         }
+
+        public Task DeleteBoard(int id)
+        {
+            return _restService.DeleteBoard(id);
+        }
     }
 }

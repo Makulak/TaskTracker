@@ -57,7 +57,6 @@ namespace TaskTracker.ViewModels.Page
 
         public Action DisplayInvalidPasswordMessage;
         public Action DisplayLoginPage;
-        public Action<string> DisplayExceptionMessage;
 
         private readonly RestManager _manager;
 
@@ -72,18 +71,18 @@ namespace TaskTracker.ViewModels.Page
         {
             if (PasswordOne != PasswordTwo)
             {
-                DisplayInvalidPasswordMessage();
+                DisplayInvalidPasswordMessage?.Invoke();
             }
             else 
             {
                 try
                 {
                     await _manager.Register(new User(Login, PasswordOne, Mail));
-                    DisplayLoginPage();
+                    DisplayLoginPage?.Invoke();
                 }
                 catch (RestException ex)
                 {
-                    DisplayExceptionMessage(ex.CompleteMessage);
+                    DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
                 }
             }
         }
