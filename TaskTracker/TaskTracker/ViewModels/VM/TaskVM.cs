@@ -1,10 +1,20 @@
-﻿using System.Threading.Tasks;
+﻿using TaskTracker.Models;
 using TaskTracker.ViewModels.VM.Base;
 
 namespace TaskTracker.ViewModels.VM
 {
     internal class TaskVM : BaseVM
     {
-        private Task Base { get; set; }
+        public Task Base { get; set; }
+
+        public string Name => Base.Name;
+
+        public static implicit operator TaskVM(Task task)
+        {
+            return new TaskVM()
+            {
+                Base = task
+            };
+        }
     }
 }

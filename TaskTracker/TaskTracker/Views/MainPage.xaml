@@ -9,7 +9,16 @@
         <control:CarouselView ItemsSource="{Binding SelectedBoard.ColumnsCollection}">
             <control:CarouselView.ItemTemplate>
                 <DataTemplate>
-                    <Label Text="{Binding Name}"></Label>
+                    <StackLayout Margin="20">
+                        <Label Text="{Binding Name}"></Label>
+                        <ListView ItemsSource="{Binding TaskCollection}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextCell Text="{Binding Name}"></TextCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
                 </DataTemplate>
             </control:CarouselView.ItemTemplate>
         </control:CarouselView>

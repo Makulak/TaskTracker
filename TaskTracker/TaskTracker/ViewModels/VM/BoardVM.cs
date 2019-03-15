@@ -10,7 +10,7 @@ namespace TaskTracker.ViewModels.VM
 
         public string Name => Base.Name;
 
-        public ObservableCollection<Column> ColumnsCollection => new ObservableCollection<Column>(Base.Columns);
+        public ObservableCollection<ColumnVM> ColumnsCollection => new ObservableCollection<ColumnVM>(Base.Columns.ConvertAll<ColumnVM>(x => x));
 
         public static implicit operator BoardVM(Board board)
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace TaskTracker.Models
@@ -13,6 +14,6 @@ namespace TaskTracker.Models
         public string Name { get; set; }
 
         [JsonProperty(PropertyName = "tasks")]
-        public Task[] Tasks { get; set; }
+        public List<Task> Tasks { get; set; }
     }
 }

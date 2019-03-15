@@ -15,6 +15,11 @@ namespace TaskTracker.ViewModels.Page
         {
             SelectedBoard = selectedBoard;
 
+            TaskVM t = new TaskVM();
+            Task y = new Task();
+
+            t = (TaskVM)y;
+
             _manager = new RestManager(new RestService());
         }
     }
