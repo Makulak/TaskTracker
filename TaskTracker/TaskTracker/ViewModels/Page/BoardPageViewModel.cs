@@ -5,13 +5,15 @@ using System.Windows.Input;
 using TaskTracker.Data;
 using TaskTracker.Exceptions;
 using TaskTracker.Models;
+using TaskTracker.ViewModels.Page.Base;
+using TaskTracker.ViewModels.VM;
 using Xamarin.Forms;
 
 namespace TaskTracker.ViewModels.Page
 {
     class BoardPageViewModel : BaseViewModel
     {
-        public ObservableCollection<Board> UserBoards
+        public ObservableCollection<BoardVM>UserBoards
         {
             get => _userBoards;
             set
@@ -20,19 +22,19 @@ namespace TaskTracker.ViewModels.Page
                 OnPropertyChanged("UserBoards");
             }
         }
-        private ObservableCollection<Board> _userBoards;
+        private ObservableCollection<BoardVM> _userBoards;
 
-        public Board SelectedBoard
+        public BoardVM SelectedBoard
         {
             get => _selectedBoard;
             set
             {
                 _selectedBoard = value;
                 OnPropertyChanged("SelectedBoard");
-                OnBoardSelected();
+                OnSelectedBoard();
             }
         }
-        private Board _selectedBoard;
+        private BoardVM _selectedBoard;
 
         public bool IsRefreshing
         {
@@ -50,8 +52,8 @@ namespace TaskTracker.ViewModels.Page
         public ICommand DeleteBoardCommand { get; set; }
         public ICommand EditBoardCommand { get; set; }
 
-        public Action<Board> DisplayMainPage;
-        public Action<Board> DisplayEditBoard;
+        public Action<BoardVM> DisplayMainPage;
+        public Action<BoardVM> DisplayEditBoard;
         public Action DisplayAddBoard;
 
         private readonly RestManager _manager;
@@ -70,6 +72,8 @@ namespace TaskTracker.ViewModels.Page
             GetUserBoards();
         }
 
+        #region Commands
+
         private void OnEditBoard(object obj)
         {
             if (obj is Board board && DisplayAddBoard != null)
@@ -81,6 +85,7 @@ namespace TaskTracker.ViewModels.Page
             if (obj is Board board)
             {
                 DeleteSelectedBoard(board);
+
                 GetUserBoards();
             }
         }
@@ -90,10 +95,10 @@ namespace TaskTracker.ViewModels.Page
             DisplayAddBoard?.Invoke();
         }
 
-        private void OnBoardSelected()
+        private void OnSelectedBoard()
         {
             if (SelectedBoard != null)
-                DisplayMainPage?.Invoke(SelectedBoard);
+                DisplayMainPage?.Invoke(SelectedBoard.Base);
         }
 
         private void OnRefresh()
@@ -103,13 +108,17 @@ namespace TaskTracker.ViewModels.Page
             IsRefreshing = false;
         }
 
+        #endregion
+
+        #region Methods
+
         private async void GetUserBoards()
         {
             try
             {
                 List<Board> boards = await _manager.GetLoggedUserBoards();
 
-                UserBoards = new ObservableCollection<Board>(boards);
+                UserBoards = new ObservableCollection<BoardVM>(boards.ConvertAll<BoardVM>(x => x));
             }
             catch (RestException ex)
             {
@@ -128,5 +137,31 @@ namespace TaskTracker.ViewModels.Page
                 DisplayExceptionMessage(ex.CompleteMessage);
             }
         }
+
+        private async void EditSelectedBoard(Board board)
+        {
+            try
+            {
+                await _manager.EditBoard(board);
+            }
+            catch (RestException ex)
+            {
+                DisplayExceptionMessage(ex.CompleteMessage);
+            }
+        }
+
+        private async void AddNewBoard(string boardName)
+        {
+            try
+            {
+                await _manager.AddNewBoard(boardName);
+            }
+            catch (RestException ex)
+            {
+                DisplayExceptionMessage(ex.CompleteMessage);
+            }
+        }
+
+        #endregion
     }
 }

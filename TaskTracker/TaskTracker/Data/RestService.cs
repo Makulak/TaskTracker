@@ -21,6 +21,8 @@ namespace TaskTracker.Data
             Client = new HttpClient();
         }
 
+        #region User
+
         public async Task LogIn(User user)
         {
             var uri = UriFactory.CreateEndpointUri("users/login");
@@ -58,23 +60,6 @@ namespace TaskTracker.Data
             }
         }
 
-        [Obsolete]
-        public async Task<List<User>> GetUsers()
-        {
-            List<User> list = new List<User>();
-            var uri = UriFactory.CreateEndpointUri("users/all");
-
-            var response = await Client.GetAsync(uri);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-                list = JsonConvert.DeserializeObject<List<User>>(content);
-            }
-
-            return list;
-        }
-
         public async Task<List<Board>> GetLoggedUserBoards()
         {
             var uri = UriFactory.CreateEndpointUri("boards/show");
@@ -94,6 +79,10 @@ namespace TaskTracker.Data
             }
         }
 
+        #endregion
+
+        #region Boards
+
         public async Task DeleteBoard(int id)
         {
             var uri = UriFactory.CreateEndpointUri("boards/delete");
@@ -106,5 +95,38 @@ namespace TaskTracker.Data
                 throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
             }
         }
+
+        public async Task<Board> AddNewBoard(string name)
+        {
+            var uri = UriFactory.CreateEndpointUri("board/add");
+            var param = JsonContentFactory.CreateContent(new Board(name));
+
+            var response = await Client.PostAsync(uri, param);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Board>(content);
+            }
+            else
+            {
+                throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
+            }
+        }
+
+        public async Task EditBoard(Board board)
+        {
+            var uri = UriFactory.CreateEndpointUri("board/edit"); //TODO[JM]: Nazwa endpointa
+            var param = JsonContentFactory.CreateContent(board);
+
+            var response = await Client.PostAsync(uri, param);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
+            }
+        }
+
+        #endregion
     }
 }

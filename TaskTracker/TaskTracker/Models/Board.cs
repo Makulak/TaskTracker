@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using TaskTracker.ViewModels.VM;
 
 namespace TaskTracker.Models
 {
@@ -18,5 +19,10 @@ namespace TaskTracker.Models
 
         [JsonProperty(PropertyName = "assignedUserIds")]
         public int[] AssignedUsersIds { get; set; }
+
+        public Board(string name)
+        {
+            Name = name;
+        }
     }
 }

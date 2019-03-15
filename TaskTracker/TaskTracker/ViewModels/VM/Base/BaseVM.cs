@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text;
 
-namespace TaskTracker.ViewModels
+namespace TaskTracker.ViewModels.VM.Base
 {
-    class BaseViewModel : INotifyPropertyChanged
+    class BaseVM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -11,7 +13,5 @@ namespace TaskTracker.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        public Action<string> DisplayExceptionMessage;
     }
 }

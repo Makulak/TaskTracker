@@ -6,10 +6,10 @@
              xmlns:control="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView">
 
     <StackLayout>
-        <control:CarouselView ItemsSource="{Binding SelectedBoard.Columns}">
+        <control:CarouselView ItemsSource="{Binding SelectedBoard.ColumnsCollection}">
             <control:CarouselView.ItemTemplate>
                 <DataTemplate>
-                    <Label Text="asdf"></Label>
+                    <Label Text="{Binding Name}"></Label>
                 </DataTemplate>
             </control:CarouselView.ItemTemplate>
         </control:CarouselView>

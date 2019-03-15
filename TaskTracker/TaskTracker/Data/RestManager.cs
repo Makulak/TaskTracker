@@ -15,6 +15,8 @@ namespace TaskTracker.Data
             _restService = service;
         }
 
+        #region User
+
         public async Task LogIn(User user)
         {
             await _restService.LogIn(user);
@@ -25,20 +27,30 @@ namespace TaskTracker.Data
             return _restService.Register(user);
         }
 
-        [Obsolete]
-        public Task<List<User>> GetUsers()
-        {
-            return _restService.GetUsers();
-        }
-
         public Task<List<Board>> GetLoggedUserBoards()
         {
             return _restService.GetLoggedUserBoards();
         }
 
+        #endregion
+
+        #region Boards
+
         public Task DeleteBoard(int id)
         {
             return _restService.DeleteBoard(id);
         }
+
+        public Task<Board> AddNewBoard(string name)
+        {
+            return _restService.AddNewBoard(name);
+        }
+
+        public Task EditBoard(Board board)
+        {
+            return _restService.EditBoard(board);
+        }
+
+        #endregion
     }
 }

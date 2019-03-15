@@ -3,6 +3,7 @@ using System.Windows.Input;
 using TaskTracker.Data;
 using TaskTracker.Exceptions;
 using TaskTracker.Models;
+using TaskTracker.ViewModels.Page.Base;
 using Xamarin.Forms;
 
 namespace TaskTracker.ViewModels.Page
