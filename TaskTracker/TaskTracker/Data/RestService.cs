@@ -127,6 +127,42 @@ namespace TaskTracker.Data
             }
         }
 
+        public async Task<Column> AddNewColumn(Column column)
+        {
+            var uri = UriFactory.CreateEndpointUri("column/add");
+            var param = JsonContentFactory.CreateContent(column);
+
+            var response = await Client.PostAsync(uri, param);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Column>(content);
+            }
+            else
+            {
+                throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
+            }
+        }
+
+        public async Task<Models.Task> AddNewTask(Models.Task task)
+        {
+            var uri = UriFactory.CreateEndpointUri("task/add");
+            var param = JsonContentFactory.CreateContent(task);
+
+            var response = await Client.PostAsync(uri, param);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Models.Task>(content);
+            }
+            else
+            {
+                throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
+            }
+        }
+
         #endregion
     }
 }

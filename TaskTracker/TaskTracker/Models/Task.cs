@@ -12,6 +12,9 @@ namespace TaskTracker.Models
         [JsonProperty(PropertyName = "columnId")]
         public int ColumnId { get; set; }
 
+        [JsonProperty(PropertyName = "boardId")]
+        public int BoardId { get; set; }
+
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
@@ -20,5 +23,12 @@ namespace TaskTracker.Models
 
         [JsonProperty(PropertyName = "position")]
         public int Position { get; set; }
+
+        public Task(int boardId, int columnId, string name)
+        {
+            BoardId = boardId;
+            ColumnId = columnId;
+            Name = name;
+        }
     }
 }

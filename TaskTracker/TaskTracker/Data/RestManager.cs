@@ -52,5 +52,16 @@ namespace TaskTracker.Data
         }
 
         #endregion
+
+        public Task<Column> AddNewColumn(Column column)
+        {
+            return _restService.AddNewColumn(column);
+        }
+
+        public Task<Models.Task> AddNewTask(Models.Task task)
+        {
+            return _restService.AddNewTask(task);
+        }
+
     }
 }

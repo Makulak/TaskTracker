@@ -13,5 +13,7 @@ namespace TaskTracker.Data
         Task DeleteBoard(int id);
         Task<Board> AddNewBoard(string name);
         Task EditBoard(Board board);
+        Task<Column> AddNewColumn(Column column);
+        Task<Models.Task> AddNewTask(Models.Task task);
     }
 }

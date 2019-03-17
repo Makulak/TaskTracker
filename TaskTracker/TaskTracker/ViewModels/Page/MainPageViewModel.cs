@@ -1,4 +1,5 @@
 ﻿using TaskTracker.Data;
+using TaskTracker.Exceptions;
 using TaskTracker.Models;
 using TaskTracker.ViewModels.Page.Base;
 using TaskTracker.ViewModels.VM;
@@ -15,12 +16,41 @@ namespace TaskTracker.ViewModels.Page
         {
             SelectedBoard = selectedBoard;
 
-            TaskVM t = new TaskVM();
-            Task y = new Task();
-
-            t = (TaskVM)y;
-
             _manager = new RestManager(new RestService());
+        }
+
+        void AddColumn(int boardId, string columnName)
+        {
+            try
+            {
+                _manager.AddNewColumn(new Column(boardId, columnName));
+            }
+            catch (RestException ex)
+            {
+                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
+            }
+        }
+
+        void AddTask(int boardId, int columnId, string taskName)
+        {
+            try
+            {
+                _manager.AddNewTask(new Task(boardId, columnId, taskName));
+            }
+            catch (RestException ex)
+            {
+                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
+            }
+        }
+
+        void MoveTask(int boardId, int taskId, int sourceColumn, int destinationColumn)
+        {
+
+        }
+
+        void MoveColumn(int boardId, int columnId, int sourcePosition, int destinationPosition)
+        {
+
         }
     }
 }

@@ -6,7 +6,7 @@
              xmlns:control="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView">
 
     <StackLayout>
-        <control:CarouselView ItemsSource="{Binding SelectedBoard.ColumnsCollection}">
+        <control:CarouselView x:Name="carv" ItemsSource="{Binding SelectedBoard.ColumnsCollection}" Margin="20">
             <control:CarouselView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Margin="20">
@@ -22,5 +22,5 @@
                 </DataTemplate>
             </control:CarouselView.ItemTemplate>
         </control:CarouselView>
-    </StackLayout>
+    </StackLayout> 
 </ContentPage>

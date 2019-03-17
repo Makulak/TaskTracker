@@ -13,7 +13,7 @@ namespace TaskTracker.ViewModels.Page
 {
     class BoardPageViewModel : BaseViewModel
     {
-        public ObservableCollection<BoardVM>UserBoards
+        public ObservableCollection<BoardVM> UserBoards
         {
             get => _userBoards;
             set
@@ -154,7 +154,9 @@ namespace TaskTracker.ViewModels.Page
         {
             try
             {
-                await _manager.AddNewBoard(boardName);
+                Board newBoard = await _manager.AddNewBoard(boardName);
+
+                UserBoards.Add(newBoard);
             }
             catch (RestException ex)
             {
