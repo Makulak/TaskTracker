@@ -9,7 +9,7 @@ namespace TaskTracker.Views
         internal MainPage(BoardVM selectedBoard)
         {
             var vm = new MainPageViewModel(selectedBoard);
-            vm.DisplayExceptionMessage = () => DisplayAlert("Rest error", exMessage, "OK");
+            vm.DisplayExceptionMessage = (exMessage) => DisplayAlert("Rest error", exMessage, "OK");
 
             BindingContext = vm;
 

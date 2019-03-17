@@ -13,7 +13,7 @@ namespace TaskTracker.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class TaskPage : ContentPage
 	{
-		public TaskPage (TaskVM selectedTask)
+		internal TaskPage (TaskVM selectedTask)
         {
             BindingContext = new TaskPageViewModel(selectedTask);
 			InitializeComponent ();
