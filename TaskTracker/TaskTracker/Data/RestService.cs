@@ -127,6 +127,8 @@ namespace TaskTracker.Data
             }
         }
 
+        #endregion
+
         public async Task<Column> AddNewColumn(Column column)
         {
             var uri = UriFactory.CreateEndpointUri("column/add");
@@ -162,7 +164,5 @@ namespace TaskTracker.Data
                 throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
             }
         }
-
-        #endregion
     }
 }

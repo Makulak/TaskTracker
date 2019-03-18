@@ -154,6 +154,8 @@ namespace TaskTracker.ViewModels.Page
         {
             try
             {
+                await _manager.AddNewBoard(boardName);
+
                 Board newBoard = await _manager.AddNewBoard(boardName);
 
                 UserBoards.Add(newBoard);

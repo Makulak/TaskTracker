@@ -1,15 +1,10 @@
-﻿using TaskTracker.ViewModels.Page.Base;
-using TaskTracker.ViewModels.VM;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace TaskTracker.ViewModels.Page
 {
-    class TaskPageViewModel : BaseViewModel
+    class TaskPageViewModel
     {
-        public TaskVM SelectedTask { get; set; }
-
-        public TaskPageViewModel(TaskVM selectedTask)
-        {
-            SelectedTask = selectedTask;
-        }
     }
 }

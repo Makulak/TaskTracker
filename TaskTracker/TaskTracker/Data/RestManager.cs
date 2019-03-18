@@ -62,6 +62,5 @@ namespace TaskTracker.Data
         {
             return _restService.AddNewTask(task);
         }
-
     }
 }
