@@ -83,19 +83,6 @@ namespace TaskTracker.Data
 
         #region Boards
 
-        public async Task DeleteBoard(int id)
-        {
-            var uri = UriFactory.CreateEndpointUri("boards/delete");
-            var param = JsonContentFactory.CreateContent(id);
-
-            var response = await Client.PostAsync(uri, param);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
-            }
-        }
-
         public async Task<Board> AddNewBoard(string name)
         {
             var uri = UriFactory.CreateEndpointUri("board/add");
@@ -114,10 +101,28 @@ namespace TaskTracker.Data
             }
         }
 
-        public async Task EditBoard(Board board)
+        public async Task<Board> EditBoard(Board board)
         {
             var uri = UriFactory.CreateEndpointUri("board/edit"); //TODO[JM]: Nazwa endpointa
             var param = JsonContentFactory.CreateContent(board);
+
+            var response = await Client.PostAsync(uri, param);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Board>(content);
+            }
+            else
+            {
+                throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
+            }
+        }
+
+        public async Task DeleteBoard(int id)
+        {
+            var uri = UriFactory.CreateEndpointUri("board/delete"); //TODO[JM]: Nazwa endpointa
+            var param = JsonContentFactory.CreateContent(id);
 
             var response = await Client.PostAsync(uri, param);
 
@@ -128,6 +133,8 @@ namespace TaskTracker.Data
         }
 
         #endregion
+
+        #region Columns
 
         public async Task<Column> AddNewColumn(Column column)
         {
@@ -147,6 +154,41 @@ namespace TaskTracker.Data
             }
         }
 
+        public async Task<Column> EditColumn(Column column)
+        {
+            var uri = UriFactory.CreateEndpointUri("column/edit"); //TODO[JM]: Nazwa endpointa
+            var param = JsonContentFactory.CreateContent(column);
+
+            var response = await Client.PostAsync(uri, param);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Column>(content);
+            }
+            else
+            {
+                throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
+            }
+        }
+
+        public async Task DeleteColumn(int columnId)
+        {
+            var uri = UriFactory.CreateEndpointUri("column/delete"); //TODO[JM]: Nazwa endpointa
+            var param = JsonContentFactory.CreateContent(columnId);
+
+            var response = await Client.PostAsync(uri, param);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
+            }
+        }
+
+        #endregion
+
+        #region Tasks
+
         public async Task<Models.Task> AddNewTask(Models.Task task)
         {
             var uri = UriFactory.CreateEndpointUri("task/add");
@@ -164,5 +206,38 @@ namespace TaskTracker.Data
                 throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
             }
         }
+
+        public async Task<Models.Task> EditTask(Models.Task task)
+        {
+            var uri = UriFactory.CreateEndpointUri("task/edit"); //TODO[JM]: Nazwa endpointa
+            var param = JsonContentFactory.CreateContent(task);
+
+            var response = await Client.PostAsync(uri, param);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Models.Task>(content);
+            }
+            else
+            {
+                throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
+            }
+        }
+
+        public async Task DeleteTask(int taskId)
+        {
+            var uri = UriFactory.CreateEndpointUri("task/delete"); //TODO[JM]: Nazwa endpointa
+            var param = JsonContentFactory.CreateContent(taskId);
+
+            var response = await Client.PostAsync(uri, param);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
+            }
+        }
+
+        #endregion
     }
 }

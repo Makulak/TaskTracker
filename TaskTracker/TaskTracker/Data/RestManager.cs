@@ -22,45 +22,73 @@ namespace TaskTracker.Data
             await _restService.LogIn(user);
         }
 
-        public Task Register(User user)
+        public async Task Register(User user)
         {
-            return _restService.Register(user);
+            await _restService.Register(user);
         }
 
-        public Task<List<Board>> GetLoggedUserBoards()
+        public async Task<List<Board>> GetLoggedUserBoards()
         {
-            return _restService.GetLoggedUserBoards();
+            return await _restService.GetLoggedUserBoards();
         }
 
         #endregion
 
         #region Boards
 
-        public Task DeleteBoard(int id)
+        public async Task<Board> AddNewBoard(string name)
         {
-            return _restService.DeleteBoard(id);
+            return await _restService.AddNewBoard(name);
         }
 
-        public Task<Board> AddNewBoard(string name)
+        public async Task<Board> EditBoard(Board board)
         {
-            return _restService.AddNewBoard(name);
+            return await _restService.EditBoard(board);
         }
 
-        public Task EditBoard(Board board)
+        public async Task DeleteBoard(int id)
         {
-            return _restService.EditBoard(board);
+            await _restService.DeleteBoard(id);
         }
 
         #endregion
 
-        public Task<Column> AddNewColumn(Column column)
+        #region Columns
+
+        public async Task<Column> AddNewColumn(Column column)
         {
-            return _restService.AddNewColumn(column);
+            return await _restService.AddNewColumn(column);
         }
 
-        public Task<Models.Task> AddNewTask(Models.Task task)
+        public async Task<Column> EditColumn(Column column)
         {
-            return _restService.AddNewTask(task);
+            return await _restService.EditColumn(column);
         }
+
+        public async Task DeleteColumn(int columnId)
+        {
+            await _restService.DeleteColumn(columnId);
+        }
+
+        #endregion
+
+        #region Tasks
+
+        public async Task<Models.Task> AddNewTask(Models.Task task)
+        {
+            return await _restService.AddNewTask(task);
+        }
+
+        public async Task<Models.Task> EditTask(Models.Task task)
+        {
+            return await _restService.EditTask(task);
+        }
+
+        public async Task DeleteTask(int taskId)
+        {
+            await _restService.DeleteTask(taskId);
+        }
+
+        #endregion
     }
 }

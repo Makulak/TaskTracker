@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TaskTracker.ViewModels.VM;
+﻿using TaskTracker.ViewModels.VM;
 
 namespace TaskTracker.ViewModels.Page
 {
