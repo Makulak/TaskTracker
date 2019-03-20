@@ -12,6 +12,18 @@ namespace TaskTracker.ViewModels.Page
 
         private readonly RestManager _manager;
 
+        public bool IsDeleteViewVisible
+        {
+            get => _isDeleteViewVisible;
+            set
+            {
+                _isDeleteViewVisible = value;
+                OnPropertyChanged("IsDeleteViewVisible");
+            }
+        }
+
+        private bool _isDeleteViewVisible;
+
         public MainPageViewModel(BoardVM selectedBoard)
         {
             SelectedBoard = selectedBoard;

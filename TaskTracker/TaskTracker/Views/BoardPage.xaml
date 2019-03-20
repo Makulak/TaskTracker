@@ -2,20 +2,57 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TaskTracker.Views.BoardPage"
-             x:Name="_BoardPage">
+             x:Name="_BoardPage"
+             xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+             xmlns:radialMenu="clr-namespace:Syncfusion.SfRadialMenu.XForms;assembly=Syncfusion.SfRadialMenu.XForms"
+             xmlns:pulltoRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+             xmlns:sflistview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms">
 
-    <StackLayout>
-        <ListView ItemsSource="{Binding UserBoards}" SelectedItem="{Binding SelectedBoard}" IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding Name}">
-                        <TextCell.ContextActions>
-                            <MenuItem Text="Edytuj" IsDestructive="True" Command="{Binding Path=BindingContext.EditBoardCommand, Source={x:Reference _BoardPage}}" CommandParameter="{Binding .}"></MenuItem>
-                            <MenuItem Text="Usuń" IsDestructive="True" Command="{Binding Path=BindingContext.DeleteBoardCommand, Source={x:Reference _BoardPage}}"></MenuItem>
-                        </TextCell.ContextActions>
-                    </TextCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
+    <ContentPage.Content>
+        <sfPopup:SfPopupLayout x:Name="AddNewBoardPopup">
+            <sfPopup:SfPopupLayout.Content>
+                <AbsoluteLayout>
+                    <pulltoRefresh:SfPullToRefresh x:Name="PullToRefresh" VerticalOptions="FillAndExpand" TransitionMode="Push" IsRefreshing="False" Refreshing="SfPullToRefresh_OnRefreshing">
+                        <pulltoRefresh:SfPullToRefresh.PullableContent>
+
+                            <sflistview:SfListView ItemTapped="SfListView_OnItemTapped" SelectionMode="None" ItemSize="56" ItemSpacing="0,5,0,0" ItemsSource="{Binding UserBoards}">
+                                <sflistview:SfListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame x:Name="frame" BackgroundColor="LightSkyBlue" HeightRequest="50" Padding="1" Margin="10,0,10,0">
+                                            <StackLayout>
+                                                <Label FontAttributes="Bold" HorizontalTextAlignment="Center" Text="{Binding Name}" TextColor="Black"/>
+                                            </StackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </sflistview:SfListView.ItemTemplate>
+                            </sflistview:SfListView>
+
+                        </pulltoRefresh:SfPullToRefresh.PullableContent>
+                    </pulltoRefresh:SfPullToRefresh>
+
+                    <radialMenu:SfRadialMenu AnimationDuration="300" IsDragEnabled="False" Opening="FloatingButton_OnOpening" x:Name="FloatingButton" LayoutType="Custom" Point="135,230" CenterButtonPlacement="Center" CenterButtonRadius="32" CenterButtonBackgroundColor="IndianRed" >
+                        <radialMenu:SfRadialMenu.CenterButtonView>
+                            <Image Margin="5" HorizontalOptions="Center" VerticalOptions="Center" Source="plus.xml"/>
+                        </radialMenu:SfRadialMenu.CenterButtonView>
+                    </radialMenu:SfRadialMenu>
+                </AbsoluteLayout>
+            </sfPopup:SfPopupLayout.Content>
+
+
+            <sfPopup:SfPopupLayout.PopupView>
+                <sfPopup:PopupView AppearanceMode="TwoButton" AcceptCommand="{Binding AddBoardCommand}" HeaderTitle="Dodaj nową tablicę" HeightRequest="150">
+                    <sfPopup:PopupView.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Entry Text="{Binding NewBoardName}" Placeholder="Nazwa tablicy" Keyboard="Text" TextColor="Black" HeightRequest="50"/>
+                            </Grid>
+                        </DataTemplate>
+                    </sfPopup:PopupView.ContentTemplate>
+                </sfPopup:PopupView>
+
+            </sfPopup:SfPopupLayout.PopupView>
+
+        </sfPopup:SfPopupLayout>
+
+    </ContentPage.Content>
 </ContentPage>

@@ -85,7 +85,7 @@ namespace TaskTracker.Data
 
         public async Task<Board> AddNewBoard(string name)
         {
-            var uri = UriFactory.CreateEndpointUri("board/add");
+            var uri = UriFactory.CreateEndpointUri("boards/add");
             var param = JsonContentFactory.CreateContent(new Board(name));
 
             var response = await Client.PostAsync(uri, param);

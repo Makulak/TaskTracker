@@ -3,24 +3,63 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:TaskTracker"
              x:Class="TaskTracker.Views.MainPage"
-    xmlns:control="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView">
+             xmlns:sfcarousel="clr-namespace:Syncfusion.SfCarousel.XForms;assembly=Syncfusion.SfCarousel.XForms"
+             xmlns:sflistview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms">
 
-    <StackLayout>
-        <control:CarouselView ItemsSource="{Binding SelectedBoard.ColumnsCollection}">
-            <control:CarouselView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout Margin="20">
-                        <Label Text="{Binding Name}"></Label>
-                        <ListView ItemsSource="{Binding TaskCollection}">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <TextCell Text="{Binding Name}"></TextCell>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </StackLayout>
-                </DataTemplate>
-            </control:CarouselView.ItemTemplate>
-        </control:CarouselView>
-    </StackLayout>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand">
+            <sfcarousel:SfCarousel ItemsSource="{Binding SelectedBoard.ColumnsCollection}" ViewMode="Linear" RotationAngle="0" ItemSpacing="25">
+                <sfcarousel:SfCarousel.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="45"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <StackLayout BackgroundColor="SkyBlue">
+                                    <Label Text="{Binding Name}" FontAttributes="Bold" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                </StackLayout>
+                                <StackLayout BackgroundColor="OrangeRed" IsVisible="false">
+                                    <Label Text="{Binding Name}" FontAttributes="Bold" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Grid>
+
+                            <sflistview:SfListView ItemDragging="SfListView_OnItemDragging" ItemsSource="{Binding TaskCollection}" DragStartMode="OnHold" ItemSpacing="0,5,0,0" Grid.Row="1" >
+                                <sflistview:SfListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame x:Name="frame" BackgroundColor="BurlyWood" HeightRequest="50" Padding="1" >
+                                            <StackLayout>
+                                                <Label Text="{Binding Name}" TextColor="Black"/>
+                                            </StackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </sflistview:SfListView.ItemTemplate>
+
+                                <sflistview:SfListView.SelectedItemTemplate>
+                                    <DataTemplate>
+                                        <Frame x:Name="frame" HasShadow="True" BackgroundColor="CornflowerBlue" HeightRequest="50" Padding="1" >
+                                            <StackLayout>
+                                                <Label Text="{Binding Name}" TextColor="Black"/>
+                                            </StackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </sflistview:SfListView.SelectedItemTemplate>
+
+                                <sflistview:SfListView.DragItemTemplate>
+                                    <DataTemplate>
+                                        <Frame x:Name="frame" BackgroundColor="Green" HeightRequest="50" Padding="1" >
+                                            <StackLayout>
+                                                <Label Text="{Binding Name}" TextColor="Black"/>
+                                            </StackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </sflistview:SfListView.DragItemTemplate>
+                            </sflistview:SfListView>
+                        </Grid>
+                    </DataTemplate>
+                </sfcarousel:SfCarousel.ItemTemplate>
+            </sfcarousel:SfCarousel>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

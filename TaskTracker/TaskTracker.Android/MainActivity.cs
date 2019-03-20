@@ -17,9 +17,12 @@ namespace TaskTracker.Droid
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("@31372e312e30iqMYsL5fikFHG9J3MB5sjVYIRWVkk9lMelw0qz7qsP8=");
+
             base.OnCreate(savedInstanceState);
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
 
             LoadApplication(new App());
         }

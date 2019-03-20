@@ -24,61 +24,38 @@ namespace TaskTracker.ViewModels.Page
         }
         private ObservableCollection<BoardVM> _userBoards;
 
-        public BoardVM SelectedBoard
-        {
-            get => _selectedBoard;
-            set
-            {
-                _selectedBoard = value;
-                OnPropertyChanged("SelectedBoard");
-                OnSelectedBoard();
-            }
-        }
-        private BoardVM _selectedBoard;
-
-        public bool IsRefreshing
-        {
-            get => _isRefreshing;
-            set
-            {
-                _isRefreshing = false;
-                OnPropertyChanged("IsRefreshing");
-            }
-        }
-        private bool _isRefreshing;
-
-        public ICommand RefreshCommand { get; set; }
         public ICommand AddBoardCommand { get; set; }
         public ICommand DeleteBoardCommand { get; set; }
         public ICommand EditBoardCommand { get; set; }
 
         public Action<BoardVM> DisplayMainPage;
         public Action<BoardVM> DisplayEditBoard;
-        public Action DisplayAddBoard;
+        public Action HideKeyboard;
 
         private readonly RestManager _manager;
+
+        public string NewBoardName
+        {
+            get => _newBoardName;
+            set
+            {
+                _newBoardName = value;
+                OnPropertyChanged("BoardName");
+            }
+        }
+        private string _newBoardName;
 
         public BoardPageViewModel()
         {
             _manager = new RestManager(new RestService());
 
-            RefreshCommand = new Command(OnRefresh);
-            AddBoardCommand = new Command(OnAddBoard);
             DeleteBoardCommand = new Command(OnDeleteBoard);
-            EditBoardCommand = new Command(OnEditBoard);
-
-            SelectedBoard = null;
+            AddBoardCommand = new Command(OnAddBoard);
 
             GetUserBoards();
         }
 
         #region Commands
-
-        private void OnEditBoard(object obj)
-        {
-            if (obj is Board board && DisplayAddBoard != null)
-                DisplayEditBoard?.Invoke(board);
-        }
 
         private void OnDeleteBoard(object obj)
         {
@@ -90,29 +67,18 @@ namespace TaskTracker.ViewModels.Page
             }
         }
 
-        private void OnAddBoard()
+        private void OnAddBoard(object obj)
         {
-            DisplayAddBoard?.Invoke();
-        }
-
-        private void OnSelectedBoard()
-        {
-            if (SelectedBoard != null)
-                DisplayMainPage?.Invoke(SelectedBoard.Base);
-        }
-
-        private void OnRefresh()
-        {
-            GetUserBoards();
-
-            IsRefreshing = false;
+            AddNewBoard(NewBoardName);
+            NewBoardName = string.Empty;
+            HideKeyboard?.Invoke();
         }
 
         #endregion
 
         #region Methods
 
-        private async void GetUserBoards()
+        internal async void GetUserBoards()
         {
             try
             {
@@ -154,8 +120,6 @@ namespace TaskTracker.ViewModels.Page
         {
             try
             {
-                await _manager.AddNewBoard(boardName);
-
                 Board newBoard = await _manager.AddNewBoard(boardName);
 
                 UserBoards.Add(newBoard);

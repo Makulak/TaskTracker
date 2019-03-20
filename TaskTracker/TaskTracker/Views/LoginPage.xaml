@@ -6,8 +6,8 @@
         <StackLayout Padding="5,50" Spacing="20">
             <Frame>
                 <StackLayout Spacing="10">
-                    <Entry Text="{Binding Login}" Placeholder="Login" Keyboard="Email" TextColor="Black" HeightRequest="50"></Entry>
-                    <Entry Text="{Binding Password}" Placeholder="Hasło" IsPassword="True" TextColor="Black" HeightRequest="50"></Entry>
+                    <Entry Text="{Binding Login}" Placeholder="Login" Keyboard="Email" TextColor="Black" HeightRequest="50"/>
+                    <Entry Text="{Binding Password}" Placeholder="Hasło" IsPassword="True" TextColor="Black" HeightRequest="50"/>
                 </StackLayout>
             </Frame>
             <Button Command="{Binding LoginCommand}" Text="Zaloguj" BackgroundColor="#4107a5" TextColor="White" />
