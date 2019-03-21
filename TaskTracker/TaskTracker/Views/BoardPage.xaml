@@ -6,7 +6,8 @@
              xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
              xmlns:radialMenu="clr-namespace:Syncfusion.SfRadialMenu.XForms;assembly=Syncfusion.SfRadialMenu.XForms"
              xmlns:pulltoRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
-             xmlns:sflistview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms">
+             xmlns:sflistview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:controls="clr-namespace:TaskTracker.Views.Controls;assembly=TaskTracker">
 
     <ContentPage.Content>
         <sfPopup:SfPopupLayout x:Name="AddNewBoardPopup">
@@ -17,12 +18,8 @@
 
                             <sflistview:SfListView ItemTapped="SfListView_OnItemTapped" SelectionMode="None" ItemSize="56" ItemSpacing="0,5,0,0" ItemsSource="{Binding UserBoards}">
                                 <sflistview:SfListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Frame x:Name="frame" BackgroundColor="LightSkyBlue" HeightRequest="50" Padding="1" Margin="10,0,10,0">
-                                            <StackLayout>
-                                                <Label FontAttributes="Bold" HorizontalTextAlignment="Center" Text="{Binding Name}" TextColor="Black"/>
-                                            </StackLayout>
-                                        </Frame>
+                                    <DataTemplate >
+                                        <controls:BoardListItem/>
                                     </DataTemplate>
                                 </sflistview:SfListView.ItemTemplate>
                             </sflistview:SfListView>
@@ -40,7 +37,7 @@
 
 
             <sfPopup:SfPopupLayout.PopupView>
-                <sfPopup:PopupView AppearanceMode="TwoButton" AcceptCommand="{Binding AddBoardCommand}" HeaderTitle="Dodaj nową tablicę" HeightRequest="150">
+                <sfPopup:PopupView AppearanceMode="TwoButton" AcceptButtonText="Akcaptuj" DeclineButtonText="Anuluj" AcceptCommand="{Binding AddBoardCommand}" HeaderTitle="Dodaj nową tablicę" HeightRequest="150">
                     <sfPopup:PopupView.ContentTemplate>
                         <DataTemplate>
                             <Grid>

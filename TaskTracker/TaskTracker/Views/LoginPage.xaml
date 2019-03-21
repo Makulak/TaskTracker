@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:TaskTracker.Resources;assembly=TaskTracker"
              x:Class="TaskTracker.Views.LoginPage">
     <ContentPage.Content>
         <StackLayout Padding="5,50" Spacing="20">
             <Frame>
                 <StackLayout Spacing="10">
-                    <Entry Text="{Binding Login}" Placeholder="Login" Keyboard="Email" TextColor="Black" HeightRequest="50"/>
+                    <Entry Text="{Binding Login}" Placeholder="{resources:Translate Login}" Keyboard="Email" TextColor="Black" HeightRequest="50"/>
                     <Entry Text="{Binding Password}" Placeholder="Hasło" IsPassword="True" TextColor="Black" HeightRequest="50"/>
                 </StackLayout>
             </Frame>

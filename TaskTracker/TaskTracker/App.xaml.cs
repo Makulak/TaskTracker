@@ -1,4 +1,5 @@
 ﻿using System;
+using TaskTracker.Resources;
 using TaskTracker.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,6 +12,14 @@ namespace TaskTracker
         public App()
         {
             InitializeComponent();
+
+            if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
+            {
+                var cultureInfo = DependencyService.Get<ILocalization>().GetCurrentCultureInfo();
+
+                TaskTracker.Resources.AppResources.Culture = cultureInfo;
+                DependencyService.Get<ILocalization>().SetLocale(cultureInfo);
+            }
 
             MainPage = new NavigationPage(new LoginPage());
         }
