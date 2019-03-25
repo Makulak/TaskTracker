@@ -22,10 +22,7 @@ namespace TaskTracker.Resources
 
         public TranslateExtension()
         {
-            if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
-            {
-                cultureInfo = DependencyService.Get<ILocalization>().GetCurrentCultureInfo();
-            }
+            cultureInfo = DependencyService.Get<ILocalization>().GetCurrentCultureInfo();
         }
 
         public object ProvideValue(IServiceProvider serviceProvider)

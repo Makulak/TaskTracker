@@ -117,13 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Error" xml:space="preserve">
+    <value>Błąd</value>
+  </data>
+  <data name="InvalidPassword" xml:space="preserve">
+    <value>Hasła muszą być identyczne.</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
+  </data>
+  <data name="Mail" xml:space="preserve">
+    <value>Mail</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Hasło</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Rejestracja</value>
+  </data>
+  <data name="RepeatPassword" xml:space="preserve">
+    <value>Powtórz hasło</value>
+  </data>
+  <data name="RestError" xml:space="preserve">
+    <value>Rest error</value>
   </data>
 </root>

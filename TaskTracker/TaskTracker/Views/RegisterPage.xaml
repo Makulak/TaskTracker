@@ -1,17 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:TaskTracker.Converters;assembly=TaskTracker"
+             xmlns:resources="clr-namespace:TaskTracker.Resources;assembly=TaskTracker"
              x:Class="TaskTracker.Views.RegisterPage">
+
+    <ContentPage.Resources>
+        <converters:BoolNegateConverter x:Key="NegateConverter"/>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout Padding="5,50" Spacing="20">
-            <StackLayout Spacing="10">
-                <Entry Text="{Binding Login}" Placeholder="Login" Keyboard="Text" TextColor="Black" HeightRequest="50"></Entry>
-                <Entry Text="{Binding Mail}" Placeholder="Mail" Keyboard="Email" TextColor="Black" HeightRequest="50"></Entry>
-                <Entry Text="{Binding PasswordOne}" Placeholder="Hasło" IsPassword="True" TextColor="Black" HeightRequest="50"></Entry>
-                <Entry Text="{Binding PasswordTwo}" Placeholder="Powtórz hasło" IsPassword="True" TextColor="Black" HeightRequest="50"></Entry>
+
+        <Grid>
+            <StackLayout Padding="5,50" Spacing="20" Opacity="{Binding ControlsOpacity}" IsEnabled="{Binding ShowWaitForm, Converter={StaticResource NegateConverter}}">
+                <Frame>
+                    <StackLayout Spacing="10">
+                        <Entry Text="{Binding Login}" Placeholder="{resources:Translate Login}" Keyboard="Text" TextColor="Black" HeightRequest="50"/>
+                        <Entry Text="{Binding Mail}" Placeholder="{resources:Translate Mail}" Keyboard="Email" TextColor="Black" HeightRequest="50"/>
+                        <Entry Text="{Binding PasswordOne}" Placeholder="{resources:Translate Password}" IsPassword="True" TextColor="Black" HeightRequest="50"/>
+                        <Entry Text="{Binding PasswordTwo}" Placeholder="{resources:Translate RepeatPassword}" IsPassword="True" TextColor="Black" HeightRequest="50"/>
+                    </StackLayout>
+                </Frame>
+
+                <Button Command="{Binding RegisterCommand}" Text="Zarejestruj" BackgroundColor="#4107a5" TextColor="White"/>
             </StackLayout>
 
-            <Button Command="{Binding RegisterCommand}" Text="Zarejestruj"></Button>
-        </StackLayout>
+            <ActivityIndicator IsRunning="{Binding ShowWaitForm}" HorizontalOptions="Center"/>
+
+        </Grid>
+
     </ContentPage.Content>
 </ContentPage>

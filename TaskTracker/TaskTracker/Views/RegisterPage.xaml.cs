@@ -1,4 +1,5 @@
-﻿using TaskTracker.ViewModels.Page;
+﻿using TaskTracker.Resources;
+using TaskTracker.ViewModels.Page;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,8 +12,8 @@ namespace TaskTracker.Views
 		{
             RegisterPageViewModel vm = new RegisterPageViewModel();
 
-            vm.DisplayInvalidPasswordMessage += () => DisplayAlert("Zjebałeś XD", "W dupe se pogrzeb tą rejestracją", "Ok, wypierdalam");
-            vm.DisplayExceptionMessage += (exMessage) => DisplayAlert("Rest error", exMessage, "OK");
+            vm.DisplayInvalidPasswordMessage += () => DisplayAlert(string.Empty, AppResources.InvalidPassword, AppResources.Ok);
+            vm.DisplayExceptionMessage += (exMessage) => DisplayAlert(AppResources.Error, exMessage, AppResources.Ok);
             vm.DisplayLoginPage += () => Navigation.PopAsync();
 
             BindingContext = vm;

@@ -7,7 +7,7 @@
              xmlns:radialMenu="clr-namespace:Syncfusion.SfRadialMenu.XForms;assembly=Syncfusion.SfRadialMenu.XForms"
              xmlns:pulltoRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
              xmlns:sflistview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
-             xmlns:controls="clr-namespace:TaskTracker.Views.Controls;assembly=TaskTracker">
+             xmlns:controls="clr-namespace:TaskTracker.Views.Controls">
 
     <ContentPage.Content>
         <sfPopup:SfPopupLayout x:Name="AddNewBoardPopup">

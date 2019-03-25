@@ -33,40 +33,10 @@ namespace TaskTracker.ViewModels.Page
         }
         private string _password;
 
-        public bool ShowWaitForm
-        {
-            get => _showWaitForm;
-            set
-            {
-                _showWaitForm = value;
-                if (value)
-                    ControlsOpacity = 0.25f;
-                else
-                    ControlsOpacity = 1;
-
-                OnPropertyChanged("ShowWaitForm");
-            }
-        }
-        private bool _showWaitForm;
-
-        public float ControlsOpacity
-        {
-            get => _controlsOpacity;
-            set
-            {
-                _controlsOpacity = value;
-                OnPropertyChanged("ControlsOpacity");
-            }
-        }
-        private float _controlsOpacity = 1;
-
-
         public ICommand LoginCommand { get; set; }
         public ICommand RegisterCommand { get; set; }
-        public ICommand ForgetPasswordCommand { get; set; }
 
         public Action DisplayRegisterPage;
-        public Action DisplayForgetPasswordPage;
         public Action DisplayMainPage;
 
         private readonly RestManager _manager;
@@ -75,14 +45,8 @@ namespace TaskTracker.ViewModels.Page
         {
             LoginCommand = new Command(OnLogin);
             RegisterCommand = new Command(OnRegister);
-            ForgetPasswordCommand = new Command(OnForgetPassword);
 
             _manager = new RestManager(new RestService());
-        }
-
-        private void OnForgetPassword()
-        {
-            DisplayForgetPasswordPage?.Invoke();
         }
 
         private void OnRegister()

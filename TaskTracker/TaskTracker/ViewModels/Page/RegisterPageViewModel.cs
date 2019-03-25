@@ -78,12 +78,17 @@ namespace TaskTracker.ViewModels.Page
             {
                 try
                 {
+                    ShowWaitForm = true;
                     await _manager.Register(new User(Login, PasswordOne, Mail));
                     DisplayLoginPage?.Invoke();
                 }
                 catch (RestException ex)
                 {
                     DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
+                }
+                finally
+                {
+                    ShowWaitForm = false;
                 }
             }
         }

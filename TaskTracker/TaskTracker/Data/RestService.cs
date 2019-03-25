@@ -27,8 +27,16 @@ namespace TaskTracker.Data
         {
             var uri = UriFactory.CreateEndpointUri("users/login");
             var param = JsonContentFactory.CreateContent(user);
+            HttpResponseMessage response;
 
-            var response = await Client.PostAsync(uri, param);
+            try
+            {
+                response = await Client.PostAsync(uri, param);
+            }
+            catch (Exception ex)
+            {
+                throw new ServerResponseException(ex.Message);
+            }
 
             if (response.IsSuccessStatusCode)
             {
@@ -51,8 +59,16 @@ namespace TaskTracker.Data
         {
             var uri = UriFactory.CreateEndpointUri("users/register");
             var param = JsonContentFactory.CreateContent(user);
+            HttpResponseMessage response;
 
-            var response = await Client.PostAsync(uri, param);
+            try
+            {
+                response = await Client.PostAsync(uri, param);
+            }
+            catch (Exception ex)
+            {
+                throw new ServerResponseException(ex.Message);
+            }
 
             if (!response.IsSuccessStatusCode)
             {
@@ -63,8 +79,16 @@ namespace TaskTracker.Data
         public async Task<List<Board>> GetLoggedUserBoards()
         {
             var uri = UriFactory.CreateEndpointUri("boards/show");
+            HttpResponseMessage response;
 
-            var response = await Client.GetAsync(uri);
+            try
+            {
+                response = await Client.GetAsync(uri);
+            }
+            catch (Exception ex)
+            {
+                throw new ServerResponseException(ex.Message);
+            }
 
             if (response.IsSuccessStatusCode)
             {
@@ -87,8 +111,16 @@ namespace TaskTracker.Data
         {
             var uri = UriFactory.CreateEndpointUri("boards/add");
             var param = JsonContentFactory.CreateContent(new Board(name));
+            HttpResponseMessage response;
 
-            var response = await Client.PostAsync(uri, param);
+            try
+            {
+                response = await Client.PostAsync(uri, param);
+            }
+            catch (Exception ex)
+            {
+                throw new ServerResponseException(ex.Message);
+            }
 
             if (response.IsSuccessStatusCode)
             {
@@ -105,8 +137,16 @@ namespace TaskTracker.Data
         {
             var uri = UriFactory.CreateEndpointUri("board/edit"); //TODO[JM]: Nazwa endpointa
             var param = JsonContentFactory.CreateContent(board);
+            HttpResponseMessage response;
 
-            var response = await Client.PostAsync(uri, param);
+            try
+            {
+                response = await Client.PostAsync(uri, param);
+            }
+            catch (Exception ex)
+            {
+                throw new ServerResponseException(ex.Message);
+            }
 
             if (response.IsSuccessStatusCode)
             {
@@ -123,8 +163,16 @@ namespace TaskTracker.Data
         {
             var uri = UriFactory.CreateEndpointUri("board/delete"); //TODO[JM]: Nazwa endpointa
             var param = JsonContentFactory.CreateContent(id);
+            HttpResponseMessage response;
 
-            var response = await Client.PostAsync(uri, param);
+            try
+            {
+                response = await Client.PostAsync(uri, param);
+            }
+            catch (Exception ex)
+            {
+                throw new ServerResponseException(ex.Message);
+            }
 
             if (!response.IsSuccessStatusCode)
             {
@@ -140,8 +188,16 @@ namespace TaskTracker.Data
         {
             var uri = UriFactory.CreateEndpointUri("column/add");
             var param = JsonContentFactory.CreateContent(column);
+            HttpResponseMessage response;
 
-            var response = await Client.PostAsync(uri, param);
+            try
+            {
+                response = await Client.PostAsync(uri, param);
+            }
+            catch (Exception ex)
+            {
+                throw new ServerResponseException(ex.Message);
+            }
 
             if (response.IsSuccessStatusCode)
             {
@@ -158,8 +214,16 @@ namespace TaskTracker.Data
         {
             var uri = UriFactory.CreateEndpointUri("column/edit"); //TODO[JM]: Nazwa endpointa
             var param = JsonContentFactory.CreateContent(column);
+            HttpResponseMessage response;
 
-            var response = await Client.PostAsync(uri, param);
+            try
+            {
+                response = await Client.PostAsync(uri, param);
+            }
+            catch (Exception ex)
+            {
+                throw new ServerResponseException(ex.Message);
+            }
 
             if (response.IsSuccessStatusCode)
             {
@@ -176,8 +240,16 @@ namespace TaskTracker.Data
         {
             var uri = UriFactory.CreateEndpointUri("column/delete"); //TODO[JM]: Nazwa endpointa
             var param = JsonContentFactory.CreateContent(columnId);
+            HttpResponseMessage response;
 
-            var response = await Client.PostAsync(uri, param);
+            try
+            {
+                response = await Client.PostAsync(uri, param);
+            }
+            catch (Exception ex)
+            {
+                throw new ServerResponseException(ex.Message);
+            }
 
             if (!response.IsSuccessStatusCode)
             {
@@ -193,8 +265,16 @@ namespace TaskTracker.Data
         {
             var uri = UriFactory.CreateEndpointUri("task/add");
             var param = JsonContentFactory.CreateContent(task);
+            HttpResponseMessage response;
 
-            var response = await Client.PostAsync(uri, param);
+            try
+            {
+                response = await Client.PostAsync(uri, param);
+            }
+            catch (Exception ex)
+            {
+                throw new ServerResponseException(ex.Message);
+            }
 
             if (response.IsSuccessStatusCode)
             {
@@ -211,8 +291,16 @@ namespace TaskTracker.Data
         {
             var uri = UriFactory.CreateEndpointUri("task/edit"); //TODO[JM]: Nazwa endpointa
             var param = JsonContentFactory.CreateContent(task);
+            HttpResponseMessage response;
 
-            var response = await Client.PostAsync(uri, param);
+            try
+            {
+                response = await Client.PostAsync(uri, param);
+            }
+            catch (Exception ex)
+            {
+                throw new ServerResponseException(ex.Message);
+            }
 
             if (response.IsSuccessStatusCode)
             {
@@ -229,8 +317,16 @@ namespace TaskTracker.Data
         {
             var uri = UriFactory.CreateEndpointUri("task/delete"); //TODO[JM]: Nazwa endpointa
             var param = JsonContentFactory.CreateContent(taskId);
+            HttpResponseMessage response;
 
-            var response = await Client.PostAsync(uri, param);
+            try
+            {
+                response = await Client.PostAsync(uri, param);
+            }
+            catch (Exception ex)
+            {
+                throw new ServerResponseException(ex.Message);
+            }
 
             if (!response.IsSuccessStatusCode)
             {
