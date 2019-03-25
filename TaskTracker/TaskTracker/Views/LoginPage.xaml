@@ -1,19 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:resources="clr-namespace:TaskTracker.Resources;assembly=TaskTracker"
+             xmlns:resources="clr-namespace:TaskTracker.Resources"
+             xmlns:xForms="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:converters="clr-namespace:TaskTracker.Converters;assembly=TaskTracker"
              x:Class="TaskTracker.Views.LoginPage">
+
+    <ContentPage.Resources>
+        <converters:BoolNegateConverter x:Key="NegateConverter"/>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Padding="5,50" Spacing="20">
-            <Frame>
-                <StackLayout Spacing="10">
-                    <Entry Text="{Binding Login}" Placeholder="{resources:Translate Login}" Keyboard="Email" TextColor="Black" HeightRequest="50"/>
-                    <Entry Text="{Binding Password}" Placeholder="Hasło" IsPassword="True" TextColor="Black" HeightRequest="50"/>
-                </StackLayout>
-            </Frame>
-            <Button Command="{Binding LoginCommand}" Text="Zaloguj" BackgroundColor="#4107a5" TextColor="White" />
-            <Button Command="{Binding RegisterCommand}" Text="Zarejestruj"/>
-            <Button Command="{Binding ForgetPasswordCommand}" Text="Zapomniałem hasła" />
-        </StackLayout>
+
+        <Grid>
+            <StackLayout Padding="5,50" Spacing="20" Opacity="{Binding ControlsOpacity}">
+                <Frame>
+                    <StackLayout Spacing="10">
+                        <Entry IsEnabled="{Binding ShowWaitForm, Converter={StaticResource NegateConverter}}" Text="{Binding Login}" Placeholder="{resources:Translate Login}" Keyboard="Email" TextColor="Black" HeightRequest="50"/>
+                        <Entry IsEnabled="{Binding ShowWaitForm, Converter={StaticResource NegateConverter}}" Text="{Binding Password}" Placeholder="{resources:Translate Password}" IsPassword="True" TextColor="Black" HeightRequest="50"/>
+                    </StackLayout>
+                </Frame>
+                <Button IsEnabled="{Binding ShowWaitForm, Converter={StaticResource NegateConverter}}" Command="{Binding LoginCommand}" Text="{resources:Translate Login}" BackgroundColor="#4107a5" TextColor="White" />
+                <Button IsEnabled="{Binding ShowWaitForm, Converter={StaticResource NegateConverter}}" Command="{Binding RegisterCommand}" Text="{resources:Translate Register}"/>
+            </StackLayout>
+
+            <ActivityIndicator IsRunning="{Binding ShowWaitForm}" HorizontalOptions="Center"/>
+
+        </Grid>
+
     </ContentPage.Content>
 </ContentPage>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Input;
 using TaskTracker.Data;
 using TaskTracker.Exceptions;
@@ -31,6 +32,34 @@ namespace TaskTracker.ViewModels.Page
             }
         }
         private string _password;
+
+        public bool ShowWaitForm
+        {
+            get => _showWaitForm;
+            set
+            {
+                _showWaitForm = value;
+                if (value)
+                    ControlsOpacity = 0.25f;
+                else
+                    ControlsOpacity = 1;
+
+                OnPropertyChanged("ShowWaitForm");
+            }
+        }
+        private bool _showWaitForm;
+
+        public float ControlsOpacity
+        {
+            get => _controlsOpacity;
+            set
+            {
+                _controlsOpacity = value;
+                OnPropertyChanged("ControlsOpacity");
+            }
+        }
+        private float _controlsOpacity = 1;
+
 
         public ICommand LoginCommand { get; set; }
         public ICommand RegisterCommand { get; set; }
@@ -65,12 +94,18 @@ namespace TaskTracker.ViewModels.Page
         {
             try
             {
+                ShowWaitForm = true;
+
                 await _manager.LogIn(new User(Login, Password));
                 DisplayMainPage?.Invoke();
             }
             catch (RestException ex)
             {
                 DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
+            }
+            finally
+            {
+                ShowWaitForm = false;
             }
         }
     }
