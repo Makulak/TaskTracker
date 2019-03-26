@@ -7,7 +7,8 @@
              xmlns:pulltoRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
              xmlns:sflistview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:controls="clr-namespace:TaskTracker.Views.Controls"
-             xmlns:resources="clr-namespace:TaskTracker.Resources;assembly=TaskTracker">
+             xmlns:resources="clr-namespace:TaskTracker.Resources;assembly=TaskTracker"
+             xmlns:helpers="clr-namespace:TaskTracker.Helpers;assembly=TaskTracker">
 
     <ContentPage.Content>
         <sfPopup:SfPopupLayout x:Name="AddNewBoardPopup">
@@ -18,6 +19,10 @@
                         <pulltoRefresh:SfPullToRefresh.PullableContent>
 
                             <sflistview:SfListView ItemTapped="SfListView_OnItemTapped" SelectionMode="None" ItemSize="60" ItemSpacing="0,5,0,0" ItemsSource="{Binding UserBoards}">
+                                <sflistview:SfListView.Behaviors>
+                                    <helpers:BoardListBehavior/>
+                                </sflistview:SfListView.Behaviors>
+
                                 <sflistview:SfListView.ItemTemplate>
                                     <DataTemplate >
                                         <controls:BoardListItem/>
