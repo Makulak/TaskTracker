@@ -11,7 +11,7 @@
 
     <ContentPage.Content>
 
-        <Grid>
+        <Grid AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All">
             <StackLayout Padding="5,50" Spacing="20" Opacity="{Binding ControlsOpacity}" IsEnabled="{Binding ShowWaitForm, Converter={StaticResource NegateConverter}}">
                 <Frame>
                     <StackLayout Spacing="10">
@@ -26,6 +26,5 @@
             <ActivityIndicator IsRunning="{Binding ShowWaitForm}" HorizontalOptions="Center"/>
 
         </Grid>
-
     </ContentPage.Content>
 </ContentPage>

@@ -61,11 +61,38 @@ namespace TaskTracker.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Zaloguj.
+        ///   Looks up a localized string similar to Akceptuj.
         /// </summary>
-        public static string BtnLogin {
+        public static string Accept {
             get {
-                return ResourceManager.GetString("BtnLogin", resourceCulture);
+                return ResourceManager.GetString("Accept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dodaj nową tablicę.
+        /// </summary>
+        public static string AddNewBoard {
+            get {
+                return ResourceManager.GetString("AddNewBoard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nazwa tablicy.
+        /// </summary>
+        public static string BoardName {
+            get {
+                return ResourceManager.GetString("BoardName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anuluj.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
             }
         }
         
@@ -93,6 +120,15 @@ namespace TaskTracker.Resources {
         public static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zaloguj.
+        /// </summary>
+        public static string LoginBtn {
+            get {
+                return ResourceManager.GetString("LoginBtn", resourceCulture);
             }
         }
         

@@ -30,6 +30,7 @@ namespace TaskTracker.ViewModels.Page
 
         public Action<BoardVM> DisplayMainPage;
         public Action<BoardVM> DisplayEditBoard;
+        public Action DisplayAddBoard;
         public Action HideKeyboard;
 
         private readonly RestManager _manager;

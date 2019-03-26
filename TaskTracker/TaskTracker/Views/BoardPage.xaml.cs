@@ -18,6 +18,7 @@ namespace TaskTracker.Views
             vm.DisplayMainPage = (selectedBoard) => Navigation.PushAsync(new MainPage(selectedBoard));
             vm.DisplayExceptionMessage += (exMessage) => DisplayAlert("Rest error", exMessage, "OK");
             vm.HideKeyboard += () => { }; //TODO: Zrobić ukrywanie
+            vm.DisplayAddBoard += () => AddNewBoardPopup.Show();
 
             BindingContext = vm;
 
@@ -41,14 +42,6 @@ namespace TaskTracker.Views
         {
             var vm = BindingContext as BoardPageViewModel;
             vm?.DisplayMainPage(e.ItemData as BoardVM);
-        }
-
-        private async void FloatingButton_OnOpening(object sender, OpeningEventArgs e)
-        {
-            await Task.Delay(50); //For animation
-            FloatingButton.Close();
-
-            AddNewBoardPopup.Show();
         }
     }
 }

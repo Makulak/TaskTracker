@@ -27,14 +27,14 @@ namespace TaskTracker.Data
             await _restService.Register(user);
         }
 
+        #endregion
+
+        #region Boards
+
         public async Task<List<Board>> GetLoggedUserBoards()
         {
             return await _restService.GetLoggedUserBoards();
         }
-
-        #endregion
-
-        #region Boards
 
         public async Task<Board> AddNewBoard(string name)
         {

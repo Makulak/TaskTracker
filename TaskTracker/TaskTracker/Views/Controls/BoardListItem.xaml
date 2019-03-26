@@ -4,7 +4,7 @@
              x:Class="TaskTracker.Views.Controls.BoardListItem">
     <ContentView.Content>
         <StackLayout>
-            <Frame x:Name="frame" BackgroundColor="LightSkyBlue" HeightRequest="50" Padding="1" Margin="10,0,10,0">
+            <Frame x:Name="frame" BackgroundColor="LightSkyBlue" HasShadow="True" HeightRequest="50" Padding="1" Margin="10,0,10,0">
                 <StackLayout>
                     <Label FontAttributes="Bold" HorizontalTextAlignment="Center" Text="{Binding Name}" TextColor="Black"/>
                 </StackLayout>

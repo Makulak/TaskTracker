@@ -4,19 +4,20 @@
              x:Class="TaskTracker.Views.BoardPage"
              x:Name="_BoardPage"
              xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
-             xmlns:radialMenu="clr-namespace:Syncfusion.SfRadialMenu.XForms;assembly=Syncfusion.SfRadialMenu.XForms"
              xmlns:pulltoRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
              xmlns:sflistview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
-             xmlns:controls="clr-namespace:TaskTracker.Views.Controls">
+             xmlns:controls="clr-namespace:TaskTracker.Views.Controls"
+             xmlns:resources="clr-namespace:TaskTracker.Resources;assembly=TaskTracker">
 
     <ContentPage.Content>
         <sfPopup:SfPopupLayout x:Name="AddNewBoardPopup">
+
             <sfPopup:SfPopupLayout.Content>
                 <AbsoluteLayout>
                     <pulltoRefresh:SfPullToRefresh x:Name="PullToRefresh" VerticalOptions="FillAndExpand" TransitionMode="Push" IsRefreshing="False" Refreshing="SfPullToRefresh_OnRefreshing">
                         <pulltoRefresh:SfPullToRefresh.PullableContent>
 
-                            <sflistview:SfListView ItemTapped="SfListView_OnItemTapped" SelectionMode="None" ItemSize="56" ItemSpacing="0,5,0,0" ItemsSource="{Binding UserBoards}">
+                            <sflistview:SfListView ItemTapped="SfListView_OnItemTapped" SelectionMode="None" ItemSize="60" ItemSpacing="0,5,0,0" ItemsSource="{Binding UserBoards}">
                                 <sflistview:SfListView.ItemTemplate>
                                     <DataTemplate >
                                         <controls:BoardListItem/>
@@ -27,21 +28,17 @@
                         </pulltoRefresh:SfPullToRefresh.PullableContent>
                     </pulltoRefresh:SfPullToRefresh>
 
-                    <radialMenu:SfRadialMenu AnimationDuration="300" IsDragEnabled="False" Opening="FloatingButton_OnOpening" x:Name="FloatingButton" LayoutType="Custom" Point="135,230" CenterButtonPlacement="Center" CenterButtonRadius="32" CenterButtonBackgroundColor="IndianRed" >
-                        <radialMenu:SfRadialMenu.CenterButtonView>
-                            <Image Margin="5" HorizontalOptions="Center" VerticalOptions="Center" Source="plus.xml"/>
-                        </radialMenu:SfRadialMenu.CenterButtonView>
-                    </radialMenu:SfRadialMenu>
+                    <Button BackgroundColor="OrangeRed" HeightRequest="56" WidthRequest="56" CornerRadius="28" AbsoluteLayout.LayoutBounds=".9,.9,56,56" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
                 </AbsoluteLayout>
             </sfPopup:SfPopupLayout.Content>
 
-
             <sfPopup:SfPopupLayout.PopupView>
-                <sfPopup:PopupView AppearanceMode="TwoButton" AcceptButtonText="Akcaptuj" DeclineButtonText="Anuluj" AcceptCommand="{Binding AddBoardCommand}" HeaderTitle="Dodaj nową tablicę" HeightRequest="150">
+                <sfPopup:PopupView AppearanceMode="TwoButton" AcceptButtonText="{resources:Translate Accept}" DeclineButtonText="{resources:Translate Cancel}" AcceptCommand="{Binding AddBoardCommand}" HeaderTitle="{resources:Translate AddNewBoard}" HeightRequest="150">
                     <sfPopup:PopupView.ContentTemplate>
                         <DataTemplate>
                             <Grid>
-                                <Entry Text="{Binding NewBoardName}" Placeholder="Nazwa tablicy" Keyboard="Text" TextColor="Black" HeightRequest="50"/>
+                                <Entry Text="{Binding NewBoardName}" Placeholder="{resources:Translate BoardName}" Keyboard="Text" TextColor="Black" HeightRequest="50"/>
                             </Grid>
                         </DataTemplate>
                     </sfPopup:PopupView.ContentTemplate>
