@@ -20,7 +20,7 @@
 
                             <sflistview:SfListView ItemTapped="SfListView_OnItemTapped" SelectionMode="None" ItemSize="60" ItemSpacing="0,5,0,0" ItemsSource="{Binding UserBoards}">
                                 <sflistview:SfListView.Behaviors>
-                                    <helpers:BoardListBehavior/>
+                                    <helpers:BoardListBehavior EditItemCommand="{Binding EditBoardCommand}" DeleteItemCommand="{Binding DeleteBoardCommand}"/>
                                 </sflistview:SfListView.Behaviors>
 
                                 <sflistview:SfListView.ItemTemplate>
@@ -33,17 +33,17 @@
                         </pulltoRefresh:SfPullToRefresh.PullableContent>
                     </pulltoRefresh:SfPullToRefresh>
 
-                    <Button BackgroundColor="OrangeRed" HeightRequest="56" WidthRequest="56" CornerRadius="28" AbsoluteLayout.LayoutBounds=".9,.9,56,56" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                    <Button Command="{Binding AddBoardButtonCommand}" BackgroundColor="OrangeRed" HeightRequest="56" WidthRequest="56" CornerRadius="28" AbsoluteLayout.LayoutBounds=".9,.9,56,56" AbsoluteLayout.LayoutFlags="PositionProportional"/>
 
                 </AbsoluteLayout>
             </sfPopup:SfPopupLayout.Content>
 
             <sfPopup:SfPopupLayout.PopupView>
-                <sfPopup:PopupView AppearanceMode="TwoButton" AcceptButtonText="{resources:Translate Accept}" DeclineButtonText="{resources:Translate Cancel}" AcceptCommand="{Binding AddBoardCommand}" HeaderTitle="{resources:Translate AddNewBoard}" HeightRequest="150">
+                <sfPopup:PopupView AppearanceMode="TwoButton" AcceptButtonText="{resources:Translate Accept}" DeclineButtonText="{resources:Translate Cancel}" AcceptCommand="{Binding ConfirmPopupCommand}" HeaderTitle="{resources:Translate AddNewBoard}" HeightRequest="150">
                     <sfPopup:PopupView.ContentTemplate>
                         <DataTemplate>
                             <Grid>
-                                <Entry Text="{Binding NewBoardName}" Placeholder="{resources:Translate BoardName}" Keyboard="Text" TextColor="Black" HeightRequest="50"/>
+                                <Entry Text="{Binding NewBoardName, Mode=TwoWay}" Placeholder="{resources:Translate BoardName}" Keyboard="Text" TextColor="Black" HeightRequest="50"/>
                             </Grid>
                         </DataTemplate>
                     </sfPopup:PopupView.ContentTemplate>

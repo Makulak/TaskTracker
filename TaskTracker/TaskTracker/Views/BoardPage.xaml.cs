@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Syncfusion.SfRadialMenu.XForms;
+using TaskTracker.Resources;
 using TaskTracker.ViewModels.Page;
 using TaskTracker.ViewModels.VM;
 using Xamarin.Forms;
@@ -16,8 +17,7 @@ namespace TaskTracker.Views
 		{
             BoardPageViewModel vm = new BoardPageViewModel();
             vm.DisplayMainPage = (selectedBoard) => Navigation.PushAsync(new MainPage(selectedBoard));
-            vm.DisplayExceptionMessage += (exMessage) => DisplayAlert("Rest error", exMessage, "OK");
-            vm.HideKeyboard += () => { }; //TODO: Zrobić ukrywanie
+            vm.DisplayExceptionMessage += (exMessage) => DisplayAlert(AppResources.Error, exMessage, AppResources.Ok);
             vm.DisplayAddBoard += () => AddNewBoardPopup.Show();
 
             BindingContext = vm;

@@ -5,6 +5,7 @@ using System.Windows.Input;
 using TaskTracker.Data;
 using TaskTracker.Exceptions;
 using TaskTracker.Models;
+using TaskTracker.Resources;
 using TaskTracker.ViewModels.Page.Base;
 using TaskTracker.ViewModels.VM;
 using Xamarin.Forms;
@@ -13,35 +14,33 @@ namespace TaskTracker.ViewModels.Page
 {
     class BoardPageViewModel : BaseViewModel
     {
-        public ObservableCollection<BoardVM> UserBoards
-        {
+        private bool _editBoard; //TODO: Change that
+        private BoardVM _selectedBoard;
+
+        public ObservableCollection<BoardVM> UserBoards {
             get => _userBoards;
-            set
-            {
+            set {
                 _userBoards = value;
                 OnPropertyChanged("UserBoards");
             }
         }
         private ObservableCollection<BoardVM> _userBoards;
 
-        public ICommand AddBoardCommand { get; set; }
+        public ICommand ConfirmPopupCommand { get; set; }
         public ICommand DeleteBoardCommand { get; set; }
         public ICommand EditBoardCommand { get; set; }
+        public ICommand AddBoardButtonCommand { get; set; }
 
         public Action<BoardVM> DisplayMainPage;
-        public Action<BoardVM> DisplayEditBoard;
         public Action DisplayAddBoard;
-        public Action HideKeyboard;
 
         private readonly RestManager _manager;
 
-        public string NewBoardName
-        {
+        public string NewBoardName {
             get => _newBoardName;
-            set
-            {
+            set {
                 _newBoardName = value;
-                OnPropertyChanged("BoardName");
+                OnPropertyChanged("NewBoardName");
             }
         }
         private string _newBoardName;
@@ -50,10 +49,15 @@ namespace TaskTracker.ViewModels.Page
         {
             _manager = new RestManager(new RestService());
 
+            EditBoardCommand = new Command(OnEditBoard);
             DeleteBoardCommand = new Command(OnDeleteBoard);
-            AddBoardCommand = new Command(OnAddBoard);
+            ConfirmPopupCommand = new Command(OnConfirmPopup);
+            AddBoardButtonCommand = new Command(OnAddBoardButton);
 
             GetUserBoards();
+
+            UserBoards = new ObservableCollection<BoardVM>();
+            UserBoards.Add(new Board("xD"));
         }
 
         #region Commands
@@ -68,11 +72,49 @@ namespace TaskTracker.ViewModels.Page
             }
         }
 
-        private void OnAddBoard(object obj)
+        private void OnConfirmPopup(object obj)
         {
-            AddNewBoard(NewBoardName);
-            NewBoardName = string.Empty;
-            HideKeyboard?.Invoke();
+            if (!string.IsNullOrEmpty(NewBoardName))
+            {
+                if (_editBoard)
+                {
+                    _selectedBoard.Base.Name = NewBoardName;
+                    EditSelectedBoard(_selectedBoard.Base);
+
+                    GetUserBoards();
+                }
+                else
+                {
+                    AddNewBoard(NewBoardName);
+                }
+
+                NewBoardName = string.Empty;
+            }
+            else
+            {
+                DisplayExceptionMessage(AppResources.NameCannotBeEmpty);
+            }
+        }
+
+        private void OnAddBoardButton(object obj)
+        {
+            _editBoard = false;
+            DisplayAddBoard();
+        }
+
+        private void OnEditBoard(object obj)
+        {
+            _editBoard = true;
+
+            if (obj is BoardVM board)
+            {
+                _selectedBoard = board;
+
+                NewBoardName = board.Name;
+                DisplayAddBoard();
+
+                GetUserBoards();
+            }
         }
 
         #endregion
@@ -123,7 +165,8 @@ namespace TaskTracker.ViewModels.Page
             {
                 Board newBoard = await _manager.AddNewBoard(boardName);
 
-                UserBoards.Add(newBoard);
+                if(newBoard != null)
+                    UserBoards.Add(newBoard);
             }
             catch (RestException ex)
             {

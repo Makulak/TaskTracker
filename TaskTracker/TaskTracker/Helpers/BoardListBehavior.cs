@@ -4,6 +4,7 @@ using Syncfusion.ListView.XForms;
 using Syncfusion.XForms.PopupLayout;
 using TaskTracker.Models;
 using TaskTracker.Resources;
+using TaskTracker.ViewModels.VM;
 using Xamarin.Forms;
 
 namespace TaskTracker.Helpers
@@ -11,26 +12,33 @@ namespace TaskTracker.Helpers
     class BoardListBehavior : Behavior<SfListView>
     {
         private SfListView _listView;
-        private Board _selectedItem;
+        private BoardVM _selectedItem;
         private SfPopupLayout _popup;
 
-        public ICommand DeleteItemCommand
-        {
-            get => (ICommand)GetValue(DeleteItemProperty);
-            set => SetValue(DeleteItemProperty, value);
+        public static readonly BindableProperty DeleteItemCommandProperty =
+            BindableProperty.Create(nameof(DeleteItemCommand), typeof(ICommand), typeof(BoardListBehavior), propertyChanged: DeleteItemCommandUpdated);
+
+        public ICommand DeleteItemCommand {
+            get => (ICommand)GetValue(DeleteItemCommandProperty);
+            set => SetValue(DeleteItemCommandProperty, value);
         }
 
-        public static readonly BindableProperty DeleteItemProperty =
-            BindableProperty.Create("DeleteItemCommand", typeof(ICommand), typeof(ICommand));
+        public static readonly BindableProperty EditItemCommandProperty =
+            BindableProperty.Create(nameof(EditItemCommand), typeof(ICommand), typeof(BoardListBehavior));
 
-        //public ICommand EditItemCommand
-        //{
-        //    get => (ICommand)GetValue(DeleteItemProperty);
-        //    set => SetValue(DeleteItemProperty, value);
-        //}
+        public ICommand EditItemCommand {
+            get => (ICommand)GetValue(EditItemCommandProperty);
+            set => SetValue(EditItemCommandProperty, value);
+        }
 
-        //public static readonly BindableProperty DeleteItemProperty =
-        //    BindableProperty.Create("DeleteItemCommand", typeof(ICommand), typeof(ICommand));
+        private static void DeleteItemCommandUpdated(object sender, object oldValue, object newValue)
+        {
+            if (sender is BoardListBehavior listBehavior && newValue is ICommand newCommand)
+            {
+                listBehavior.DeleteItemCommand = newCommand;
+            }
+        }
+
 
         protected override void OnAttachedTo(SfListView listView)
         {
@@ -45,12 +53,12 @@ namespace TaskTracker.Helpers
 
         private void ListView_ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
         {
-            _popup.Dismiss();
+            _popup?.Dismiss();
         }
 
         private void ListView_ScrollStateChanged(object sender, ScrollStateChangedEventArgs e)
         {
-            _popup.Dismiss();
+            _popup?.Dismiss();
         }
 
         private void ListView_ItemHolding(object sender, ItemHoldingEventArgs e)
@@ -59,37 +67,36 @@ namespace TaskTracker.Helpers
 
             _popup = new SfPopupLayout();
 
+            _popup.PopupView.ShowHeader = false;
+            _popup.PopupView.ShowFooter = false;
             _popup.PopupView.HeightRequest = 100;
-            _popup.PopupView.WidthRequest = 150;
+            _popup.PopupView.WidthRequest = 200;
 
             _popup.PopupView.ContentTemplate = new DataTemplate(() =>
             {
                 var mainStack = new StackLayout();
-                mainStack.BackgroundColor = Color.BlanchedAlmond;
+                mainStack.BackgroundColor = Color.FromHex("#ECEFF1");
 
                 var deleteButton = new Button()
                 {
                     Text = AppResources.Delete,
-                    HeightRequest = 50,
+                    HeightRequest = 70,
                     TextColor = Color.Black
                 };
                 deleteButton.Clicked += DeleteButtonClicked;
 
-                var sortButton = new Button()
+                var editButton = new Button()
                 {
                     Text = AppResources.Edit,
-                    HeightRequest = 50,
+                    HeightRequest = 70,
                     TextColor = Color.Black
                 };
-                sortButton.Clicked += EditButtonClicked;
+                editButton.Clicked += EditButtonClicked;
                 mainStack.Children.Add(deleteButton);
-                mainStack.Children.Add(sortButton);
+                mainStack.Children.Add(editButton);
                 return mainStack;
 
             });
-
-            _popup.PopupView.ShowHeader = false;
-            _popup.PopupView.ShowFooter = false;
 
             if (e.Position.Y + 100 <= _listView.Height && e.Position.X + 100 > _listView.Width)
                 _popup.Show(e.Position.X - 100, e.Position.Y);
@@ -108,7 +115,7 @@ namespace TaskTracker.Helpers
 
         private void EditButtonClicked(object sender, EventArgs e)
         {
-
+            EditItemCommand?.Execute(_selectedItem);
         }
 
         private void Dismiss()

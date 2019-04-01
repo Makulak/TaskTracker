@@ -160,6 +160,15 @@ namespace TaskTracker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nazwa nie może być pusta..
+        /// </summary>
+        public static string NameCannotBeEmpty {
+            get {
+                return ResourceManager.GetString("NameCannotBeEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         public static string Ok {
