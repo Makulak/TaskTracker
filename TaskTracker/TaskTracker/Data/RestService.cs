@@ -135,7 +135,7 @@ namespace TaskTracker.Data
 
         public async Task<Board> EditBoard(Board board)
         {
-            var uri = UriFactory.CreateEndpointUri("board/edit"); //TODO[JM]: Nazwa endpointa
+            var uri = UriFactory.CreateEndpointUri("boards/edit"); //TODO[JM]: Nazwa endpointa
             var param = JsonContentFactory.CreateContent(board);
             HttpResponseMessage response;
 
@@ -161,13 +161,12 @@ namespace TaskTracker.Data
 
         public async Task DeleteBoard(int id)
         {
-            var uri = UriFactory.CreateEndpointUri("board/delete"); //TODO[JM]: Nazwa endpointa
-            var param = JsonContentFactory.CreateContent(id);
+            var uri = UriFactory.CreateEndpointUri($"boards/delete/id={id}"); //TODO[JM]: Nazwa endpointa
             HttpResponseMessage response;
 
             try
             {
-                response = await Client.PostAsync(uri, param);
+                response = await Client.DeleteAsync(uri);
             }
             catch (Exception ex)
             {

@@ -8,6 +8,8 @@ namespace TaskTracker.ViewModels.VM
     {
         public Board Base { get; set; }
 
+        public UserVM AssignedUsers { get; set; }
+
         public string Name => Base.Name;
 
         public ObservableCollection<ColumnVM> ColumnsCollection => new ObservableCollection<ColumnVM>(Base.Columns.ConvertAll<ColumnVM>(x => x));

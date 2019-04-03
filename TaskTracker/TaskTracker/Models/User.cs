@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using Xamarin.Forms;
 
 namespace TaskTracker.Models
 {
@@ -15,14 +16,17 @@ namespace TaskTracker.Models
         [JsonProperty(PropertyName = "password")]
         public string Password { get; set; }
 
-        [JsonProperty(PropertyName = "mail")] 
+        [JsonProperty(PropertyName = "mail")]
         public string Mail { get; set; }
 
         [JsonProperty(PropertyName = "boardIds")]
         public int[] BoardIds { get; set; }
 
+        [JsonProperty(PropertyName = "")]
+        public string ImageUrl { get; set; }
+
         public User()
-        {}
+        { }
 
         public User(int id, string login)
         {

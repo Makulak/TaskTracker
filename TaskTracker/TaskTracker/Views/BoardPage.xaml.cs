@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Syncfusion.SfRadialMenu.XForms;
+using TaskTracker.Helpers;
 using TaskTracker.Resources;
 using TaskTracker.ViewModels.Page;
 using TaskTracker.ViewModels.VM;
@@ -22,7 +23,13 @@ namespace TaskTracker.Views
 
             BindingContext = vm;
 
-			InitializeComponent ();
+            BoardListBehavior behavior = new BoardListBehavior();
+            behavior.DeleteItemCommand = vm.DeleteBoardCommand;
+            behavior.EditItemCommand = vm.EditBoardCommand;
+
+            InitializeComponent();
+
+            lvBoard.Behaviors.Insert(0, behavior);
 		}
 
         private async void SfPullToRefresh_OnRefreshing(object sender, EventArgs e)

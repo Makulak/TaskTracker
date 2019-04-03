@@ -16,7 +16,7 @@ namespace TaskTracker.Helpers
         private SfPopupLayout _popup;
 
         public static readonly BindableProperty DeleteItemCommandProperty =
-            BindableProperty.Create(nameof(DeleteItemCommand), typeof(ICommand), typeof(BoardListBehavior), propertyChanged: DeleteItemCommandUpdated);
+            BindableProperty.Create(nameof(DeleteItemCommand), typeof(ICommand), typeof(BoardListBehavior));
 
         public ICommand DeleteItemCommand {
             get => (ICommand)GetValue(DeleteItemCommandProperty);
@@ -29,14 +29,6 @@ namespace TaskTracker.Helpers
         public ICommand EditItemCommand {
             get => (ICommand)GetValue(EditItemCommandProperty);
             set => SetValue(EditItemCommandProperty, value);
-        }
-
-        private static void DeleteItemCommandUpdated(object sender, object oldValue, object newValue)
-        {
-            if (sender is BoardListBehavior listBehavior && newValue is ICommand newCommand)
-            {
-                listBehavior.DeleteItemCommand = newCommand;
-            }
         }
 
 
@@ -63,7 +55,7 @@ namespace TaskTracker.Helpers
 
         private void ListView_ItemHolding(object sender, ItemHoldingEventArgs e)
         {
-            _selectedItem = e.ItemData as Board;
+            _selectedItem = e.ItemData as BoardVM;
 
             _popup = new SfPopupLayout();
 
@@ -80,7 +72,7 @@ namespace TaskTracker.Helpers
                 var deleteButton = new Button()
                 {
                     Text = AppResources.Delete,
-                    HeightRequest = 70,
+                    HeightRequest = 50,
                     TextColor = Color.Black
                 };
                 deleteButton.Clicked += DeleteButtonClicked;
@@ -88,7 +80,7 @@ namespace TaskTracker.Helpers
                 var editButton = new Button()
                 {
                     Text = AppResources.Edit,
-                    HeightRequest = 70,
+                    HeightRequest = 50,
                     TextColor = Color.Black
                 };
                 editButton.Clicked += EditButtonClicked;

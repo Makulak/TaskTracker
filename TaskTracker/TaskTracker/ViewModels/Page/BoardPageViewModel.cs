@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using TaskTracker.Data;
 using TaskTracker.Exceptions;
@@ -55,18 +56,15 @@ namespace TaskTracker.ViewModels.Page
             AddBoardButtonCommand = new Command(OnAddBoardButton);
 
             GetUserBoards();
-
-            UserBoards = new ObservableCollection<BoardVM>();
-            UserBoards.Add(new Board("xD"));
         }
 
         #region Commands
 
         private void OnDeleteBoard(object obj)
         {
-            if (obj is Board board)
+            if (obj is BoardVM board) //TODO: Add confirmation popup
             {
-                DeleteSelectedBoard(board);
+                DeleteSelectedBoard(board.Base);
 
                 GetUserBoards();
             }
@@ -128,6 +126,7 @@ namespace TaskTracker.ViewModels.Page
                 List<Board> boards = await _manager.GetLoggedUserBoards();
 
                 UserBoards = new ObservableCollection<BoardVM>(boards.ConvertAll<BoardVM>(x => x));
+
             }
             catch (RestException ex)
             {

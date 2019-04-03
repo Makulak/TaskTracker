@@ -18,10 +18,7 @@
                     <pulltoRefresh:SfPullToRefresh x:Name="PullToRefresh" VerticalOptions="FillAndExpand" TransitionMode="Push" IsRefreshing="False" Refreshing="SfPullToRefresh_OnRefreshing">
                         <pulltoRefresh:SfPullToRefresh.PullableContent>
 
-                            <sflistview:SfListView ItemTapped="SfListView_OnItemTapped" SelectionMode="None" ItemSize="60" ItemSpacing="0,5,0,0" ItemsSource="{Binding UserBoards}">
-                                <sflistview:SfListView.Behaviors>
-                                    <helpers:BoardListBehavior EditItemCommand="{Binding EditBoardCommand}" DeleteItemCommand="{Binding DeleteBoardCommand}"/>
-                                </sflistview:SfListView.Behaviors>
+                            <sflistview:SfListView x:Name="LvBoard" ItemTapped="SfListView_OnItemTapped" SelectionMode="None" ItemSize="60" ItemSpacing="0,5,0,0" ItemsSource="{Binding UserBoards}">
 
                                 <sflistview:SfListView.ItemTemplate>
                                     <DataTemplate >
@@ -33,7 +30,7 @@
                         </pulltoRefresh:SfPullToRefresh.PullableContent>
                     </pulltoRefresh:SfPullToRefresh>
 
-                    <Button Command="{Binding AddBoardButtonCommand}" BackgroundColor="OrangeRed" HeightRequest="56" WidthRequest="56" CornerRadius="28" AbsoluteLayout.LayoutBounds=".9,.9,56,56" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                    <Button Command="{Binding AddBoardButtonCommand}" Image="plus.xml" BackgroundColor="OrangeRed" HeightRequest="56" WidthRequest="56" CornerRadius="28" AbsoluteLayout.LayoutBounds=".9,.9,56,56" AbsoluteLayout.LayoutFlags="PositionProportional"/>
 
                 </AbsoluteLayout>
             </sfPopup:SfPopupLayout.Content>
