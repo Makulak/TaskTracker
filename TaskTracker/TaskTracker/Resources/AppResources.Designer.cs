@@ -212,5 +212,14 @@ namespace TaskTracker.Resources {
                 return ResourceManager.GetString("RestError", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tablice.
+        /// </summary>
+        public static string Tables {
+            get {
+                return ResourceManager.GetString("Tables", resourceCulture);
+            }
+        }
     }
 }

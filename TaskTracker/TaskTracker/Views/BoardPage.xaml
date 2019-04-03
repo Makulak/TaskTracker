@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TaskTracker.Views.BoardPage"
              x:Name="_BoardPage"
+             Title="{resources:Translate Tables}"
              xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
              xmlns:pulltoRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
              xmlns:sflistview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:controls="clr-namespace:TaskTracker.Views.Controls"
-             xmlns:resources="clr-namespace:TaskTracker.Resources;assembly=TaskTracker"
-             xmlns:helpers="clr-namespace:TaskTracker.Helpers;assembly=TaskTracker">
+             xmlns:resources="clr-namespace:TaskTracker.Resources;assembly=TaskTracker">
 
     <ContentPage.Content>
         <sfPopup:SfPopupLayout x:Name="AddNewBoardPopup">

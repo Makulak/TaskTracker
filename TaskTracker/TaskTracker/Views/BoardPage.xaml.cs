@@ -29,7 +29,7 @@ namespace TaskTracker.Views
 
             InitializeComponent();
 
-            lvBoard.Behaviors.Insert(0, behavior);
+            LvBoard.Behaviors.Insert(0, behavior);
 		}
 
         private async void SfPullToRefresh_OnRefreshing(object sender, EventArgs e)

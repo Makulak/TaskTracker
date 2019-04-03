@@ -168,4 +168,7 @@
   <data name="RestError" xml:space="preserve">
     <value>Rest error</value>
   </data>
+  <data name="Tables" xml:space="preserve">
+    <value>Tablice</value>
+  </data>
 </root>

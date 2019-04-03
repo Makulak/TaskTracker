@@ -3,6 +3,7 @@ using TaskTracker.Models;
 using TaskTracker.ViewModels.Page;
 using TaskTracker.ViewModels.VM;
 using Xamarin.Forms;
+using ItemTappedEventArgs = Syncfusion.ListView.XForms.ItemTappedEventArgs;
 
 namespace TaskTracker.Views
 {
@@ -51,6 +52,11 @@ namespace TaskTracker.Views
 
             //    this.DeleteHeader.IsVisible = false;
             //}
+        }
+
+        private void SfListView_OnItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            
         }
     }
 }

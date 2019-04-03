@@ -72,22 +72,23 @@ namespace TaskTracker.Helpers
                 var deleteButton = new Button()
                 {
                     Text = AppResources.Delete,
+                    TextColor = Color.Black,
                     HeightRequest = 50,
-                    TextColor = Color.Black
                 };
                 deleteButton.Clicked += DeleteButtonClicked;
 
                 var editButton = new Button()
                 {
                     Text = AppResources.Edit,
+                    TextColor = Color.Black,
                     HeightRequest = 50,
-                    TextColor = Color.Black
                 };
                 editButton.Clicked += EditButtonClicked;
+
                 mainStack.Children.Add(deleteButton);
                 mainStack.Children.Add(editButton);
-                return mainStack;
 
+                return mainStack;
             });
 
             if (e.Position.Y + 100 <= _listView.Height && e.Position.X + 100 > _listView.Width)
