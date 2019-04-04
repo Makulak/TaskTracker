@@ -11,14 +11,14 @@
              xmlns:resources="clr-namespace:TaskTracker.Resources;assembly=TaskTracker">
 
     <ContentPage.Content>
-        <sfPopup:SfPopupLayout x:Name="AddNewBoardPopup">
+        <sfPopup:SfPopupLayout x:Name="AddNewBoardPopup" BackgroundColor="#EEEEEE">
 
             <sfPopup:SfPopupLayout.Content>
                 <AbsoluteLayout>
                     <pulltoRefresh:SfPullToRefresh x:Name="PullToRefresh" VerticalOptions="FillAndExpand" TransitionMode="Push" IsRefreshing="False" Refreshing="SfPullToRefresh_OnRefreshing">
                         <pulltoRefresh:SfPullToRefresh.PullableContent>
 
-                            <sflistview:SfListView x:Name="LvBoard" ItemTapped="SfListView_OnItemTapped" SelectionMode="None" ItemSize="60" ItemSpacing="0,5,0,0" ItemsSource="{Binding UserBoards}">
+                            <sflistview:SfListView x:Name="LvBoard" ItemTapped="SfListView_OnItemTapped" SelectionMode="None" ItemSize="70" ItemSpacing="0,10,0,0" ItemsSource="{Binding UserBoards}">
 
                                 <sflistview:SfListView.ItemTemplate>
                                     <DataTemplate >

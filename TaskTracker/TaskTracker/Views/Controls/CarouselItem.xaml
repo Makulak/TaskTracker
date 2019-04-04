@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             x:Class="TaskTracker.Views.Controls.CarouselItem">
+
+    <ContentView.Content>
+        <!--<Grid Padding="30,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <StackLayout x:Name="Header" Orientation="Horizontal">
+                    <Image IsVisible="{Binding IsDeleteIconVisible}" Source="delete.xml"/>
+                    <Label TextColor="Black" HorizontalTextAlignment="Center" Text="{Binding Name}" FontAttributes="Bold" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Center"/>
+                </StackLayout>
+            </Grid>
+
+            <xForms:SfListView BackgroundColor="#C0E0E0E0" AllowSwiping="True" SelectionMode="None" ItemSize="80" ItemTapped="SfListView_OnItemTapped" ItemDragging="SfListView_OnItemDragging" ItemsSource="{Binding TaskCollection}" DragStartMode="OnHold" ItemSpacing="0,5,0,0" Grid.Row="1" >
+                <xForms:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame x:Name="frame" BackgroundColor="#EEEEEE" Padding="1" >
+                            <StackLayout HeightRequest="70">
+                                <Label Text="{Binding Name}" TextColor="Black"/>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </xForms:SfListView.ItemTemplate>
+
+                <xForms:SfListView.DragItemTemplate>
+                    <DataTemplate>
+                        <Frame x:Name="frame" BackgroundColor="#32EEEEEE" Padding="1" >
+                            <StackLayout>
+                                <Label Text="{Binding Name}" TextColor="Black"/>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </xForms:SfListView.DragItemTemplate>
+            </xForms:SfListView>
+        </Grid>-->
+    </ContentView.Content>
+</ContentView>

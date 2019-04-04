@@ -4,6 +4,7 @@ using TaskTracker.Exceptions;
 using TaskTracker.Models;
 using TaskTracker.ViewModels.Page.Base;
 using TaskTracker.ViewModels.VM;
+using Xamarin.Forms;
 
 namespace TaskTracker.ViewModels.Page
 {
@@ -13,17 +14,15 @@ namespace TaskTracker.ViewModels.Page
 
         private readonly RestManager _manager;
 
-        public bool IsDeleteViewVisible
-        {
-            get => _isDeleteViewVisible;
+        public bool IsDeleteIconVisible {
+            get => _isDeleteIconVisible;
             set
             {
-                _isDeleteViewVisible = value;
-                OnPropertyChanged("IsDeleteViewVisible");
+                _isDeleteIconVisible = value;
+                OnPropertyChanged("IsDeleteIconVisible");
             }
         }
-
-        private bool _isDeleteViewVisible;
+        private bool _isDeleteIconVisible;
 
         public MainPageViewModel(BoardVM selectedBoard)
         {

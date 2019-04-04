@@ -8,49 +8,49 @@
              xmlns:sflistview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              BackgroundImage="background.jpg">
 
+    
+
     <ContentPage.Content>
-        <RelativeLayout VerticalOptions="FillAndExpand">
-            <sfcarousel:SfCarousel ItemsSource="{Binding SelectedBoard.ColumnsCollection}" ViewMode="Linear" RotationAngle="0" ItemSpacing="35">
-                <sfcarousel:SfCarousel.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Padding="25,0,25,0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="45"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
+        <sfcarousel:SfCarousel x:Name="Carousel" ItemsSource="{Binding SelectedBoard.ColumnsCollection}" SelectedIndex="{Binding CarouselIndex}" ViewMode="Linear" RotationAngle="0" VerticalOptions="FillAndExpand" ItemSpacing="40">
+            <sfcarousel:SfCarousel.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="30,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="45"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-                            <Grid Grid.Row="0">
-                                <StackLayout Orientation="Horizontal" BackgroundColor="#BDBDBD">
-                                    <!--<Image Source="delete.xml"></Image>-->
-                                    <Label TextColor="Black" HorizontalTextAlignment="Center" Text="{Binding Name}" FontAttributes="Bold" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Center"/>
-                                </StackLayout>
-                            </Grid>
-
-                            <sflistview:SfListView BackgroundColor="#C0E0E0E0" AllowSwiping="True" SelectionMode="None" ItemTapped="SfListView_OnItemTapped" ItemDragging="SfListView_OnItemDragging" ItemsSource="{Binding TaskCollection}" DragStartMode="OnHold" ItemSpacing="0,5,0,0" Grid.Row="1" >
-                                <sflistview:SfListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Frame x:Name="frame" BackgroundColor="#EEEEEE" HeightRequest="70" Padding="1" >
-                                            <StackLayout HeightRequest="70">
-                                                <Label Text="{Binding Name}" TextColor="Black"/>
-                                            </StackLayout>
-                                        </Frame>
-                                    </DataTemplate>
-                                </sflistview:SfListView.ItemTemplate>
-
-                                <sflistview:SfListView.DragItemTemplate>
-                                    <DataTemplate>
-                                        <Frame x:Name="frame" BackgroundColor="#EEEEEE" HeightRequest="50" Padding="1" >
-                                            <StackLayout>
-                                                <Label Text="{Binding Name}" TextColor="Black"/>
-                                            </StackLayout>
-                                        </Frame>
-                                    </DataTemplate>
-                                </sflistview:SfListView.DragItemTemplate>
-                            </sflistview:SfListView>
+                        <Grid Grid.Row="0">
+                            <StackLayout x:Name="Header" Orientation="Horizontal" >
+                                <Image IsVisible="false" Source="delete.xml"/>
+                                <Label TextColor="Black" HorizontalTextAlignment="Center" Text="{Binding Name}" FontAttributes="Bold" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            </StackLayout>
                         </Grid>
-                    </DataTemplate>
-                </sfcarousel:SfCarousel.ItemTemplate>
-            </sfcarousel:SfCarousel>
-        </RelativeLayout>
+
+                        <sflistview:SfListView BackgroundColor="#C0E0E0E0" AllowSwiping="True" SelectionMode="None" ItemSize="80" ItemTapped="SfListView_OnItemTapped" ItemDragging="SfListView_OnItemDragging" ItemsSource="{Binding TaskCollection}" DragStartMode="OnHold" ItemSpacing="0,0,0,5" Grid.Row="1" >
+                            <sflistview:SfListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame x:Name="frame" BackgroundColor="#EEEEEE" Padding="1" >
+                                        <StackLayout HeightRequest="70">
+                                            <Label Text="{Binding Name}" TextColor="Black"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </sflistview:SfListView.ItemTemplate>
+
+                            <sflistview:SfListView.DragItemTemplate>
+                                <DataTemplate>
+                                    <Frame x:Name="frame" BackgroundColor="#32EEEEEE" Padding="1" >
+                                        <StackLayout>
+                                            <Label Text="{Binding Name}" TextColor="Black"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </sflistview:SfListView.DragItemTemplate>
+                        </sflistview:SfListView>
+                    </Grid>
+                </DataTemplate>
+            </sfcarousel:SfCarousel.ItemTemplate>
+        </sfcarousel:SfCarousel>
     </ContentPage.Content>
 </ContentPage>

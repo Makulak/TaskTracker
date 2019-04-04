@@ -16,6 +16,9 @@ namespace TaskTracker.Models
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
+        [JsonProperty(PropertyName = "position")]
+        public int Position { get; set; }
+
         [JsonProperty(PropertyName = "tasks")]
         public List<Task> Tasks { get; set; }
 
