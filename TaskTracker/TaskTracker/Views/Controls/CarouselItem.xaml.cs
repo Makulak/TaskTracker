@@ -17,13 +17,13 @@ namespace TaskTracker.Views.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CarouselItem : ContentView
     {
-        public static readonly BindableProperty MainPageVmProperty =
-            BindableProperty.Create(nameof(MainPageVm), typeof(MainPageViewModel), typeof(CarouselItem));
+        //public static readonly BindableProperty MainPageVmProperty =
+        //    BindableProperty.Create(nameof(MainPageVm), typeof(MainPageViewModel), typeof(CarouselItem));
 
-        public MainPageViewModel MainPageVm {
-            get => (MainPageViewModel)GetValue(MainPageVmProperty);
-            set => SetValue(MainPageVmProperty, value);
-        }
+        //public MainPageViewModel MainPageVm {
+        //    get => (MainPageViewModel)GetValue(MainPageVmProperty);
+        //    set => SetValue(MainPageVmProperty, value);
+        //}
 
         public CarouselItem()
         {
@@ -39,15 +39,17 @@ namespace TaskTracker.Views.Controls
         {
             TaskVM task = e.ItemData as TaskVM;
 
-            if (task == null)
+            ColumnVM bindingContext = BindingContext as ColumnVM;
+
+            if (task == null || bindingContext == null)
                 return;
 
             if (e.Action == DragAction.Start)
             {
-                int pos = MainPageVm.SelectedBoard.Base.Columns.FirstOrDefault(x => x.Id == task.Base.ColumnId).Position;
+                //int pos = MainPageVm.SelectedBoard.Base.Columns.FirstOrDefault(x => x.Id == task.Base.ColumnId).Position;
 
-                if (MainPageVm.CarouselSelectedIndex != pos)
-                    MainPageVm.CarouselSelectedIndex = pos;
+                //if (MainPageVm.CarouselSelectedIndex != pos)
+                //    MainPageVm.CarouselSelectedIndex = pos;
 
                 DeleteImage.IsVisible = true;
             }
@@ -68,7 +70,7 @@ namespace TaskTracker.Views.Controls
 
                 if (Header.Bounds.Contains(position))
                 {
-                    MainPageVm.RemoveTask(task);
+                    bindingContext.RemoveTask(task);
                 }
 
                 Header.BackgroundColor = Color.Transparent;

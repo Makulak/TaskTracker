@@ -5,7 +5,7 @@ using Xamarin.Forms;
 namespace TaskTracker.Models
 {
     [Serializable]
-    public class User
+    internal class User
     {
         [JsonProperty(PropertyName = "id")]
         public int Id { get; set; }

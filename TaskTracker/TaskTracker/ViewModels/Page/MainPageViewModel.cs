@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace TaskTracker.ViewModels.Page
 {
-    public class MainPageViewModel : BaseViewModel
+    class MainPageViewModel : BaseViewModel
     {
         private readonly RestManager _manager;
 
@@ -76,22 +76,6 @@ namespace TaskTracker.ViewModels.Page
 
         }
 
-        internal async void RemoveTask(TaskVM task)
-        {
-            try
-            {
-                await _manager.DeleteTask(task.Base.Id);
-
-                SelectedBoard.ColumnsCollection[CarouselSelectedIndex].TaskCollection.Remove(task);
-            }
-            catch (RestException ex)
-            {
-                DisplayExceptionMessage(ex.CompleteMessage);
-            }
-        }
-
         #endregion
-
-
     }
 }

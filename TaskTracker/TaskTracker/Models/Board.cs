@@ -6,7 +6,7 @@ using TaskTracker.ViewModels.VM;
 namespace TaskTracker.Models
 {
     [Serializable]
-    public class Board
+    internal class Board
     {
         [JsonProperty(PropertyName = "id")]
         public int Id { get; set; }

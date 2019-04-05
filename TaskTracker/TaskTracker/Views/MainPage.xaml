@@ -13,7 +13,7 @@
         <sfcarousel:SfCarousel ItemsSource="{Binding SelectedBoard.ColumnsCollection}" SelectedIndex="{Binding CarouselSelectedIndex, Mode=TwoWay}" ViewMode="Linear" RotationAngle="0" VerticalOptions="FillAndExpand" ItemSpacing="40">
             <sfcarousel:SfCarousel.ItemTemplate>
                 <DataTemplate>
-                    <controls:CarouselItem MainPageVm="{Binding BindingContext, Source={x:Reference MainContentPage}}"/>
+                    <controls:CarouselItem/>
                 </DataTemplate>
             </sfcarousel:SfCarousel.ItemTemplate>
         </sfcarousel:SfCarousel>

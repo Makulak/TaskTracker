@@ -1,9 +1,10 @@
-﻿using TaskTracker.Models;
+﻿using TaskTracker.Exceptions;
+using TaskTracker.Models;
 using TaskTracker.ViewModels.VM.Base;
 
 namespace TaskTracker.ViewModels.VM
 {
-    public class TaskVM : BaseVM
+    internal class TaskVM : BaseVM
     {
         public Task Base { get; set; }
 

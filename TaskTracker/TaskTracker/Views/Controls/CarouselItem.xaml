@@ -21,7 +21,7 @@
                 </Frame>
             </Grid>
 
-            <xForms:SfListView Grid.Row="1" x:Name="ListView" BackgroundColor="#C0E0E0E0" AllowSwiping="True" SelectionMode="None" ItemSize="80" ItemTapped="SfListView_OnItemTapped" ItemDragging="SfListView_OnItemDragging" ItemsSource="{Binding TaskCollection}" DragStartMode="OnHold" ItemSpacing="0,0,0,5" >
+            <xForms:SfListView Grid.Row="1" x:Name="ListView" BackgroundColor="#C0E0E0E0" AllowSwiping="False" SelectionMode="None" ItemSize="80" ItemTapped="SfListView_OnItemTapped" ItemDragging="SfListView_OnItemDragging" ItemsSource="{Binding TaskCollection}" DragStartMode="OnHold" ItemSpacing="0,0,0,5" >
                 <xForms:SfListView.ItemTemplate>
                     <DataTemplate>
                         <Frame BackgroundColor="#EEEEEE" Padding="1" >
