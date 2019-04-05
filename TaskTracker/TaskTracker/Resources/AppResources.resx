@@ -123,6 +123,9 @@
   <data name="AddNewBoard" xml:space="preserve">
     <value>Dodaj nową tablicę</value>
   </data>
+  <data name="AddNewTask" xml:space="preserve">
+    <value>Dodaj nowe zadanie</value>
+  </data>
   <data name="BoardName" xml:space="preserve">
     <value>Nazwa tablicy</value>
   </data>

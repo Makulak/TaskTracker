@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace TaskTracker.ViewModels.VM
 {
-    internal class UserVM : BaseVM
+    public class UserVM : BaseVM
     {
         private User Base { get; set; }
 

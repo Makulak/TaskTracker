@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TaskTracker.ViewModels.VM.Base
 {
-    class BaseVM : INotifyPropertyChanged
+    public class BaseVM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

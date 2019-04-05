@@ -314,13 +314,12 @@ namespace TaskTracker.Data
 
         public async Task DeleteTask(int taskId)
         {
-            var uri = UriFactory.CreateEndpointUri("task/delete"); //TODO[JM]: Nazwa endpointa
-            var param = JsonContentFactory.CreateContent(taskId);
+            var uri = UriFactory.CreateEndpointUri($"task/delete/it={taskId}"); //TODO[JM]: Nazwa endpointa
             HttpResponseMessage response;
 
             try
             {
-                response = await Client.PostAsync(uri, param);
+                response = await Client.DeleteAsync(uri);
             }
             catch (Exception ex)
             {

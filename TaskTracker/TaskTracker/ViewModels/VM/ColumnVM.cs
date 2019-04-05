@@ -4,7 +4,7 @@ using TaskTracker.ViewModels.VM.Base;
 
 namespace TaskTracker.ViewModels.VM
 {
-    internal class ColumnVM : BaseVM
+    public class ColumnVM : BaseVM
     {
         public Column Base { get; set; }
 

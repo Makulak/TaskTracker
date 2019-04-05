@@ -4,7 +4,7 @@ using TaskTracker.ViewModels.VM.Base;
 
 namespace TaskTracker.ViewModels.VM
 {
-    internal class BoardVM : BaseVM
+    public class BoardVM : BaseVM
     {
         public Board Base { get; set; }
 

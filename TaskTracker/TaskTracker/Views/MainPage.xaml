@@ -3,52 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:TaskTracker"
              x:Class="TaskTracker.Views.MainPage"
+             x:Name="MainContentPage"
              Title="{Binding SelectedBoard.Name}"
              xmlns:sfcarousel="clr-namespace:Syncfusion.SfCarousel.XForms;assembly=Syncfusion.SfCarousel.XForms"
-             xmlns:sflistview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:controls="clr-namespace:TaskTracker.Views.Controls;assembly=TaskTracker"
              BackgroundImage="background.jpg">
 
-    
-
     <ContentPage.Content>
-        <sfcarousel:SfCarousel x:Name="Carousel" ItemsSource="{Binding SelectedBoard.ColumnsCollection}" SelectedIndex="{Binding CarouselIndex}" ViewMode="Linear" RotationAngle="0" VerticalOptions="FillAndExpand" ItemSpacing="40">
+        <sfcarousel:SfCarousel ItemsSource="{Binding SelectedBoard.ColumnsCollection}" SelectedIndex="{Binding CarouselSelectedIndex, Mode=TwoWay}" ViewMode="Linear" RotationAngle="0" VerticalOptions="FillAndExpand" ItemSpacing="40">
             <sfcarousel:SfCarousel.ItemTemplate>
                 <DataTemplate>
-                    <Grid Padding="30,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="45"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-
-                        <Grid Grid.Row="0">
-                            <StackLayout x:Name="Header" Orientation="Horizontal" >
-                                <Image IsVisible="false" Source="delete.xml"/>
-                                <Label TextColor="Black" HorizontalTextAlignment="Center" Text="{Binding Name}" FontAttributes="Bold" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Center"/>
-                            </StackLayout>
-                        </Grid>
-
-                        <sflistview:SfListView BackgroundColor="#C0E0E0E0" AllowSwiping="True" SelectionMode="None" ItemSize="80" ItemTapped="SfListView_OnItemTapped" ItemDragging="SfListView_OnItemDragging" ItemsSource="{Binding TaskCollection}" DragStartMode="OnHold" ItemSpacing="0,0,0,5" Grid.Row="1" >
-                            <sflistview:SfListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Frame x:Name="frame" BackgroundColor="#EEEEEE" Padding="1" >
-                                        <StackLayout HeightRequest="70">
-                                            <Label Text="{Binding Name}" TextColor="Black"/>
-                                        </StackLayout>
-                                    </Frame>
-                                </DataTemplate>
-                            </sflistview:SfListView.ItemTemplate>
-
-                            <sflistview:SfListView.DragItemTemplate>
-                                <DataTemplate>
-                                    <Frame x:Name="frame" BackgroundColor="#32EEEEEE" Padding="1" >
-                                        <StackLayout>
-                                            <Label Text="{Binding Name}" TextColor="Black"/>
-                                        </StackLayout>
-                                    </Frame>
-                                </DataTemplate>
-                            </sflistview:SfListView.DragItemTemplate>
-                        </sflistview:SfListView>
-                    </Grid>
+                    <controls:CarouselItem MainPageVm="{Binding BindingContext, Source={x:Reference MainContentPage}}"/>
                 </DataTemplate>
             </sfcarousel:SfCarousel.ItemTemplate>
         </sfcarousel:SfCarousel>

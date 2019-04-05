@@ -1,4 +1,6 @@
 ﻿using System.Dynamic;
+using System.Linq;
+using System.Windows.Input;
 using TaskTracker.Data;
 using TaskTracker.Exceptions;
 using TaskTracker.Models;
@@ -8,28 +10,37 @@ using Xamarin.Forms;
 
 namespace TaskTracker.ViewModels.Page
 {
-    class MainPageViewModel : BaseViewModel
+    public class MainPageViewModel : BaseViewModel
     {
-        public BoardVM SelectedBoard { get; set; }
-
         private readonly RestManager _manager;
 
-        public bool IsDeleteIconVisible {
-            get => _isDeleteIconVisible;
+        public BoardVM SelectedBoard { get; set; }
+
+        public int CarouselSelectedIndex
+        {
+            get => _carouselSelectedIndex;
             set
             {
-                _isDeleteIconVisible = value;
-                OnPropertyChanged("IsDeleteIconVisible");
+                _carouselSelectedIndex = value;
+                OnPropertyChanged("CarouselSelectedIndex");
             }
         }
-        private bool _isDeleteIconVisible;
+        private int _carouselSelectedIndex;
+
 
         public MainPageViewModel(BoardVM selectedBoard)
         {
             SelectedBoard = selectedBoard;
 
             _manager = new RestManager(new RestService());
+
         }
+
+        #region Commands
+
+        #endregion
+
+        #region Methods
 
         void AddColumn(int boardId, string columnName)
         {
@@ -64,5 +75,23 @@ namespace TaskTracker.ViewModels.Page
         {
 
         }
+
+        internal async void RemoveTask(TaskVM task)
+        {
+            try
+            {
+                await _manager.DeleteTask(task.Base.Id);
+
+                SelectedBoard.ColumnsCollection[CarouselSelectedIndex].TaskCollection.Remove(task);
+            }
+            catch (RestException ex)
+            {
+                DisplayExceptionMessage(ex.CompleteMessage);
+            }
+        }
+
+        #endregion
+
+
     }
 }

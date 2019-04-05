@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace TaskTracker.Models
 {
     [Serializable]
-    internal class Column
+    public class Column
     {
         [JsonProperty(PropertyName = "id")]
         public int Id { get; set; }

@@ -3,7 +3,7 @@ using TaskTracker.ViewModels.VM.Base;
 
 namespace TaskTracker.ViewModels.VM
 {
-    internal class TaskVM : BaseVM
+    public class TaskVM : BaseVM
     {
         public Task Base { get; set; }
 

@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace TaskTracker.ViewModels.Page.Base
 {
-    class BaseViewModel : INotifyPropertyChanged
+    public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
