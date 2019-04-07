@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Syncfusion.ListView.XForms;
 using TaskTracker.Helpers;
+using TaskTracker.Resources;
 using TaskTracker.ViewModels.Page;
 using TaskTracker.ViewModels.VM;
 using Xamarin.Forms;
@@ -17,17 +18,16 @@ namespace TaskTracker.Views.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CarouselItem : ContentView
     {
-        //public static readonly BindableProperty MainPageVmProperty =
-        //    BindableProperty.Create(nameof(MainPageVm), typeof(MainPageViewModel), typeof(CarouselItem));
-
-        //public MainPageViewModel MainPageVm {
-        //    get => (MainPageViewModel)GetValue(MainPageVmProperty);
-        //    set => SetValue(MainPageVmProperty, value);
-        //}
-
         public CarouselItem()
         {
             InitializeComponent();
+
+            ColumnVM column = BindingContext as ColumnVM;
+
+            if (column == null)
+                return;
+
+            column.DisplayExceptionMessage += (exMessage) => Application.Current.MainPage.DisplayAlert(AppResources.Error, exMessage, AppResources.Ok);
         }
 
         private void SfListView_OnItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)

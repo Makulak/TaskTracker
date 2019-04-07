@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Windows.Input;
 using TaskTracker.Data;
 using TaskTracker.Exceptions;
@@ -123,14 +124,25 @@ namespace TaskTracker.ViewModels.Page
         {
             try
             {
+                ShowWaitForm = true;
                 List<Board> boards = await _manager.GetLoggedUserBoards();
 
                 UserBoards = new ObservableCollection<BoardVM>(boards.ConvertAll<BoardVM>(x => x));
 
+                foreach (BoardVM board in UserBoards)
+                {
+                    Thread.Sleep(30);
+                    //List<User> users = await _manager.GetUsersAssignedToBoard(board.Base.Id);
+                    //board.AssignedUsers = new ObservableCollection<UserVM>(users.ConvertAll<UserVM>(x => x));
+                }
             }
             catch (RestException ex)
             {
                 DisplayExceptionMessage(ex.CompleteMessage);
+            }
+            finally
+            {
+                ShowWaitForm = false;
             }
         }
 
@@ -164,7 +176,7 @@ namespace TaskTracker.ViewModels.Page
             {
                 Board newBoard = await _manager.AddNewBoard(boardName);
 
-                if(newBoard != null)
+                if (newBoard != null)
                     UserBoards.Add(newBoard);
             }
             catch (RestException ex)

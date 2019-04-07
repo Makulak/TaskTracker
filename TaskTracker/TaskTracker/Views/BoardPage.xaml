@@ -8,47 +8,55 @@
              xmlns:pulltoRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
              xmlns:sflistview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:controls="clr-namespace:TaskTracker.Views.Controls"
-             xmlns:resources="clr-namespace:TaskTracker.Resources;assembly=TaskTracker">
+             xmlns:resources="clr-namespace:TaskTracker.Resources;assembly=TaskTracker"
+             xmlns:converters="clr-namespace:TaskTracker.Converters;assembly=TaskTracker">
+
+    <ContentPage.Resources>
+        <converters:BoolNegateConverter x:Key="NegateConverter"/>
+    </ContentPage.Resources>
 
     <ContentPage.Content>
-        <sfPopup:SfPopupLayout x:Name="AddNewBoardPopup" BackgroundColor="#EEEEEE">
+        <Grid>
+            <sfPopup:SfPopupLayout x:Name="AddNewBoardPopup" BackgroundColor="#EEEEEE" Opacity="{Binding ControlsOpacity}" IsEnabled="{Binding ShowWaitForm, Converter={StaticResource NegateConverter}}">
 
-            <sfPopup:SfPopupLayout.Content>
-                <AbsoluteLayout>
-                    <pulltoRefresh:SfPullToRefresh x:Name="PullToRefresh" VerticalOptions="FillAndExpand" TransitionMode="Push" IsRefreshing="False" Refreshing="SfPullToRefresh_OnRefreshing">
-                        <pulltoRefresh:SfPullToRefresh.PullableContent>
+                <sfPopup:SfPopupLayout.Content>
+                    <AbsoluteLayout>
+                        <pulltoRefresh:SfPullToRefresh x:Name="PullToRefresh" VerticalOptions="FillAndExpand" TransitionMode="Push" IsRefreshing="False" Refreshing="SfPullToRefresh_OnRefreshing">
+                            <pulltoRefresh:SfPullToRefresh.PullableContent>
 
-                            <sflistview:SfListView x:Name="LvBoard" ItemTapped="SfListView_OnItemTapped" SelectionMode="None" ItemSize="70" ItemSpacing="0,10,0,0" ItemsSource="{Binding UserBoards}">
+                                <sflistview:SfListView x:Name="LvBoard" ItemTapped="SfListView_OnItemTapped" SelectionMode="None" ItemSize="70" ItemSpacing="0,10,0,0" ItemsSource="{Binding UserBoards}">
 
-                                <sflistview:SfListView.ItemTemplate>
-                                    <DataTemplate >
-                                        <controls:BoardListItem/>
-                                    </DataTemplate>
-                                </sflistview:SfListView.ItemTemplate>
-                            </sflistview:SfListView>
+                                    <sflistview:SfListView.ItemTemplate>
+                                        <DataTemplate >
+                                            <controls:BoardListItem/>
+                                        </DataTemplate>
+                                    </sflistview:SfListView.ItemTemplate>
+                                </sflistview:SfListView>
 
-                        </pulltoRefresh:SfPullToRefresh.PullableContent>
-                    </pulltoRefresh:SfPullToRefresh>
+                            </pulltoRefresh:SfPullToRefresh.PullableContent>
+                        </pulltoRefresh:SfPullToRefresh>
 
-                    <Button Command="{Binding AddBoardButtonCommand}" Image="plus.xml" BackgroundColor="OrangeRed" HeightRequest="56" WidthRequest="56" CornerRadius="28" AbsoluteLayout.LayoutBounds=".9,.9,56,56" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                        <Button Command="{Binding AddBoardButtonCommand}" Image="plus.xml" BackgroundColor="OrangeRed" HeightRequest="56" WidthRequest="56" CornerRadius="28" AbsoluteLayout.LayoutBounds=".9,.9,56,56" AbsoluteLayout.LayoutFlags="PositionProportional"/>
 
-                </AbsoluteLayout>
-            </sfPopup:SfPopupLayout.Content>
+                    </AbsoluteLayout>
+                </sfPopup:SfPopupLayout.Content>
 
-            <sfPopup:SfPopupLayout.PopupView>
-                <sfPopup:PopupView AppearanceMode="TwoButton" AcceptButtonText="{resources:Translate Accept}" DeclineButtonText="{resources:Translate Cancel}" AcceptCommand="{Binding ConfirmPopupCommand}" HeaderTitle="{resources:Translate AddNewBoard}" HeightRequest="150">
-                    <sfPopup:PopupView.ContentTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Entry Text="{Binding NewBoardName, Mode=TwoWay}" Placeholder="{resources:Translate BoardName}" Keyboard="Text" TextColor="Black" HeightRequest="50"/>
-                            </Grid>
-                        </DataTemplate>
-                    </sfPopup:PopupView.ContentTemplate>
-                </sfPopup:PopupView>
+                <sfPopup:SfPopupLayout.PopupView>
+                    <sfPopup:PopupView AppearanceMode="TwoButton" AcceptButtonText="{resources:Translate Accept}" DeclineButtonText="{resources:Translate Cancel}" AcceptCommand="{Binding ConfirmPopupCommand}" HeaderTitle="{resources:Translate AddNewBoard}" HeightRequest="150">
+                        <sfPopup:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Entry Text="{Binding NewBoardName, Mode=TwoWay}" Placeholder="{resources:Translate BoardName}" Keyboard="Text" TextColor="Black" HeightRequest="50"/>
+                                </Grid>
+                            </DataTemplate>
+                        </sfPopup:PopupView.ContentTemplate>
+                    </sfPopup:PopupView>
 
-            </sfPopup:SfPopupLayout.PopupView>
+                </sfPopup:SfPopupLayout.PopupView>
 
-        </sfPopup:SfPopupLayout>
+            </sfPopup:SfPopupLayout>
 
+            <ActivityIndicator IsRunning="{Binding ShowWaitForm}" HorizontalOptions="Center"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

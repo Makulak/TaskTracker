@@ -7,15 +7,27 @@
              Title="{Binding SelectedBoard.Name}"
              xmlns:sfcarousel="clr-namespace:Syncfusion.SfCarousel.XForms;assembly=Syncfusion.SfCarousel.XForms"
              xmlns:controls="clr-namespace:TaskTracker.Views.Controls;assembly=TaskTracker"
+             xmlns:converters="clr-namespace:TaskTracker.Converters;assembly=TaskTracker"
              BackgroundImage="background.jpg">
 
+    <ContentPage.Resources>
+        <converters:BoolNegateConverter x:Key="NegateConverter"/>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <sfcarousel:SfCarousel ItemsSource="{Binding SelectedBoard.ColumnsCollection}" SelectedIndex="{Binding CarouselSelectedIndex, Mode=TwoWay}" ViewMode="Linear" RotationAngle="0" VerticalOptions="FillAndExpand" ItemSpacing="40">
-            <sfcarousel:SfCarousel.ItemTemplate>
-                <DataTemplate>
-                    <controls:CarouselItem/>
-                </DataTemplate>
-            </sfcarousel:SfCarousel.ItemTemplate>
-        </sfcarousel:SfCarousel>
+        <Grid>
+            <sfcarousel:SfCarousel ItemsSource="{Binding SelectedBoard.ColumnsCollection}" 
+                                   SelectedIndex="{Binding CarouselSelectedIndex, Mode=TwoWay}" 
+                                   ViewMode="Linear" RotationAngle="0" VerticalOptions="FillAndExpand" ItemSpacing="40"
+                                   Opacity="{Binding ControlsOpacity}" IsEnabled="{Binding ShowWaitForm, Converter={StaticResource NegateConverter}}">
+                <sfcarousel:SfCarousel.ItemTemplate>
+                    <DataTemplate>
+                        <controls:CarouselItem/>
+                    </DataTemplate>
+                </sfcarousel:SfCarousel.ItemTemplate>
+            </sfcarousel:SfCarousel>
+
+            <ActivityIndicator IsRunning="{Binding ShowWaitForm}" HorizontalOptions="Center"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

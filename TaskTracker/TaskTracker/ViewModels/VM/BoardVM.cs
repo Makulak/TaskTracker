@@ -8,7 +8,7 @@ namespace TaskTracker.ViewModels.VM
     {
         public Board Base { get; set; }
 
-        public UserVM AssignedUsers { get; set; }
+        public ObservableCollection<UserVM> AssignedUsers { get; set; }
 
         public string Name => Base.Name;
 

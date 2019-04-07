@@ -27,13 +27,11 @@ namespace TaskTracker.ViewModels.Page
         }
         private int _carouselSelectedIndex;
 
-
         public MainPageViewModel(BoardVM selectedBoard)
         {
-            SelectedBoard = selectedBoard;
-
             _manager = new RestManager(new RestService());
 
+            GetDetailedInfoAboutBoard(selectedBoard);
         }
 
         #region Commands
@@ -41,6 +39,29 @@ namespace TaskTracker.ViewModels.Page
         #endregion
 
         #region Methods
+
+        private async void GetDetailedInfoAboutBoard(BoardVM board)
+        {
+            try
+            {
+                ShowWaitForm = true;
+                foreach (ColumnVM column in board.Base.Columns)
+                {
+                    foreach (TaskVM task in column.Base.Tasks)
+                    {
+                        task.AssignedUser = await _manager.GetUser(task.Base.AssignedUserId);
+                    }
+                }
+            }
+            catch (RestException ex)
+            {
+                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
+            }
+            finally
+            {
+                ShowWaitForm = false;
+            }
+        }
 
         void AddColumn(int boardId, string columnName)
         {

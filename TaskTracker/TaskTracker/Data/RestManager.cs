@@ -27,6 +27,11 @@ namespace TaskTracker.Data
             await _restService.Register(user);
         }
 
+        public async Task<User> GetUser(int userId)
+        {
+            return await _restService.GetUser(userId);
+        }
+
         #endregion
 
         #region Boards
@@ -49,6 +54,11 @@ namespace TaskTracker.Data
         public async Task DeleteBoard(int id)
         {
             await _restService.DeleteBoard(id);
+        }
+
+        public async Task<List<User>> GetUsersAssignedToBoard(int boardId)
+        {
+            return await _restService.GetUsersAssignedToBoard(boardId);
         }
 
         #endregion

@@ -24,7 +24,6 @@
             </StackLayout>
 
             <ActivityIndicator IsRunning="{Binding ShowWaitForm}" HorizontalOptions="Center"/>
-
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -76,6 +76,35 @@ namespace TaskTracker.Data
             }
         }
 
+        public async Task<User> GetUser(int userId)
+        {
+            var uri = UriFactory.CreateEndpointUri($"users/id={userId}");
+            HttpResponseMessage response;
+
+            try
+            {
+                response = await Client.GetAsync(uri);
+            }
+            catch (Exception ex)
+            {
+                throw new ServerResponseException(ex.Message);
+            }
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<User>(content);
+            }
+            else
+            {
+                throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
+            }
+        }
+
+        #endregion
+
+        #region Boards
+
         public async Task<List<Board>> GetLoggedUserBoards()
         {
             var uri = UriFactory.CreateEndpointUri("boards/show");
@@ -102,10 +131,6 @@ namespace TaskTracker.Data
                 throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
             }
         }
-
-        #endregion
-
-        #region Boards
 
         public async Task<Board> AddNewBoard(string name)
         {
@@ -161,7 +186,7 @@ namespace TaskTracker.Data
 
         public async Task DeleteBoard(int id)
         {
-            var uri = UriFactory.CreateEndpointUri($"boards/delete/id={id}"); //TODO[JM]: Nazwa endpointa
+            var uri = UriFactory.CreateEndpointUri($"boards/delete/id={id}");
             HttpResponseMessage response;
 
             try
@@ -174,6 +199,33 @@ namespace TaskTracker.Data
             }
 
             if (!response.IsSuccessStatusCode)
+            {
+                throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
+            }
+        }
+
+        public async Task<List<User>> GetUsersAssignedToBoard(int boardId)
+        {
+            var uri = UriFactory.CreateEndpointUri($"boards/getUsers/id={boardId}"); //TODO: Nazwa endpointa
+            HttpResponseMessage response;
+
+            try
+            {
+                response = await Client.GetAsync(uri);
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new ServerResponseException(ex.Message);
+            }
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<User>>(content);
+            }
+            else
             {
                 throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
             }

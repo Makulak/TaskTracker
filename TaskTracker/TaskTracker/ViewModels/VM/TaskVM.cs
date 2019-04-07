@@ -10,6 +10,17 @@ namespace TaskTracker.ViewModels.VM
 
         public string Name => Base.Name;
 
+        public UserVM AssignedUser
+        {
+            get => _assignedUser;
+            set
+            {
+                _assignedUser = value;
+                OnPropertyChanged("AssignedUser");
+            }
+        }
+        private UserVM _assignedUser;
+
         public static implicit operator TaskVM(Task task)
         {
             return new TaskVM()
