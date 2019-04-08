@@ -5,33 +5,23 @@ using TaskTracker.Data;
 using TaskTracker.Exceptions;
 using TaskTracker.Models;
 using TaskTracker.ViewModels.Page.Base;
+using TaskTracker.ViewModels.VM;
 using Xamarin.Forms;
 
 namespace TaskTracker.ViewModels.Page
 {
     class LoginPageViewModel : BaseViewModel
     {
-        public string Login
+        public UserVM UserData
         {
-            get => _login;
+            get => _userData;
             set
             {
-                _login = value;
-                OnPropertyChanged("Login");
+                _userData = value;
+                OnPropertyChanged(nameof(UserData));
             }
         }
-        private string _login;
-
-        public string Password
-        {
-            get => _password;
-            set
-            {
-                _password = value;
-                OnPropertyChanged("Password");
-            }
-        }
-        private string _password;
+        private UserVM _userData;
 
         public ICommand LoginCommand { get; set; }
         public ICommand RegisterCommand { get; set; }
@@ -45,6 +35,8 @@ namespace TaskTracker.ViewModels.Page
         {
             LoginCommand = new Command(OnLogin);
             RegisterCommand = new Command(OnRegister);
+
+            UserData = new User();
 
             _manager = new RestManager(new RestService());
         }
@@ -60,7 +52,7 @@ namespace TaskTracker.ViewModels.Page
             {
                 ShowWaitForm = true;
 
-                await _manager.LogIn(new User(Login, Password));
+                await _manager.LogIn(UserData.Base);
                 DisplayMainPage?.Invoke();
             }
             catch (RestException ex)

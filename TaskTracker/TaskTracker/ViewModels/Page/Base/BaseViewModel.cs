@@ -25,7 +25,7 @@ namespace TaskTracker.ViewModels.Page.Base
                 else
                     ControlsOpacity = 1;
 
-                OnPropertyChanged("ShowWaitForm");
+                OnPropertyChanged(nameof(ShowWaitForm));
             }
         }
         private bool _showWaitForm;
@@ -36,7 +36,7 @@ namespace TaskTracker.ViewModels.Page.Base
             set
             {
                 _controlsOpacity = value;
-                OnPropertyChanged("ControlsOpacity");
+                OnPropertyChanged(nameof(ControlsOpacity));
             }
         }
         private float _controlsOpacity = 1;

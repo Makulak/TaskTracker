@@ -15,8 +15,8 @@
             <StackLayout Padding="5,50" Spacing="20" Opacity="{Binding ControlsOpacity}" IsEnabled="{Binding ShowWaitForm, Converter={StaticResource NegateConverter}}">
                 <Frame>
                     <StackLayout Spacing="10">
-                        <Entry Text="{Binding Login}" Placeholder="{resources:Translate Login}" Keyboard="Email" TextColor="Black" HeightRequest="50"/>
-                        <Entry Text="{Binding Password}" Placeholder="{resources:Translate Password}" IsPassword="True" TextColor="Black" HeightRequest="50"/>
+                        <Entry Text="{Binding UserData.Login}" Placeholder="{resources:Translate Login}" Keyboard="Email" TextColor="Black" HeightRequest="50"/>
+                        <Entry Text="{Binding UserData.Password}" Placeholder="{resources:Translate Password}" IsPassword="True" TextColor="Black" HeightRequest="50"/>
                     </StackLayout>
                 </Frame>
                 <Button Command="{Binding LoginCommand}" Text="{resources:Translate LoginBtn}" BackgroundColor="#4107a5" TextColor="White" />

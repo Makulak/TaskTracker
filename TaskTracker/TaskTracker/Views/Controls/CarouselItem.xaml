@@ -28,7 +28,7 @@
                         <Frame BackgroundColor="#EEEEEE" Padding="1" >
                             <StackLayout HeightRequest="70">
                                 <Label Text="{Binding Name}" TextColor="Black"/>
-                                <controls:AssignedUsersListView ItemsSource="{Binding }"/>
+                                <!--<controls:AssignedUsersListView ItemsSource="{Binding }"/>-->
                             </StackLayout>
                         </Frame>
                     </DataTemplate>

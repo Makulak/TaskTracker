@@ -45,9 +45,6 @@ namespace TaskTracker.Data
 
                 Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authHeaderValue);
                 Client.MaxResponseContentBufferSize = 256000;
-
-                var content = await response.Content.ReadAsStringAsync();
-                GlobalValues.LoggedUser = JsonConvert.DeserializeObject<User>(content);
             }
             else
             {
@@ -160,13 +157,13 @@ namespace TaskTracker.Data
 
         public async Task<Board> EditBoard(Board board)
         {
-            var uri = UriFactory.CreateEndpointUri("boards/edit"); //TODO[JM]: Nazwa endpointa
+            var uri = UriFactory.CreateEndpointUri("boards/update");
             var param = JsonContentFactory.CreateContent(board);
             HttpResponseMessage response;
 
             try
             {
-                response = await Client.PostAsync(uri, param);
+                response = await Client.PutAsync(uri, param);
             }
             catch (Exception ex)
             {
@@ -366,7 +363,7 @@ namespace TaskTracker.Data
 
         public async Task DeleteTask(int taskId)
         {
-            var uri = UriFactory.CreateEndpointUri($"task/delete/it={taskId}"); //TODO[JM]: Nazwa endpointa
+            var uri = UriFactory.CreateEndpointUri($"task/delete/id={taskId}");
             HttpResponseMessage response;
 
             try

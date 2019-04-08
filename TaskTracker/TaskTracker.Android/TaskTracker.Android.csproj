@@ -149,7 +149,7 @@
     <AndroidResource Include="Resources\drawable\key.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\account.xml" />
+    <AndroidResource Include="Resources\drawable\user.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\delete.xml" />

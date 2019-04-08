@@ -2,14 +2,21 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
-             xmlns:controls="clr-namespace:TaskTracker.Views.Controls;assembly=TaskTracker"
              x:Class="TaskTracker.Views.Controls.BoardListItem">
     <ContentView.Content>
-        <Frame BackgroundColor="#FAFAFA" HasShadow="True" HeightRequest="60" Padding="1" Margin="20,0">
+        <Frame BackgroundColor="#FAFAFA" HasShadow="True" HeightRequest="70" Padding="1" Margin="20,0">
             <StackLayout>
                 <Label HorizontalTextAlignment="Center" Text="{Binding Name}" TextColor="Black"/>
 
-                <controls:AssignedUsersListView ItemsSource="{Binding AssignedUsers}" IsEnabled="false"/>
+                <xForms:SfListView Orientation="Horizontal" ItemsSource="{Binding AssignedUsers}" IsEnabled="false" Margin="10,0,0,10">
+                    <xForms:SfListView.ItemTemplate>
+                        <DataTemplate >
+                            <Frame CornerRadius="10" Padding="1" BackgroundColor="Transparent">
+                                <Image HeightRequest="20" WidthRequest="20" Source="{Binding Image}"/>
+                            </Frame>
+                        </DataTemplate>
+                    </xForms:SfListView.ItemTemplate>
+                </xForms:SfListView>
             </StackLayout>
         </Frame>
     </ContentView.Content>

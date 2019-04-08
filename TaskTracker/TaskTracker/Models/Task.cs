@@ -9,11 +9,11 @@ namespace TaskTracker.Models
         [JsonProperty(PropertyName = "id")]
         public int Id { get; set; }
 
-        [JsonProperty(PropertyName = "columnId")]
-        public int ColumnId { get; set; }
-
         [JsonProperty(PropertyName = "boardId")]
         public int BoardId { get; set; }
+
+        [JsonProperty(PropertyName = "columnId")]
+        public int ColumnId { get; set; }
 
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }

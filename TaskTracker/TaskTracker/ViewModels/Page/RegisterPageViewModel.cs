@@ -4,33 +4,23 @@ using TaskTracker.Data;
 using TaskTracker.Exceptions;
 using TaskTracker.Models;
 using TaskTracker.ViewModels.Page.Base;
+using TaskTracker.ViewModels.VM;
 using Xamarin.Forms;
 
 namespace TaskTracker.ViewModels.Page
 {
     class RegisterPageViewModel : BaseViewModel
     {
-        public string Mail
+        public UserVM NewUser
         {
-            get => _mail;
+            get => _newUser;
             set
             {
-                _mail = value;
-                OnPropertyChanged("Login");
+                _newUser = value;
+                OnPropertyChanged(nameof(NewUser));
             }
         }
-        private string _mail;
-
-        public string Login
-        {
-            get => _login;
-            set
-            {
-                _login = value;
-                OnPropertyChanged("Login");
-            }
-        }
-        private string _login;
+        private UserVM _newUser;
 
         public string PasswordOne
         {
@@ -38,7 +28,7 @@ namespace TaskTracker.ViewModels.Page
             set
             {
                 _passwordOne = value;
-                OnPropertyChanged("PasswordOne");
+                OnPropertyChanged(nameof(PasswordOne));
             }
         }
         private string _passwordOne;
@@ -49,7 +39,7 @@ namespace TaskTracker.ViewModels.Page
             set
             {
                 _passwordTwo = value;
-                OnPropertyChanged("PasswordTwo");
+                OnPropertyChanged(nameof(PasswordTwo));
             }
         }
         private string _passwordTwo;
@@ -65,6 +55,8 @@ namespace TaskTracker.ViewModels.Page
         {
             RegisterCommand = new Command(OnRegister);
 
+            NewUser = new UserVM();
+
             _manager = new RestManager(new RestService());
         }
 
@@ -79,7 +71,10 @@ namespace TaskTracker.ViewModels.Page
                 try
                 {
                     ShowWaitForm = true;
-                    await _manager.Register(new User(Login, PasswordOne, Mail));
+
+                    NewUser.Password = PasswordOne;
+
+                    await _manager.Register(NewUser.Base);
                     DisplayLoginPage?.Invoke();
                 }
                 catch (RestException ex)

@@ -22,7 +22,7 @@ namespace TaskTracker.Models
         [JsonProperty(PropertyName = "boardIds")]
         public int[] BoardIds { get; set; }
 
-        [JsonProperty(PropertyName = "")]
+        [JsonProperty(PropertyName = "imageUrl")]
         public string ImageUrl { get; set; }
 
         public User()

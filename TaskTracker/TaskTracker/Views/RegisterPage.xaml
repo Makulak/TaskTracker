@@ -15,14 +15,14 @@
             <StackLayout Padding="5,50" Spacing="20" Opacity="{Binding ControlsOpacity}" IsEnabled="{Binding ShowWaitForm, Converter={StaticResource NegateConverter}}">
                 <Frame>
                     <StackLayout Spacing="10">
-                        <Entry Text="{Binding Login}" Placeholder="{resources:Translate Login}" Keyboard="Text" TextColor="Black" HeightRequest="50"/>
-                        <Entry Text="{Binding Mail}" Placeholder="{resources:Translate Mail}" Keyboard="Email" TextColor="Black" HeightRequest="50"/>
+                        <Entry Text="{Binding NewUser.Login}" Placeholder="{resources:Translate Login}" Keyboard="Text" TextColor="Black" HeightRequest="50"/>
+                        <Entry Text="{Binding NewUser.Mail}" Placeholder="{resources:Translate Mail}" Keyboard="Email" TextColor="Black" HeightRequest="50"/>
                         <Entry Text="{Binding PasswordOne}" Placeholder="{resources:Translate Password}" IsPassword="True" TextColor="Black" HeightRequest="50"/>
                         <Entry Text="{Binding PasswordTwo}" Placeholder="{resources:Translate RepeatPassword}" IsPassword="True" TextColor="Black" HeightRequest="50"/>
                     </StackLayout>
                 </Frame>
 
-                <Button Command="{Binding RegisterCommand}" Text="Zarejestruj" BackgroundColor="#4107a5" TextColor="White"/>
+                <Button Command="{Binding RegisterCommand}" Text="{resources:Translate RegisterBtn}" BackgroundColor="#4107a5" TextColor="White"/>
             </StackLayout>
 
             <ActivityIndicator IsRunning="{Binding ShowWaitForm}" HorizontalOptions="Center"/>

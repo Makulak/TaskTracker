@@ -14,7 +14,15 @@ namespace TaskTracker.ViewModels.Page
     {
         private readonly RestManager _manager;
 
-        public BoardVM SelectedBoard { get; set; }
+        public BoardVM SelectedBoard
+        {
+            get => _selectedBoard;
+            set
+            {
+                _selectedBoard = value;
+                OnPropertyChanged(nameof(SelectedBoard));
+            } }
+        private BoardVM _selectedBoard;
 
         public int CarouselSelectedIndex
         {
@@ -22,7 +30,7 @@ namespace TaskTracker.ViewModels.Page
             set
             {
                 _carouselSelectedIndex = value;
-                OnPropertyChanged("CarouselSelectedIndex");
+                OnPropertyChanged(nameof(CarouselSelectedIndex));
             }
         }
         private int _carouselSelectedIndex;
@@ -45,13 +53,19 @@ namespace TaskTracker.ViewModels.Page
             try
             {
                 ShowWaitForm = true;
-                foreach (ColumnVM column in board.Base.Columns)
+
+                BoardVM brd = board;
+
+                foreach (ColumnVM column in brd.ColumnsCollection)
                 {
-                    foreach (TaskVM task in column.Base.Tasks)
+                    foreach (TaskVM task in column.TaskCollection)
                     {
-                        task.AssignedUser = await _manager.GetUser(task.Base.AssignedUserId);
+                        User x = await _manager.GetUser(task.Base.AssignedUserId);
+                        task.AssignedUser = x;
                     }
                 }
+
+                SelectedBoard = brd;
             }
             catch (RestException ex)
             {

@@ -205,6 +205,15 @@ namespace TaskTracker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zarejestruj.
+        /// </summary>
+        public static string RegisterBtn {
+            get {
+                return ResourceManager.GetString("RegisterBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Powtórz hasło.
         /// </summary>
         public static string RepeatPassword {

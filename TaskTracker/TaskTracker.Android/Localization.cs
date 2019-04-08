@@ -22,8 +22,7 @@ namespace TaskTracker.Droid
 
             try
             {
-                return new System.Globalization.CultureInfo("PL-pl"); //TODO: Poprawić na poprawny język
-                //return new System.Globalization.CultureInfo(netLanguage);
+                return new System.Globalization.CultureInfo(netLanguage);
             }
             catch (CultureNotFoundException)
             {

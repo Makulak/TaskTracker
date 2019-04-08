@@ -23,7 +23,7 @@ namespace TaskTracker.ViewModels.Page
             get => _userBoards;
             set {
                 _userBoards = value;
-                OnPropertyChanged("UserBoards");
+                OnPropertyChanged(nameof(UserBoards));
             }
         }
         private ObservableCollection<BoardVM> _userBoards;
@@ -42,7 +42,7 @@ namespace TaskTracker.ViewModels.Page
             get => _newBoardName;
             set {
                 _newBoardName = value;
-                OnPropertyChanged("NewBoardName");
+                OnPropertyChanged(nameof(NewBoardName));
             }
         }
         private string _newBoardName;
@@ -59,13 +59,15 @@ namespace TaskTracker.ViewModels.Page
             GetUserBoards();
         }
 
-        #region Commands
+        #region Commands 
 
         private void OnDeleteBoard(object obj)
         {
             if (obj is BoardVM board) //TODO: Add confirmation popup
             {
                 DeleteSelectedBoard(board.Base);
+
+                ShowWaitForm = true;
 
                 GetUserBoards();
             }
@@ -124,7 +126,6 @@ namespace TaskTracker.ViewModels.Page
         {
             try
             {
-                ShowWaitForm = true;
                 List<Board> boards = await _manager.GetLoggedUserBoards();
 
                 UserBoards = new ObservableCollection<BoardVM>(boards.ConvertAll<BoardVM>(x => x));
@@ -132,8 +133,12 @@ namespace TaskTracker.ViewModels.Page
                 foreach (BoardVM board in UserBoards)
                 {
                     Thread.Sleep(30);
+
                     //List<User> users = await _manager.GetUsersAssignedToBoard(board.Base.Id);
                     //board.AssignedUsers = new ObservableCollection<UserVM>(users.ConvertAll<UserVM>(x => x));
+
+                    board.AssignedUsers = new ObservableCollection<UserVM>();
+                    board.AssignedUsers.Add(new UserVM());
                 }
             }
             catch (RestException ex)

@@ -9,6 +9,7 @@ namespace TaskTracker.Data
     {
         Task LogIn(User user);
         Task Register(User user);
+        Task<User> GetUser(int userId);
         
         Task<List<Board>> GetLoggedUserBoards();
         Task<Board> AddNewBoard(string name);
