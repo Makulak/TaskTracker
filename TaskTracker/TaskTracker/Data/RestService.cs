@@ -203,7 +203,7 @@ namespace TaskTracker.Data
 
         public async Task<List<User>> GetUsersAssignedToBoard(int boardId)
         {
-            var uri = UriFactory.CreateEndpointUri($"boards/getUsers/id={boardId}"); //TODO: Nazwa endpointa
+            var uri = UriFactory.CreateEndpointUri($"boards/show/id={boardId}/users");
             HttpResponseMessage response;
 
             try

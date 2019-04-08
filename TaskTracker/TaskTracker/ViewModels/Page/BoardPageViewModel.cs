@@ -132,13 +132,8 @@ namespace TaskTracker.ViewModels.Page
 
                 foreach (BoardVM board in UserBoards)
                 {
-                    Thread.Sleep(30);
-
-                    //List<User> users = await _manager.GetUsersAssignedToBoard(board.Base.Id);
-                    //board.AssignedUsers = new ObservableCollection<UserVM>(users.ConvertAll<UserVM>(x => x));
-
-                    board.AssignedUsers = new ObservableCollection<UserVM>();
-                    board.AssignedUsers.Add(new UserVM());
+                    List<User> users = await _manager.GetUsersAssignedToBoard(board.Base.Id);
+                    board.AssignedUsers = new ObservableCollection<UserVM>(users.ConvertAll<UserVM>(x => x));
                 }
             }
             catch (RestException ex)

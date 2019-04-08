@@ -8,14 +8,12 @@ namespace TaskTracker.ViewModels.VM
 {
     internal class BoardVM : BaseVM
     {
-        public Board Base
-        {
+        public Board Base {
             get => _base;
-            private set
-            {
+            private set {
                 _base = value;
 
-                if(_base.Columns != null)
+                if (_base.Columns != null)
                     ColumnsCollection = new ObservableCollection<ColumnVM>(Base.Columns.ConvertAll<ColumnVM>(x => x));
 
                 OnPropertyChanged(nameof(Base));
@@ -40,12 +38,12 @@ namespace TaskTracker.ViewModels.VM
             set {
                 Base.Columns = value;
                 if (_base.Columns != null)
-                    ColumnsCollection = new ObservableCollection<ColumnVM>(Base.Columns.ConvertAll<ColumnVM>(x=>x));
+                    ColumnsCollection = new ObservableCollection<ColumnVM>(Base.Columns.ConvertAll<ColumnVM>(x => x));
 
                 OnPropertyChanged(nameof(Columns));
             }
         }
-        
+
         public int[] AssignedUserIds {
             get => Base.AssignedUsersIds;
             set {
@@ -58,7 +56,14 @@ namespace TaskTracker.ViewModels.VM
 
         #region ViewModelProperties
 
-        public ObservableCollection<UserVM> AssignedUsers { get; set; }
+        public ObservableCollection<UserVM> AssignedUsers {
+            get => _assignedUsers;
+            set {
+                _assignedUsers = value;
+                OnPropertyChanged(nameof(AssignedUsers));
+            }
+        }
+        private ObservableCollection<UserVM> _assignedUsers { get; set; }
 
         public ObservableCollection<ColumnVM> ColumnsCollection {
             get => _columnsCollection;

@@ -9,7 +9,7 @@
         <Grid Padding="20,0,20,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="45"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height=".8*"/>
                 <RowDefinition Height="45"/>
             </Grid.RowDefinitions>
 
@@ -26,9 +26,11 @@
                 <xForms:SfListView.ItemTemplate>
                     <DataTemplate>
                         <Frame BackgroundColor="#EEEEEE" Padding="1" >
-                            <StackLayout HeightRequest="70">
+                            <StackLayout HeightRequest="70" Orientation="Vertical">
                                 <Label Text="{Binding Name}" TextColor="Black"/>
-                                <!--<controls:AssignedUsersListView ItemsSource="{Binding }"/>-->
+                                <Frame CornerRadius="10" Padding="1" BackgroundColor="Transparent">
+                                    <Image HeightRequest="20" WidthRequest="20" Source="{Binding AssignedUser.Image}"/>
+                                </Frame>
                             </StackLayout>
                         </Frame>
                     </DataTemplate>
