@@ -16,6 +16,7 @@ namespace TaskTracker.Data
         Task<Board> EditBoard(Board board);
         Task DeleteBoard(int id);
         Task<List<User>> GetUsersAssignedToBoard(int boardId);
+        Task<Board> GetBoard(int boardId);
 
         Task<Column> AddNewColumn(Column column);
         Task<Column> EditColumn(Column column);

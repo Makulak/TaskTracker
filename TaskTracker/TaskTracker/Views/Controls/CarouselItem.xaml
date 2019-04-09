@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:resources="clr-namespace:TaskTracker.Resources;assembly=TaskTracker"
-             xmlns:controls="clr-namespace:TaskTracker.Views.Controls;assembly=TaskTracker"
              x:Class="TaskTracker.Views.Controls.CarouselItem">
     <ContentView.Content>
         <Grid Padding="20,0,20,0">
@@ -22,7 +21,7 @@
                 </Frame>
             </Grid>
 
-            <xForms:SfListView Grid.Row="1" x:Name="ListView" BackgroundColor="#C0E0E0E0" AllowSwiping="False" SelectionMode="None" ItemSize="80" ItemTapped="SfListView_OnItemTapped" ItemDragging="SfListView_OnItemDragging" ItemsSource="{Binding TaskCollection}" DragStartMode="OnHold" ItemSpacing="0,0,0,5" >
+            <xForms:SfListView Grid.Row="1" x:Name="ListView" BackgroundColor="#C0E0E0E0" AllowSwiping="True" SelectionMode="None" ItemSize="80" ItemTapped="SfListView_OnItemTapped" ItemDragging="SfListView_OnItemDragging" ItemsSource="{Binding TaskCollection, UpdateSourceEventName=PropertyChanged, Mode=TwoWay}" DragStartMode="OnHold" ItemSpacing="0,0,0,5" >
                 <xForms:SfListView.ItemTemplate>
                     <DataTemplate>
                         <Frame BackgroundColor="#EEEEEE" Padding="1" >

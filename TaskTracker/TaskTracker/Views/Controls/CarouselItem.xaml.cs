@@ -71,6 +71,7 @@ namespace TaskTracker.Views.Controls
                 if (Header.Bounds.Contains(position))
                 {
                     bindingContext.RemoveTask(task);
+                    bindingContext.Base.Tasks.Remove(task.Base);
                 }
 
                 Header.BackgroundColor = Color.Transparent;

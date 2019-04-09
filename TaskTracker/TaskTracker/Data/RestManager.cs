@@ -61,6 +61,11 @@ namespace TaskTracker.Data
             return await _restService.GetUsersAssignedToBoard(boardId);
         }
 
+        public async Task<Board> GetBoard(int boardId)
+        {
+            return await _restService.GetBoard(boardId);
+        }
+
         #endregion
 
         #region Columns

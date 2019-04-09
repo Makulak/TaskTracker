@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using TaskTracker.Data;
@@ -101,7 +102,7 @@ namespace TaskTracker.ViewModels.VM
             {
                 await _manager.DeleteTask(task.Base.Id);
 
-                Base.Tasks.Remove(task.Base);
+                TaskCollection.Remove(TaskCollection.SingleOrDefault(t => t.Id == task.Id));
             }
             catch (RestException ex)
             {

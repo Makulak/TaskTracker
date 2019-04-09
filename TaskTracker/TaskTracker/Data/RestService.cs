@@ -228,6 +228,31 @@ namespace TaskTracker.Data
             }
         }
 
+        public async Task<Board> GetBoard(int boardId)
+        {
+            var uri = UriFactory.CreateEndpointUri($"boards/show/id={boardId}");
+            HttpResponseMessage response;
+
+            try
+            {
+                response = await Client.GetAsync(uri);
+            }
+            catch (Exception ex)
+            {
+                throw new ServerResponseException(ex.Message);
+            }
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Board>(content);
+            }
+            else
+            {
+                throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
+            }
+        }
+
         #endregion
 
         #region Columns
@@ -363,7 +388,7 @@ namespace TaskTracker.Data
 
         public async Task DeleteTask(int taskId)
         {
-            var uri = UriFactory.CreateEndpointUri($"task/delete/id={taskId}");
+            var uri = UriFactory.CreateEndpointUri($"tasks/delete/id={taskId}");
             HttpResponseMessage response;
 
             try
