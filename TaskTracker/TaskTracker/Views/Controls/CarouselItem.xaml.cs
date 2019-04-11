@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using Syncfusion.ListView.XForms;
-using TaskTracker.Helpers;
 using TaskTracker.Resources;
-using TaskTracker.ViewModels.Page;
 using TaskTracker.ViewModels.VM;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using ItemTappedEventArgs = Xamarin.Forms.ItemTappedEventArgs;
 
 namespace TaskTracker.Views.Controls
 {
@@ -21,18 +13,12 @@ namespace TaskTracker.Views.Controls
         public CarouselItem()
         {
             InitializeComponent();
-
-            ColumnVM column = BindingContext as ColumnVM;
-
-            if (column == null)
-                return;
-
-            column.DisplayExceptionMessage += (exMessage) => Application.Current.MainPage.DisplayAlert(AppResources.Error, exMessage, AppResources.Ok);
         }
 
-        private void SfListView_OnItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
+        private async void SfListView_OnItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
         {
-
+            if (e.ItemData is TaskVM task)
+                await Navigation.PushAsync(new TaskPage(task));
         }
 
         private void SfListView_OnItemDragging(object sender, ItemDraggingEventArgs e)
@@ -46,11 +32,6 @@ namespace TaskTracker.Views.Controls
 
             if (e.Action == DragAction.Start)
             {
-                //int pos = MainPageVm.SelectedBoard.Base.Columns.FirstOrDefault(x => x.Id == task.Base.ColumnId).Position;
-
-                //if (MainPageVm.CarouselSelectedIndex != pos)
-                //    MainPageVm.CarouselSelectedIndex = pos;
-
                 DeleteImage.IsVisible = true;
             }
 
@@ -73,10 +54,25 @@ namespace TaskTracker.Views.Controls
                     bindingContext.RemoveTask(task);
                     bindingContext.Base.Tasks.Remove(task.Base);
                 }
+                else
+                {
+                    bindingContext.MoveTask(task.Id, e.NewIndex);
+                }
 
                 Header.BackgroundColor = Color.Transparent;
                 DeleteImage.IsVisible = false;
             }
+        }
+
+        private void CarouselItem_OnBindingContextChanged(object sender, EventArgs e)
+        {
+            ColumnVM column = BindingContext as ColumnVM;
+
+            if (column == null)
+                return;
+
+            column.DisplayAddTask = () => AddNewTaskPopup.Show();
+            column.DisplayExceptionMessage = (exMessage) => Application.Current.MainPage.DisplayAlert(AppResources.Error, exMessage, AppResources.Ok);
         }
     }
 }

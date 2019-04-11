@@ -24,17 +24,6 @@ namespace TaskTracker.ViewModels.Page
             } }
         private BoardVM _selectedBoard;
 
-        public int CarouselSelectedIndex
-        {
-            get => _carouselSelectedIndex;
-            set
-            {
-                _carouselSelectedIndex = value;
-                OnPropertyChanged(nameof(CarouselSelectedIndex));
-            }
-        }
-        private int _carouselSelectedIndex;
-
         public MainPageViewModel(BoardVM selectedBoard)
         {
             _manager = new RestManager(new RestService());
@@ -54,7 +43,7 @@ namespace TaskTracker.ViewModels.Page
             {
                 ShowWaitForm = true;
 
-                BoardVM brd = board;
+                BoardVM brd = await _manager.GetBoard(board.Id);
 
                 foreach (ColumnVM column in brd.ColumnsCollection)
                 {
@@ -82,18 +71,6 @@ namespace TaskTracker.ViewModels.Page
             try
             {
                 _manager.AddNewColumn(new Column(boardId, columnName));
-            }
-            catch (RestException ex)
-            {
-                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
-            }
-        }
-
-        void AddTask(int boardId, int columnId, string taskName)
-        {
-            try
-            {
-                _manager.AddNewTask(new Task(boardId, columnId, taskName));
             }
             catch (RestException ex)
             {

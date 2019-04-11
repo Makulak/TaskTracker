@@ -336,7 +336,7 @@ namespace TaskTracker.Data
 
         public async Task<Models.Task> AddNewTask(Models.Task task)
         {
-            var uri = UriFactory.CreateEndpointUri("task/add");
+            var uri = UriFactory.CreateEndpointUri("tasks/add");
             var param = JsonContentFactory.CreateContent(task);
             HttpResponseMessage response;
 
@@ -394,6 +394,29 @@ namespace TaskTracker.Data
             try
             {
                 response = await Client.DeleteAsync(uri);
+            }
+            catch (Exception ex)
+            {
+                throw new ServerResponseException(ex.Message);
+            }
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
+            }
+        }
+
+        public async Task MoveTask(int taskId, int position)
+        {
+            var uri = UriFactory.CreateEndpointUri($"tasks/move/id={taskId}/position={position}");
+            var param = JsonContentFactory.CreateContent(null);
+
+            HttpResponseMessage response;
+
+            try
+            {
+                response = new HttpResponseMessage();
+                //response = await Client.PatchAsync(uri, param);
             }
             catch (Exception ex)
             {

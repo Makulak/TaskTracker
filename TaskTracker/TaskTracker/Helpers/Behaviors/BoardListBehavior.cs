@@ -68,6 +68,7 @@ namespace TaskTracker.Helpers
             {
                 var mainStack = new StackLayout();
                 mainStack.BackgroundColor = Color.FromHex("#ECEFF1");
+                mainStack.Spacing = 0;
 
                 var deleteButton = new Button()
                 {

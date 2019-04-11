@@ -4,10 +4,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
+using System.Windows.Input;
 using TaskTracker.Data;
 using TaskTracker.Exceptions;
 using TaskTracker.Models;
 using TaskTracker.ViewModels.VM.Base;
+using Xamarin.Forms;
 
 namespace TaskTracker.ViewModels.VM
 {
@@ -76,14 +78,29 @@ namespace TaskTracker.ViewModels.VM
         #endregion
 
         public Action<string> DisplayExceptionMessage;
+        public Action DisplayAddTask;
 
         private readonly RestManager _manager;
+
+        public ICommand AddTaskCommand { get; set; }
+        public ICommand ConfirmPopupCommand { get; set; }
+
+        public string NewTaskName {
+            get => _newTaskName;
+            set {
+                _newTaskName = value;
+                OnPropertyChanged(nameof(NewTaskName));
+            }
+        }
+        private string _newTaskName;
 
         public ColumnVM()
         {
             _manager = new RestManager(new RestService());
             TaskCollection = new ObservableCollection<TaskVM>();
 
+            AddTaskCommand = new Command(OnAddTaskButton);
+            ConfirmPopupCommand = new Command(OnConfirmPopup);
         }
 
         public static implicit operator ColumnVM(Column column)
@@ -93,6 +110,22 @@ namespace TaskTracker.ViewModels.VM
                 Base = column
             };
         }
+
+        #region Commands
+
+        private void OnConfirmPopup()
+        {
+            AddTask();
+        }
+
+        private void OnAddTaskButton()
+        {
+            DisplayAddTask?.Invoke();
+        }
+
+        #endregion
+
+        #region Methods
 
         internal async void RemoveTask(TaskVM task)
         {
@@ -106,8 +139,38 @@ namespace TaskTracker.ViewModels.VM
             }
             catch (RestException ex)
             {
-                DisplayExceptionMessage(ex.CompleteMessage);
+                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
             }
         }
+
+        private async void AddTask()
+        {
+            try
+            {
+                Task newTask = new Task(BoardId, this.Id, NewTaskName);
+
+                await _manager.AddNewTask(newTask);
+
+                TaskCollection.Add(newTask);
+            }
+            catch (RestException ex)
+            {
+                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
+            }
+        }
+
+        internal async void MoveTask(int taskId, int position)
+        {
+            try
+            {
+                await _manager.MoveTask(taskId, position);
+            }
+            catch (RestException ex)
+            {
+                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
+            }
+        }
+
+        #endregion
     }
 }

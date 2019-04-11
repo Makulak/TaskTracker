@@ -177,4 +177,7 @@
   <data name="Tables" xml:space="preserve">
     <value>Tablice</value>
   </data>
+  <data name="TaskName" xml:space="preserve">
+    <value>Nazwa zadania</value>
+  </data>
 </root>

@@ -17,8 +17,7 @@
     <ContentPage.Content>
         <Grid>
             <sfcarousel:SfCarousel ItemsSource="{Binding SelectedBoard.ColumnsCollection}" 
-                                   SelectedIndex="{Binding CarouselSelectedIndex, Mode=TwoWay}" 
-                                   ViewMode="Linear" RotationAngle="0" VerticalOptions="FillAndExpand" ItemSpacing="40"
+                                   RotationAngle="0"
                                    Opacity="{Binding ControlsOpacity}" IsEnabled="{Binding ShowWaitForm, Converter={StaticResource NegateConverter}}">
                 <sfcarousel:SfCarousel.ItemTemplate>
                     <DataTemplate>

@@ -93,7 +93,7 @@ namespace TaskTracker.ViewModels.Page
             }
             else
             {
-                DisplayExceptionMessage(AppResources.NameCannotBeEmpty);
+                DisplayExceptionMessage?.Invoke(AppResources.NameCannotBeEmpty);
             }
         }
 
@@ -138,7 +138,7 @@ namespace TaskTracker.ViewModels.Page
             }
             catch (RestException ex)
             {
-                DisplayExceptionMessage(ex.CompleteMessage);
+                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
             }
             finally
             {
@@ -154,7 +154,7 @@ namespace TaskTracker.ViewModels.Page
             }
             catch (RestException ex)
             {
-                DisplayExceptionMessage(ex.CompleteMessage);
+                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
             }
         }
 
@@ -166,7 +166,7 @@ namespace TaskTracker.ViewModels.Page
             }
             catch (RestException ex)
             {
-                DisplayExceptionMessage(ex.CompleteMessage);
+                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
             }
         }
 
@@ -181,7 +181,7 @@ namespace TaskTracker.ViewModels.Page
             }
             catch (RestException ex)
             {
-                DisplayExceptionMessage(ex.CompleteMessage);
+                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
             }
         }
 

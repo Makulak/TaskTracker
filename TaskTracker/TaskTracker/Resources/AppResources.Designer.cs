@@ -239,5 +239,14 @@ namespace TaskTracker.Resources {
                 return ResourceManager.GetString("Tables", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nazwa zadania.
+        /// </summary>
+        public static string TaskName {
+            get {
+                return ResourceManager.GetString("TaskName", resourceCulture);
+            }
+        }
     }
 }
