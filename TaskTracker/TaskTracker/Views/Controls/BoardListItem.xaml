@@ -4,16 +4,18 @@
              xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              x:Class="TaskTracker.Views.Controls.BoardListItem">
     <ContentView.Content>
-        <Frame BackgroundColor="#FAFAFA" HasShadow="True" HeightRequest="70" Padding="1" Margin="20,0">
+        <Frame BackgroundColor="#FAFAFA" HasShadow="True" HeightRequest="75" Padding="1" Margin="20,0">
             <StackLayout>
                 <Label HorizontalTextAlignment="Center" Text="{Binding Name}" TextColor="Black"/>
 
-                <xForms:SfListView Orientation="Horizontal" ItemsSource="{Binding AssignedUsers}" ItemSpacing="5" IsEnabled="false" Margin="10,0,0,10">
+                <xForms:SfListView Orientation="Horizontal" ItemsSource="{Binding AssignedUsers}" ItemSpacing="0" IsEnabled="false" Margin="10,0,0,10">
                     <xForms:SfListView.ItemTemplate>
                         <DataTemplate >
-                            <Frame HeightRequest="20" WidthRequest="20" CornerRadius="20" Padding="1" BackgroundColor="LightBlue">
-                                <Image Scale="0.7" Source="{Binding Image}"/>
-                            </Frame>
+                            <FlexLayout AlignItems="Start" JustifyContent="SpaceBetween" Direction="Column">
+                                <Frame HeightRequest="30" WidthRequest="30" CornerRadius="15" Padding="1" BackgroundColor="LightBlue">
+                                    <Image Scale="0.7" Source="{Binding Image}"/>
+                                </Frame>
+                            </FlexLayout>
                         </DataTemplate>
                     </xForms:SfListView.ItemTemplate>
                 </xForms:SfListView>

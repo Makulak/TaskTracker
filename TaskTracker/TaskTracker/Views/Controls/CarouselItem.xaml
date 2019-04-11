@@ -16,7 +16,7 @@
 
                     <Grid.RowDefinitions>
                         <RowDefinition Height="45"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">
@@ -28,30 +28,32 @@
                         </Frame>
                     </Grid>
 
-                    <xForms:SfListView Grid.Row="1" x:Name="ListView" BackgroundColor="#C0E0E0E0" AllowSwiping="True" SelectionMode="None" ItemSize="80" ItemTapped="SfListView_OnItemTapped" ItemDragging="SfListView_OnItemDragging" ItemsSource="{Binding TaskCollection, UpdateSourceEventName=PropertyChanged, Mode=TwoWay}" DragStartMode="OnHold" ItemSpacing="0,0,0,5" >
+                    <xForms:SfListView Grid.Row="1" x:Name="ListView" BackgroundColor="#C0E0E0E0" SelectionMode="None"
+                                       ItemSize="80" ItemTapped="SfListView_OnItemTapped" ItemDragging="SfListView_OnItemDragging" 
+                                       ItemsSource="{Binding TaskCollection, UpdateSourceEventName=PropertyChanged, Mode=TwoWay}" 
+                                       DragStartMode="OnHold" ItemSpacing="0,0,0,5" >
+
                         <xForms:SfListView.ItemTemplate>
                             <DataTemplate>
-                                <Frame BackgroundColor="#EEEEEE" Padding="1" >
-                                    <StackLayout HeightRequest="70" Orientation="Vertical">
-                                        <Label Text="{Binding Name}" TextColor="Black"/>
-                                        <Frame CornerRadius="10" Padding="1" BackgroundColor="Transparent">
-                                            <Image HeightRequest="20" WidthRequest="20" Source="{Binding AssignedUser.Image}"/>
-                                        </Frame>
-                                    </StackLayout>
-                                </Frame>
+                                <FlexLayout Margin="5,0,0,5" BackgroundColor="#EEEEEE" AlignItems="Start" JustifyContent="SpaceBetween" Direction="Column">
+                                    <Label Text="{Binding Name}" TextColor="Black"/>
+
+                                    <Frame HeightRequest="30" WidthRequest="30" CornerRadius="15" Padding="1" BackgroundColor="LightBlue">
+                                        <Image Scale="0.7" Source="{Binding AssignedUser.Image}"/>
+                                    </Frame>
+                                </FlexLayout>
                             </DataTemplate>
                         </xForms:SfListView.ItemTemplate>
 
                         <xForms:SfListView.DragItemTemplate>
                             <DataTemplate>
-                                <Frame BackgroundColor="#32EEEEEE" Padding="1" >
-                                    <StackLayout>
-                                        <Label Text="{Binding Name}" TextColor="Black"/>
-                                        <Frame CornerRadius="10" Padding="1" BackgroundColor="Transparent">
-                                            <Image HeightRequest="20" WidthRequest="20" Source="{Binding AssignedUser.Image}"/>
-                                        </Frame>
-                                    </StackLayout>
-                                </Frame>
+                                <FlexLayout BackgroundColor="#32EEEEEE" >
+                                    <Label Text="{Binding Name}" TextColor="Black"/>
+
+                                    <Frame HeightRequest="20" WidthRequest="20" CornerRadius="20" Padding="1" BackgroundColor="LightBlue">
+                                        <Image Scale="0.7" Source="{Binding AssignedUser.Image}"/>
+                                    </Frame>
+                                </FlexLayout>
                             </DataTemplate>
                         </xForms:SfListView.DragItemTemplate>
 
