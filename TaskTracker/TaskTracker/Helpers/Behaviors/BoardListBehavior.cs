@@ -31,7 +31,6 @@ namespace TaskTracker.Helpers
             set => SetValue(EditItemCommandProperty, value);
         }
 
-
         protected override void OnAttachedTo(SfListView listView)
         {
             _listView = listView;

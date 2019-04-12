@@ -17,9 +17,10 @@ namespace TaskTracker.Views
 		public BoardPage ()
 		{
             BoardPageViewModel vm = new BoardPageViewModel();
+
             vm.DisplayMainPage = (selectedBoard) => Navigation.PushAsync(new MainPage(selectedBoard));
             vm.DisplayExceptionMessage += (exMessage) => DisplayAlert(AppResources.Error, exMessage, AppResources.Ok);
-            vm.DisplayAddBoard += () => AddNewBoardPopup.Show();
+            vm.DisplayAddBoard += () => AddNewBoardPopup.IsOpen = true;
 
             BindingContext = vm;
 

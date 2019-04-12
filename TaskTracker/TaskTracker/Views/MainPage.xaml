@@ -1,32 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:TaskTracker"
+             xmlns:xForms="clr-namespace:Syncfusion.SfCarousel.XForms;assembly=Syncfusion.SfCarousel.XForms"
+             xmlns:controls="clr-namespace:TaskTracker.Views.Controls"
              x:Class="TaskTracker.Views.MainPage"
-             x:Name="MainContentPage"
              Title="{Binding SelectedBoard.Name}"
-             xmlns:sfcarousel="clr-namespace:Syncfusion.SfCarousel.XForms;assembly=Syncfusion.SfCarousel.XForms"
-             xmlns:controls="clr-namespace:TaskTracker.Views.Controls;assembly=TaskTracker"
-             xmlns:converters="clr-namespace:TaskTracker.Converters;assembly=TaskTracker"
              BackgroundImage="background.jpg">
-
-    <ContentPage.Resources>
-        <converters:BoolNegateConverter x:Key="NegateConverter"/>
-    </ContentPage.Resources>
-
     <ContentPage.Content>
         <Grid>
-            <sfcarousel:SfCarousel ItemsSource="{Binding SelectedBoard.ColumnsCollection}" 
-                                   RotationAngle="0"
-                                   Opacity="{Binding ControlsOpacity}" IsEnabled="{Binding ShowWaitForm, Converter={StaticResource NegateConverter}}">
-                <sfcarousel:SfCarousel.ItemTemplate>
+            <xForms:SfCarousel ItemsSource="{Binding SelectedBoard.ColumnsCollection}">
+                <xForms:SfCarousel.ItemTemplate>
                     <DataTemplate>
                         <controls:CarouselItem/>
                     </DataTemplate>
-                </sfcarousel:SfCarousel.ItemTemplate>
-            </sfcarousel:SfCarousel>
-
-            <ActivityIndicator IsRunning="{Binding ShowWaitForm}" HorizontalOptions="Center"/>
+                </xForms:SfCarousel.ItemTemplate>
+            </xForms:SfCarousel>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

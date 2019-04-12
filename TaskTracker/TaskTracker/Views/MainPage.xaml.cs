@@ -1,26 +1,25 @@
-﻿using System.Linq;
-using Syncfusion.ListView.XForms;
-using TaskTracker.Models;
-using TaskTracker.Resources;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using TaskTracker.ViewModels.Page;
 using TaskTracker.ViewModels.VM;
 using Xamarin.Forms;
-using ItemTappedEventArgs = Syncfusion.ListView.XForms.ItemTappedEventArgs;
-using SelectionChangedEventArgs = Syncfusion.SfCarousel.XForms.SelectionChangedEventArgs;
+using Xamarin.Forms.Xaml;
 
 namespace TaskTracker.Views
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
-        internal MainPage(BoardVM selectedBoard)
+        internal MainPage(BoardVM board)
         {
-            var vm = new MainPageViewModel(selectedBoard);
+            InitializeComponent();
 
-            vm.DisplayExceptionMessage = (exMessage) => DisplayAlert(AppResources.Error, exMessage, AppResources.Ok);
+            MainPageViewModel vm = new MainPageViewModel(board);
 
             BindingContext = vm;
-
-            InitializeComponent();
         }
     }
 }

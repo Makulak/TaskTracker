@@ -8,8 +8,8 @@
              xmlns:pulltoRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
              xmlns:sflistview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:controls="clr-namespace:TaskTracker.Views.Controls"
-             xmlns:resources="clr-namespace:TaskTracker.Resources;assembly=TaskTracker"
-             xmlns:converters="clr-namespace:TaskTracker.Converters;assembly=TaskTracker">
+             xmlns:resources="clr-namespace:TaskTracker.Resources"
+             xmlns:converters="clr-namespace:TaskTracker.Converters">
 
     <ContentPage.Resources>
         <converters:BoolNegateConverter x:Key="NegateConverter"/>
@@ -51,7 +51,6 @@
                             </DataTemplate>
                         </sfPopup:PopupView.ContentTemplate>
                     </sfPopup:PopupView>
-
                 </sfPopup:SfPopupLayout.PopupView>
 
             </sfPopup:SfPopupLayout>

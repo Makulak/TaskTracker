@@ -56,25 +56,25 @@
       <Version>12.0.1</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Core">
-      <Version>16.4.0.54</Version>
+      <Version>17.1.0.40</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator">
-      <Version>16.4.0.54</Version>
+      <Version>17.1.0.40</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfCarousel">
-      <Version>16.4.0.54</Version>
+      <Version>17.1.0.40</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfListView">
-      <Version>16.4.0.54</Version>
+      <Version>17.1.0.40</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout">
-      <Version>16.4.0.54</Version>
+      <Version>17.1.0.40</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfPullToRefresh">
-      <Version>16.4.0.54</Version>
+      <Version>17.1.0.40</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfRadialMenu">
-      <Version>16.4.0.54</Version>
+      <Version>17.1.0.40</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Compat">
       <Version>28.0.0.1</Version>
@@ -94,7 +94,7 @@
     <PackageReference Include="Xamarin.Android.Support.v7.RecyclerView">
       <Version>28.0.0.1</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="3.6.0.220655" />
+    <PackageReference Include="Xamarin.Forms" Version="3.6.0.293080" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.1" />
     <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0.1" />

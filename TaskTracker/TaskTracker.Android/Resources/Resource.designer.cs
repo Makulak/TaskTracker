@@ -1286,15 +1286,32 @@ namespace TaskTracker.Droid
 			global::Com.Syncfusion.Carousel.Resource.Styleable.lbVerticalGridView = global::TaskTracker.Droid.Resource.Styleable.lbVerticalGridView;
 			global::Com.Syncfusion.Carousel.Resource.Styleable.lbVerticalGridView_columnWidth = global::TaskTracker.Droid.Resource.Styleable.lbVerticalGridView_columnWidth;
 			global::Com.Syncfusion.Carousel.Resource.Styleable.lbVerticalGridView_numberOfColumns = global::TaskTracker.Droid.Resource.Styleable.lbVerticalGridView_numberOfColumns;
+			global::Syncfusion.ListView.XForms.Android.Resource.Attribute.layoutManager = global::TaskTracker.Droid.Resource.Attribute.layoutManager;
+			global::Syncfusion.ListView.XForms.Android.Resource.Attribute.reverseLayout = global::TaskTracker.Droid.Resource.Attribute.reverseLayout;
+			global::Syncfusion.ListView.XForms.Android.Resource.Attribute.spanCount = global::TaskTracker.Droid.Resource.Attribute.spanCount;
+			global::Syncfusion.ListView.XForms.Android.Resource.Attribute.stackFromEnd = global::TaskTracker.Droid.Resource.Attribute.stackFromEnd;
+			global::Syncfusion.ListView.XForms.Android.Resource.Dimension.item_touch_helper_max_drag_scroll_per_frame = global::TaskTracker.Droid.Resource.Dimension.item_touch_helper_max_drag_scroll_per_frame;
+			global::Syncfusion.ListView.XForms.Android.Resource.Dimension.item_touch_helper_swipe_escape_max_velocity = global::TaskTracker.Droid.Resource.Dimension.item_touch_helper_swipe_escape_max_velocity;
+			global::Syncfusion.ListView.XForms.Android.Resource.Dimension.item_touch_helper_swipe_escape_velocity = global::TaskTracker.Droid.Resource.Dimension.item_touch_helper_swipe_escape_velocity;
 			global::Syncfusion.ListView.XForms.Android.Resource.Drawable.inputlayout_togglecollapseicon = global::TaskTracker.Droid.Resource.Drawable.inputlayout_togglecollapseicon;
 			global::Syncfusion.ListView.XForms.Android.Resource.Drawable.inputlayout_togglevisibleicon = global::TaskTracker.Droid.Resource.Drawable.inputlayout_togglevisibleicon;
+			global::Syncfusion.ListView.XForms.Android.Resource.Id.item_touch_helper_previous_elevation = global::TaskTracker.Droid.Resource.Id.item_touch_helper_previous_elevation;
 			global::Syncfusion.ListView.XForms.Android.Resource.String.ApplicationName = global::TaskTracker.Droid.Resource.String.ApplicationName;
 			global::Syncfusion.ListView.XForms.Android.Resource.String.Hello = global::TaskTracker.Droid.Resource.String.Hello;
 			global::Syncfusion.ListView.XForms.Android.Resource.String.Load_More = global::TaskTracker.Droid.Resource.String.Load_More;
+			global::Syncfusion.ListView.XForms.Android.Resource.Styleable.RecyclerView = global::TaskTracker.Droid.Resource.Styleable.RecyclerView;
+			global::Syncfusion.ListView.XForms.Android.Resource.Styleable.RecyclerView_android_descendantFocusability = global::TaskTracker.Droid.Resource.Styleable.RecyclerView_android_descendantFocusability;
+			global::Syncfusion.ListView.XForms.Android.Resource.Styleable.RecyclerView_android_orientation = global::TaskTracker.Droid.Resource.Styleable.RecyclerView_android_orientation;
+			global::Syncfusion.ListView.XForms.Android.Resource.Styleable.RecyclerView_layoutManager = global::TaskTracker.Droid.Resource.Styleable.RecyclerView_layoutManager;
+			global::Syncfusion.ListView.XForms.Android.Resource.Styleable.RecyclerView_reverseLayout = global::TaskTracker.Droid.Resource.Styleable.RecyclerView_reverseLayout;
+			global::Syncfusion.ListView.XForms.Android.Resource.Styleable.RecyclerView_spanCount = global::TaskTracker.Droid.Resource.Styleable.RecyclerView_spanCount;
+			global::Syncfusion.ListView.XForms.Android.Resource.Styleable.RecyclerView_stackFromEnd = global::TaskTracker.Droid.Resource.Styleable.RecyclerView_stackFromEnd;
 			global::Syncfusion.XForms.Android.PopupLayout.Resource.Drawable.inputlayout_togglecollapseicon = global::TaskTracker.Droid.Resource.Drawable.inputlayout_togglecollapseicon;
 			global::Syncfusion.XForms.Android.PopupLayout.Resource.Drawable.inputlayout_togglevisibleicon = global::TaskTracker.Droid.Resource.Drawable.inputlayout_togglevisibleicon;
 			global::Syncfusion.XForms.Android.PopupLayout.Resource.Drawable.popup_forms_android_close_icon = global::TaskTracker.Droid.Resource.Drawable.popup_forms_android_close_icon;
 			global::Syncfusion.XForms.Android.PopupLayout.Resource.Drawable.popup_forms_android_shadow = global::TaskTracker.Droid.Resource.Drawable.popup_forms_android_shadow;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Drawable.popup_forms_dark_theme_close_icon = global::TaskTracker.Droid.Resource.Drawable.popup_forms_dark_theme_close_icon;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Drawable.popup_forms_light_theme_close_icon = global::TaskTracker.Droid.Resource.Drawable.popup_forms_light_theme_close_icon;
 			global::Syncfusion.XForms.Android.PopupLayout.Resource.Id.BorderView = global::TaskTracker.Droid.Resource.Id.BorderView;
 			global::Syncfusion.XForms.Android.PopupLayout.Resource.String.accept = global::TaskTracker.Droid.Resource.String.accept;
 			global::Syncfusion.XForms.Android.PopupLayout.Resource.String.decline = global::TaskTracker.Droid.Resource.String.decline;
@@ -7283,26 +7300,26 @@ namespace TaskTracker.Droid
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
-			// aapt resource value: 0x7f02016b
-			public const int avd_hide_password_1 = 2130837867;
-			
-			// aapt resource value: 0x7f02016c
-			public const int avd_hide_password_2 = 2130837868;
-			
 			// aapt resource value: 0x7f02016d
-			public const int avd_hide_password_3 = 2130837869;
+			public const int avd_hide_password_1 = 2130837869;
+			
+			// aapt resource value: 0x7f02016e
+			public const int avd_hide_password_2 = 2130837870;
+			
+			// aapt resource value: 0x7f02016f
+			public const int avd_hide_password_3 = 2130837871;
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
 			
-			// aapt resource value: 0x7f02016e
-			public const int avd_show_password_1 = 2130837870;
-			
-			// aapt resource value: 0x7f02016f
-			public const int avd_show_password_2 = 2130837871;
-			
 			// aapt resource value: 0x7f020170
-			public const int avd_show_password_3 = 2130837872;
+			public const int avd_show_password_1 = 2130837872;
+			
+			// aapt resource value: 0x7f020171
+			public const int avd_show_password_2 = 2130837873;
+			
+			// aapt resource value: 0x7f020172
+			public const int avd_show_password_3 = 2130837874;
 			
 			// aapt resource value: 0x7f020055
 			public const int background = 2130837589;
@@ -8105,11 +8122,11 @@ namespace TaskTracker.Droid
 			// aapt resource value: 0x7f02015f
 			public const int notification_icon_background = 2130837855;
 			
-			// aapt resource value: 0x7f020169
-			public const int notification_template_icon_bg = 2130837865;
+			// aapt resource value: 0x7f02016b
+			public const int notification_template_icon_bg = 2130837867;
 			
-			// aapt resource value: 0x7f02016a
-			public const int notification_template_icon_low_bg = 2130837866;
+			// aapt resource value: 0x7f02016c
+			public const int notification_template_icon_low_bg = 2130837868;
 			
 			// aapt resource value: 0x7f020160
 			public const int notification_tile_bg = 2130837856;
@@ -8127,16 +8144,22 @@ namespace TaskTracker.Droid
 			public const int popup_forms_android_shadow = 2130837860;
 			
 			// aapt resource value: 0x7f020165
-			public const int shadow_effect = 2130837861;
+			public const int popup_forms_dark_theme_close_icon = 2130837861;
 			
 			// aapt resource value: 0x7f020166
-			public const int tooltip_frame_dark = 2130837862;
+			public const int popup_forms_light_theme_close_icon = 2130837862;
 			
 			// aapt resource value: 0x7f020167
-			public const int tooltip_frame_light = 2130837863;
+			public const int shadow_effect = 2130837863;
 			
 			// aapt resource value: 0x7f020168
-			public const int user = 2130837864;
+			public const int tooltip_frame_dark = 2130837864;
+			
+			// aapt resource value: 0x7f020169
+			public const int tooltip_frame_light = 2130837865;
+			
+			// aapt resource value: 0x7f02016a
+			public const int user = 2130837866;
 			
 			static Drawable()
 			{
