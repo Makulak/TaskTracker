@@ -133,11 +133,29 @@ namespace TaskTracker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Usuń tablicę.
+        /// </summary>
+        public static string DeleteBoard {
+            get {
+                return ResourceManager.GetString("DeleteBoard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edytuj.
         /// </summary>
         public static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edytuj tablicę.
+        /// </summary>
+        public static string EditBoard {
+            get {
+                return ResourceManager.GetString("EditBoard", resourceCulture);
             }
         }
         
@@ -196,6 +214,15 @@ namespace TaskTracker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nie.
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         public static string Ok {
@@ -210,6 +237,15 @@ namespace TaskTracker.Resources {
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Czy na pewno chcesz usunąć tablicę?.
+        /// </summary>
+        public static string Question_DeleteBoard {
+            get {
+                return ResourceManager.GetString("Question_DeleteBoard", resourceCulture);
             }
         }
         
@@ -273,6 +309,15 @@ namespace TaskTracker.Resources {
         public static string TaskName {
             get {
                 return ResourceManager.GetString("TaskName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tak.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

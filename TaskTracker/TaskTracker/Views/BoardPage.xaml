@@ -17,14 +17,18 @@
 
     <ContentPage.Content>
         <Grid>
-            <sfPopup:SfPopupLayout x:Name="AddNewBoardPopup" BackgroundColor="#EEEEEE" Opacity="{Binding ControlsOpacity}" IsEnabled="{Binding ShowWaitForm, Converter={StaticResource NegateConverter}}">
+            <sfPopup:SfPopupLayout x:Name="BoardPopup" BackgroundColor="#EEEEEE" 
+                                   Opacity="{Binding ControlsOpacity}" IsEnabled="{Binding ShowWaitForm, Converter={StaticResource NegateConverter}}">
 
                 <sfPopup:SfPopupLayout.Content>
                     <AbsoluteLayout>
-                        <pulltoRefresh:SfPullToRefresh x:Name="PullToRefresh" VerticalOptions="FillAndExpand" TransitionMode="Push" IsRefreshing="False" Refreshing="SfPullToRefresh_OnRefreshing">
+                        <pulltoRefresh:SfPullToRefresh x:Name="PullToRefresh" VerticalOptions="FillAndExpand" 
+                                                       TransitionMode="Push" IsRefreshing="False" Refreshing="SfPullToRefresh_OnRefreshing">
+
                             <pulltoRefresh:SfPullToRefresh.PullableContent>
 
-                                <sflistview:SfListView x:Name="LvBoard" TapCommand="{Binding BoardSelectedCommand}" SelectionMode="None" ItemSize="70" ItemSpacing="0,10,0,0" ItemsSource="{Binding UserBoards}">
+                                <sflistview:SfListView x:Name="LvBoard" TapCommand="{Binding BoardSelectedCommand}" 
+                                                       SelectionMode="None" ItemSize="70" ItemSpacing="0,10,0,0" ItemsSource="{Binding UserBoards}">
 
                                     <sflistview:SfListView.ItemTemplate>
                                         <DataTemplate >
@@ -36,21 +40,15 @@
                             </pulltoRefresh:SfPullToRefresh.PullableContent>
                         </pulltoRefresh:SfPullToRefresh>
 
-                        <Button Command="{Binding AddBoardButtonCommand}" Image="plus.xml" BackgroundColor="OrangeRed" HeightRequest="56" WidthRequest="56" CornerRadius="28" AbsoluteLayout.LayoutBounds=".9,.9,56,56" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                        <Button Command="{Binding AddBoardButtonCommand}" Image="plus.xml" BackgroundColor="OrangeRed" 
+                                HeightRequest="56" WidthRequest="56" CornerRadius="28" 
+                                AbsoluteLayout.LayoutBounds=".9,.9,56,56" AbsoluteLayout.LayoutFlags="PositionProportional"/>
 
                     </AbsoluteLayout>
                 </sfPopup:SfPopupLayout.Content>
 
                 <sfPopup:SfPopupLayout.PopupView>
-                    <sfPopup:PopupView AppearanceMode="TwoButton" AcceptButtonText="{resources:Translate Accept}" DeclineButtonText="{resources:Translate Cancel}" AcceptCommand="{Binding ConfirmPopupCommand}" HeaderTitle="{resources:Translate AddNewBoard}" HeightRequest="150">
-                        <sfPopup:PopupView.ContentTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Entry Text="{Binding NewBoardName, Mode=TwoWay}" Placeholder="{resources:Translate BoardName}" Keyboard="Text" TextColor="Black" HeightRequest="50"/>
-                                </Grid>
-                            </DataTemplate>
-                        </sfPopup:PopupView.ContentTemplate>
-                    </sfPopup:PopupView>
+                    <sfPopup:PopupView AppearanceMode="TwoButton" HeightRequest="150"/>
                 </sfPopup:SfPopupLayout.PopupView>
 
             </sfPopup:SfPopupLayout>

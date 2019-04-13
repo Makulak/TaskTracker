@@ -104,11 +104,13 @@ namespace TaskTracker.Helpers
         private void DeleteButtonClicked(object sender, EventArgs e)
         {
             DeleteItemCommand?.Execute(_selectedItem);
+            _popup.IsOpen = false;
         }
 
         private void EditButtonClicked(object sender, EventArgs e)
         {
             EditItemCommand?.Execute(_selectedItem);
+            _popup.IsOpen = false;
         }
 
         private void Dismiss()

@@ -1,8 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:TaskTracker.Resources;assembly=TaskTracker"
              x:Class="TaskTracker.App">
     <Application.Resources>
+
+        <DataTemplate x:Key="AddBoardPopup">
+            <Grid>
+                <Entry Text="{Binding Path=BoardName}" Placeholder="{resources:Translate NewBoardName}" 
+                       Keyboard="Text" TextColor="Black" HeightRequest="50"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="EditBoardPopup">
+            <Grid>
+                <Entry Text="{Binding Path=BoardName}" Placeholder="{resources:Translate BoardName}" 
+                       Keyboard="Text" TextColor="Black" HeightRequest="50"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="DeleteBoardPopup">
+            <Grid>
+                <Label Text="{resources:Translate Question_DeleteBoard}" TextColor="Black" HeightRequest="50"/>
+            </Grid>
+        </DataTemplate>
 
     </Application.Resources>
 </Application>

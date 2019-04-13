@@ -28,22 +28,28 @@ namespace TaskTracker.ViewModels.Page
         }
         private ObservableCollection<BoardVM> _userBoards;
 
-        public ICommand ConfirmPopupCommand { get; set; }
-        public ICommand DeleteBoardCommand { get; set; }
-        public ICommand EditBoardCommand { get; set; }
-        public ICommand AddBoardButtonCommand { get; set; }
         public ICommand BoardSelectedCommand { get; set; }
 
+        public ICommand AddBoardButtonCommand { get; set; }
+        public ICommand EditBoardButtonCommand { get; set; }
+        public ICommand DeleteBoardButtonCommand { get; set; }
+
+        public ICommand AddNewBoardCommand { get; set; }
+        public ICommand EditBoardCommand { get; set; }
+        public ICommand DeleteBoardCommand { get; set; }
+
         public Action<BoardVM> DisplayMainPage;
-        public Action DisplayAddBoard;
+        public Action DisplayAddBoardPopup;
+        public Action DisplayEditBoardPopup;
+        public Action DisplayDeleteBoardPopup;
 
         private readonly RestManager _manager;
 
-        public string NewBoardName {
+        public string BoardName {
             get => _newBoardName;
             set {
                 _newBoardName = value;
-                OnPropertyChanged(nameof(NewBoardName));
+                OnPropertyChanged(nameof(BoardName));
             }
         }
         private string _newBoardName;
@@ -52,14 +58,19 @@ namespace TaskTracker.ViewModels.Page
         {
             _manager = new RestManager(new RestService());
 
+            BoardSelectedCommand = new Command(OnBoardSelected);
+
+            AddBoardButtonCommand = new Command(OnAddBoardButton);
+            EditBoardButtonCommand = new Command(OnEditBoardButton);
+            DeleteBoardButtonCommand = new Command(OnDeleteBoardButton);
+
+            AddNewBoardCommand = new Command(OnAddNewBoard);
             EditBoardCommand = new Command(OnEditBoard);
             DeleteBoardCommand = new Command(OnDeleteBoard);
-            ConfirmPopupCommand = new Command(OnConfirmPopup);
-            AddBoardButtonCommand = new Command(OnAddBoardButton);
-            BoardSelectedCommand = new Command(OnBoardSelected);
 
             GetUserBoards();
         }
+
         #region Commands 
 
         private void OnBoardSelected(object obj)
@@ -74,61 +85,73 @@ namespace TaskTracker.ViewModels.Page
             DisplayMainPage(board);
         }
 
-        private void OnDeleteBoard(object obj)
+
+        private void OnAddBoardButton()
         {
-            if (obj is BoardVM board) //TODO: Add confirmation popup
-            {
-                DeleteSelectedBoard(board.Base);
-
-                ShowWaitForm = true;
-
-                GetUserBoards();
-            }
+            DisplayAddBoardPopup();
         }
 
-        private void OnConfirmPopup(object obj)
+        private void OnEditBoardButton(object obj)
         {
-            if (!string.IsNullOrEmpty(NewBoardName))
-            {
-                if (_editBoard)
-                {
-                    _selectedBoard.Base.Name = NewBoardName;
-                    EditSelectedBoard(_selectedBoard.Base);
-
-                    GetUserBoards();
-                }
-                else
-                {
-                    AddNewBoard(NewBoardName);
-                }
-
-                NewBoardName = string.Empty;
-            }
-            else
-            {
-                DisplayExceptionMessage?.Invoke(AppResources.NameCannotBeEmpty);
-            }
-        }
-
-        private void OnAddBoardButton(object obj)
-        {
-            _editBoard = false;
-            DisplayAddBoard();
-        }
-
-        private void OnEditBoard(object obj)
-        {
-            _editBoard = true;
-
             if (obj is BoardVM board)
             {
                 _selectedBoard = board;
 
-                NewBoardName = board.Name;
-                DisplayAddBoard();
+                BoardName = board.Name;
+                DisplayEditBoardPopup();
 
                 GetUserBoards();
             }
+        }
+
+        private void OnDeleteBoardButton(object obj)
+        {
+            if (obj is BoardVM board)
+            {
+                _selectedBoard = board;
+
+                BoardName = board.Name;
+                DisplayDeleteBoardPopup();
+
+                GetUserBoards();
+            }
+        }
+
+
+        private void OnAddNewBoard()
+        {
+            if (string.IsNullOrEmpty(BoardName))
+                DisplayExceptionMessage?.Invoke(AppResources.NameCannotBeEmpty);
+            else
+                AddNewBoard(BoardName);
+
+            BoardName = string.Empty;
+        }
+
+        private void OnEditBoard()
+        {
+            if (string.IsNullOrEmpty(BoardName))
+                DisplayExceptionMessage?.Invoke(AppResources.NameCannotBeEmpty);
+            else
+            {
+                _selectedBoard.Name = BoardName;
+                EditSelectedBoard(_selectedBoard.Base);
+            }
+
+            BoardName = string.Empty;
+        }
+
+        private void OnDeleteBoard()
+        {
+            if (string.IsNullOrEmpty(BoardName))
+                DisplayExceptionMessage?.Invoke(AppResources.NameCannotBeEmpty);
+            else
+            {
+                _selectedBoard.Name = BoardName;
+                DeleteSelectedBoard(_selectedBoard.Base);
+            }
+
+            BoardName = string.Empty;
         }
 
         #endregion
@@ -164,6 +187,8 @@ namespace TaskTracker.ViewModels.Page
             try
             {
                 await _manager.DeleteBoard(board.Id);
+
+                GetUserBoards();
             }
             catch (RestException ex)
             {
@@ -176,6 +201,8 @@ namespace TaskTracker.ViewModels.Page
             try
             {
                 await _manager.EditBoard(board);
+
+                GetUserBoards();
             }
             catch (RestException ex)
             {
@@ -187,10 +214,9 @@ namespace TaskTracker.ViewModels.Page
         {
             try
             {
-                Board newBoard = await _manager.AddNewBoard(boardName);
+                await _manager.AddNewBoard(boardName);
 
-                if (newBoard != null)
-                    UserBoards.Add(newBoard);
+                GetUserBoards();
             }
             catch (RestException ex)
             {

@@ -141,8 +141,14 @@
   <data name="Delete" xml:space="preserve">
     <value>Usuń</value>
   </data>
+  <data name="DeleteBoard" xml:space="preserve">
+    <value>Usuń tablicę</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>Edytuj</value>
+  </data>
+  <data name="EditBoard" xml:space="preserve">
+    <value>Edytuj tablicę</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Błąd</value>
@@ -162,11 +168,17 @@
   <data name="NameCannotBeEmpty" xml:space="preserve">
     <value>Nazwa nie może być pusta.</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>Nie</value>
+  </data>
   <data name="Ok" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Hasło</value>
+  </data>
+  <data name="Question_DeleteBoard" xml:space="preserve">
+    <value>Czy na pewno chcesz usunąć tablicę?</value>
   </data>
   <data name="Refresh" xml:space="preserve">
     <value>Odśwież</value>
@@ -188,5 +200,8 @@
   </data>
   <data name="TaskName" xml:space="preserve">
     <value>Nazwa zadania</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Tak</value>
   </data>
 </root>
