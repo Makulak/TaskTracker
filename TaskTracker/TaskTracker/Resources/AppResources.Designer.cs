@@ -70,6 +70,15 @@ namespace TaskTracker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dodaj kolumnę.
+        /// </summary>
+        public static string AddColumn {
+            get {
+                return ResourceManager.GetString("AddColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dodaj nową tablicę.
         /// </summary>
         public static string AddNewBoard {
@@ -84,6 +93,15 @@ namespace TaskTracker.Resources {
         public static string AddNewTask {
             get {
                 return ResourceManager.GetString("AddNewTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dodaj zadanie.
+        /// </summary>
+        public static string AddTask {
+            get {
+                return ResourceManager.GetString("AddTask", resourceCulture);
             }
         }
         
@@ -192,6 +210,15 @@ namespace TaskTracker.Resources {
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odśwież.
+        /// </summary>
+        public static string Refresh {
+            get {
+                return ResourceManager.GetString("Refresh", resourceCulture);
             }
         }
         

@@ -1,5 +1,4 @@
-﻿using System.Dynamic;
-using System.Linq;
+﻿using System;
 using System.Windows.Input;
 using TaskTracker.Data;
 using TaskTracker.Exceptions;
@@ -24,14 +23,38 @@ namespace TaskTracker.ViewModels.Page
             } }
         private BoardVM _selectedBoard;
 
+        public ICommand RefreshCommand { get; set; }
+        public ICommand AddColumnCommand { get; set; }
+        public ICommand AddTaskCommand { get; set; }
+
+        public Action DisplayAddTask;
+        public Action DisplayAddColumn;
+
         public MainPageViewModel(BoardVM selectedBoard)
         {
             _manager = new RestManager(new RestService());
+
+            RefreshCommand = new Command(OnRefresh);
+            AddColumnCommand = new Command(OnAddColumn);
+            AddTaskCommand = new Command(OnAddTask);
 
             GetDetailedInfoAboutBoard(selectedBoard);
         }
 
         #region Commands
+
+        private void OnRefresh()
+        {
+            GetDetailedInfoAboutBoard(SelectedBoard);
+        }
+
+        private void OnAddColumn()
+        {
+        }
+
+        private void OnAddTask()
+        {
+        }
 
         #endregion
 
@@ -66,15 +89,26 @@ namespace TaskTracker.ViewModels.Page
             }
         }
 
-        void AddColumn(int boardId, string columnName)
+        private async void AddColumn(string columnName)
         {
             try
             {
-                _manager.AddNewColumn(new Column(boardId, columnName));
+                ShowWaitForm = true;
+
+                ColumnVM newColumn = await _manager.AddNewColumn(new Column(SelectedBoard.Id, columnName));
+
+                if (newColumn == null)
+                    return;
+
+                SelectedBoard.ColumnsCollection.Add(newColumn);
             }
             catch (RestException ex)
             {
                 DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
+            }
+            finally
+            {
+                ShowWaitForm = false;
             }
         }
 

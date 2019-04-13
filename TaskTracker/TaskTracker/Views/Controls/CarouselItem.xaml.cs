@@ -1,4 +1,5 @@
 ﻿using System;
+using Syncfusion.ListView.XForms;
 using TaskTracker.Resources;
 using TaskTracker.ViewModels.VM;
 using Xamarin.Forms;
@@ -11,7 +12,7 @@ namespace TaskTracker.Views.Controls
 	{
 		public CarouselItem ()
 		{
-			InitializeComponent ();
+			InitializeComponent();
 		}
 
         private void CarouselItem_OnBindingContextChanged(object sender, EventArgs e)
@@ -23,6 +24,12 @@ namespace TaskTracker.Views.Controls
 
             column.DisplayAddTask = () => AddNewTaskPopup.Show();
             column.DisplayExceptionMessage = (exMessage) => Application.Current.MainPage.DisplayAlert(AppResources.Error, exMessage, AppResources.Ok);
+            column.DisplayTaskPage = (task) => Navigation.PushAsync(new TaskPage(task));
+        }
+
+        private void LvTasks_OnItemDragging(object sender, ItemDraggingEventArgs e)
+        {
+            
         }
     }
 }

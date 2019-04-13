@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows.Input;
 using TaskTracker.Data;
 using TaskTracker.Exceptions;
@@ -79,11 +77,13 @@ namespace TaskTracker.ViewModels.VM
 
         public Action<string> DisplayExceptionMessage;
         public Action DisplayAddTask;
+        public Action<TaskVM> DisplayTaskPage;
 
         private readonly RestManager _manager;
 
         public ICommand AddTaskCommand { get; set; }
         public ICommand ConfirmPopupCommand { get; set; }
+        public ICommand TaskSelectedCommand { get; set; }
 
         public string NewTaskName {
             get => _newTaskName;
@@ -101,6 +101,7 @@ namespace TaskTracker.ViewModels.VM
 
             AddTaskCommand = new Command(OnAddTaskButton);
             ConfirmPopupCommand = new Command(OnConfirmPopup);
+            TaskSelectedCommand = new Command(OnTaskSelected);
         }
 
         public static implicit operator ColumnVM(Column column)
@@ -121,6 +122,18 @@ namespace TaskTracker.ViewModels.VM
         private void OnAddTaskButton()
         {
             DisplayAddTask?.Invoke();
+        }
+
+        private void OnTaskSelected(object obj)
+        {
+            Syncfusion.ListView.XForms.ItemTappedEventArgs arg = obj as Syncfusion.ListView.XForms.ItemTappedEventArgs;
+
+            TaskVM task = arg?.ItemData as TaskVM;
+
+            if(task == null)
+                return;
+
+            DisplayTaskPage?.Invoke(task);
         }
 
         #endregion
@@ -156,6 +169,10 @@ namespace TaskTracker.ViewModels.VM
             catch (RestException ex)
             {
                 DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
+            }
+            finally
+            {
+                NewTaskName = string.Empty;
             }
         }
 

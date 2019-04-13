@@ -120,11 +120,17 @@
   <data name="Accept" xml:space="preserve">
     <value>Akceptuj</value>
   </data>
+  <data name="AddColumn" xml:space="preserve">
+    <value>Dodaj kolumnę</value>
+  </data>
   <data name="AddNewBoard" xml:space="preserve">
     <value>Dodaj nową tablicę</value>
   </data>
   <data name="AddNewTask" xml:space="preserve">
     <value>Dodaj nowe zadanie</value>
+  </data>
+  <data name="AddTask" xml:space="preserve">
+    <value>Dodaj zadanie</value>
   </data>
   <data name="BoardName" xml:space="preserve">
     <value>Nazwa tablicy</value>
@@ -161,6 +167,9 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Hasło</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Odśwież</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Rejestracja</value>

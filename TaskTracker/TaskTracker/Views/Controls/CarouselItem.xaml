@@ -18,7 +18,10 @@
 
                 <popupLayout:SfPopupLayout.Content>
 
-                    <xForms:SfListView ItemsSource="{Binding TaskCollection}" ItemSize="80" DragStartMode="OnHold" ItemSpacing="0,0,0,5" IsStickyFooter="True" IsStickyHeader="True">
+                    <xForms:SfListView x:Name="LvTasks" ItemsSource="{Binding TaskCollection}" TapCommand="{Binding TaskSelectedCommand}" 
+                                       ItemDragging="LvTasks_OnItemDragging"
+                                       ItemSize="80" DragStartMode="OnHold" ItemSpacing="0,0,0,5" 
+                                       IsStickyFooter="True" IsStickyHeader="True">
                         <xForms:SfListView.ItemTemplate>
                             <DataTemplate>
                                 <FlexLayout Padding="5,5,5,5" AlignItems="Start" JustifyContent="SpaceBetween" Direction="Column" BackgroundColor="#FAFAFA">
@@ -56,7 +59,7 @@
                         <popupLayout:PopupView.ContentTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <Entry Text="{Binding NewTaskName, Mode=TwoWay}" Placeholder="{resources:Translate TasakName}" Keyboard="Text" TextColor="Black" HeightRequest="50"/>
+                                    <Entry Text="{Binding NewTaskName, Mode=TwoWay}" Placeholder="{resources:Translate TaskName}" Keyboard="Text" TextColor="Black" HeightRequest="50"/>
                                 </Grid>
                             </DataTemplate>
                         </popupLayout:PopupView.ContentTemplate>

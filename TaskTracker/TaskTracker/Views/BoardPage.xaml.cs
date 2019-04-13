@@ -46,7 +46,7 @@ namespace TaskTracker.Views
             PullToRefresh.IsRefreshing = false;
         }
 
-        private void SfListView_OnItemTapped(object sender, ItemTappedEventArgs e)
+        private void SfListView_OnItemTapped(object sender, ItemTappedEventArgs e) //TODO: Change
         {
             var vm = BindingContext as BoardPageViewModel;
             vm?.DisplayMainPage(e.ItemData as BoardVM);

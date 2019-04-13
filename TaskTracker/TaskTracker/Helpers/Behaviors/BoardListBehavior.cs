@@ -65,9 +65,9 @@ namespace TaskTracker.Helpers
 
             _popup.PopupView.ContentTemplate = new DataTemplate(() =>
             {
-                var mainStack = new StackLayout();
+                var mainStack = new FlexLayout();
                 mainStack.BackgroundColor = Color.FromHex("#ECEFF1");
-                mainStack.Spacing = 0;
+                mainStack.Direction = FlexDirection.Column;
 
                 var deleteButton = new Button()
                 {

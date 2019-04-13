@@ -3,9 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xForms="clr-namespace:Syncfusion.SfCarousel.XForms;assembly=Syncfusion.SfCarousel.XForms"
              xmlns:controls="clr-namespace:TaskTracker.Views.Controls"
+             xmlns:resources="clr-namespace:TaskTracker.Resources;assembly=TaskTracker"
              x:Class="TaskTracker.Views.MainPage"
              Title="{Binding SelectedBoard.Name}"
              BackgroundImage="background.jpg">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Primary" Icon="reload.xml" Command="{Binding RefreshCommand}"/>
+        <ToolbarItem Order="Secondary" Text="{resources:Translate Refresh}" Command="{Binding RefreshCommand}"/>
+        <ToolbarItem Order="Secondary" Text="{resources:Translate AddTask}" Command="{Binding AddTaskCommand}"/>
+        <ToolbarItem Order="Secondary" Text="{resources:Translate AddColumn}" Command="{Binding AddColumnCommand}"/>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <Grid>
             <xForms:SfCarousel ItemsSource="{Binding SelectedBoard.ColumnsCollection}">
@@ -15,6 +24,8 @@
                     </DataTemplate>
                 </xForms:SfCarousel.ItemTemplate>
             </xForms:SfCarousel>
+
+            <ActivityIndicator IsRunning="{Binding ShowWaitForm}" HorizontalOptions="Center"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
