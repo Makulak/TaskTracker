@@ -32,6 +32,7 @@ namespace TaskTracker.ViewModels.Page
         public ICommand DeleteBoardCommand { get; set; }
         public ICommand EditBoardCommand { get; set; }
         public ICommand AddBoardButtonCommand { get; set; }
+        public ICommand BoardSelectedCommand { get; set; }
 
         public Action<BoardVM> DisplayMainPage;
         public Action DisplayAddBoard;
@@ -55,11 +56,23 @@ namespace TaskTracker.ViewModels.Page
             DeleteBoardCommand = new Command(OnDeleteBoard);
             ConfirmPopupCommand = new Command(OnConfirmPopup);
             AddBoardButtonCommand = new Command(OnAddBoardButton);
+            BoardSelectedCommand = new Command(OnBoardSelected);
 
             GetUserBoards();
         }
-
         #region Commands 
+
+        private void OnBoardSelected(object obj)
+        {
+            Syncfusion.ListView.XForms.ItemTappedEventArgs arg = obj as Syncfusion.ListView.XForms.ItemTappedEventArgs;
+
+            BoardVM board = arg?.ItemData as BoardVM;
+
+            if (board == null)
+                return;
+
+            DisplayMainPage(board);
+        }
 
         private void OnDeleteBoard(object obj)
         {

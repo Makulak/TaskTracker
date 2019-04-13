@@ -24,7 +24,7 @@
                         <pulltoRefresh:SfPullToRefresh x:Name="PullToRefresh" VerticalOptions="FillAndExpand" TransitionMode="Push" IsRefreshing="False" Refreshing="SfPullToRefresh_OnRefreshing">
                             <pulltoRefresh:SfPullToRefresh.PullableContent>
 
-                                <sflistview:SfListView x:Name="LvBoard" ItemTapped="SfListView_OnItemTapped" SelectionMode="None" ItemSize="70" ItemSpacing="0,10,0,0" ItemsSource="{Binding UserBoards}">
+                                <sflistview:SfListView x:Name="LvBoard" TapCommand="{Binding BoardSelectedCommand}" SelectionMode="None" ItemSize="70" ItemSpacing="0,10,0,0" ItemsSource="{Binding UserBoards}">
 
                                     <sflistview:SfListView.ItemTemplate>
                                         <DataTemplate >
