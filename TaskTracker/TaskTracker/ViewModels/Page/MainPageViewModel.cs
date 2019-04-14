@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Input;
 using TaskTracker.Data;
 using TaskTracker.Exceptions;
 using TaskTracker.Models;
+using TaskTracker.Resources;
 using TaskTracker.ViewModels.Page.Base;
 using TaskTracker.ViewModels.VM;
 using Xamarin.Forms;
@@ -13,19 +15,47 @@ namespace TaskTracker.ViewModels.Page
     {
         private readonly RestManager _manager;
 
-        public BoardVM SelectedBoard
-        {
+        public BoardVM SelectedBoard {
             get => _selectedBoard;
-            set
-            {
+            set {
                 _selectedBoard = value;
                 OnPropertyChanged(nameof(SelectedBoard));
-            } }
+            }
+        }
         private BoardVM _selectedBoard;
 
+        public string TaskName {
+            get => _taskName;
+            set {
+                _taskName = value;
+                OnPropertyChanged(nameof(TaskName));
+            }
+        }
+        private string _taskName;
+
+        public string ColumnName {
+            get => _columnName;
+            set {
+                _columnName = value;
+                OnPropertyChanged(nameof(ColumnName));
+            }
+        }
+        private string _columnName;
+
+        public int SelectedColumnPosition {
+            get => _selectedColumnPosition;
+            set {
+                _selectedColumnPosition = value;
+                OnPropertyChanged(nameof(SelectedColumnPosition));
+            }
+        }
+        private int _selectedColumnPosition;
+
         public ICommand RefreshCommand { get; set; }
-        public ICommand AddColumnCommand { get; set; }
-        public ICommand AddTaskCommand { get; set; }
+        public ICommand AddColumnButtonCommand { get; set; }
+        public ICommand AddTaskButtonCommand { get; set; }
+        public ICommand AddNewTaskCommand { get; set; }
+        public ICommand AddNewColumnCommand { get; set; }
 
         public Action DisplayAddTask;
         public Action DisplayAddColumn;
@@ -35,8 +65,11 @@ namespace TaskTracker.ViewModels.Page
             _manager = new RestManager(new RestService());
 
             RefreshCommand = new Command(OnRefresh);
-            AddColumnCommand = new Command(OnAddColumn);
-            AddTaskCommand = new Command(OnAddTask);
+            AddColumnButtonCommand = new Command(OnAddColumnButton);
+            AddTaskButtonCommand = new Command(OnAddTaskButton);
+
+            AddNewColumnCommand = new Command(OnAddColumn);
+            AddNewTaskCommand = new Command(OnAddTask);
 
             GetDetailedInfoAboutBoard(selectedBoard);
         }
@@ -48,12 +81,34 @@ namespace TaskTracker.ViewModels.Page
             GetDetailedInfoAboutBoard(SelectedBoard);
         }
 
-        private void OnAddColumn()
+        private void OnAddColumnButton()
         {
+            DisplayAddColumn?.Invoke();
+        }
+
+        private void OnAddTaskButton()
+        {
+            DisplayAddTask?.Invoke();
         }
 
         private void OnAddTask()
         {
+            if (string.IsNullOrEmpty(ColumnName))
+                DisplayExceptionMessage?.Invoke(AppResources.NameCannotBeEmpty);
+            else
+                AddTask();
+
+            TaskName = string.Empty;
+        }
+
+        private void OnAddColumn()
+        {
+            if (string.IsNullOrEmpty(ColumnName))
+                DisplayExceptionMessage?.Invoke(AppResources.NameCannotBeEmpty);
+            else
+                AddColumn();
+
+            ColumnName = string.Empty;
         }
 
         #endregion
@@ -89,18 +144,41 @@ namespace TaskTracker.ViewModels.Page
             }
         }
 
-        private async void AddColumn(string columnName)
+        private async void AddColumn()
         {
             try
             {
                 ShowWaitForm = true;
 
-                ColumnVM newColumn = await _manager.AddNewColumn(new Column(SelectedBoard.Id, columnName));
+                ColumnVM newColumn = await _manager.AddNewColumn(new Column(SelectedBoard.Id, ColumnName));
 
                 if (newColumn == null)
                     return;
 
                 SelectedBoard.ColumnsCollection.Add(newColumn);
+            }
+            catch (RestException ex)
+            {
+                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
+            }
+            finally
+            {
+                ShowWaitForm = false;
+            }
+        }
+
+        private async void AddTask()
+        {
+            try
+            {
+                ShowWaitForm = true;
+
+                ColumnVM column =
+                    SelectedBoard.ColumnsCollection.SingleOrDefault(col => col.Position == SelectedColumnPosition);
+
+                if (column == null)
+                    return;
+
             }
             catch (RestException ex)
             {

@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xForms="clr-namespace:Syncfusion.SfCarousel.XForms;assembly=Syncfusion.SfCarousel.XForms"
              xmlns:controls="clr-namespace:TaskTracker.Views.Controls"
-             xmlns:resources="clr-namespace:TaskTracker.Resources;assembly=TaskTracker"
+             xmlns:resources="clr-namespace:TaskTracker.Resources"
+             xmlns:popupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
              x:Class="TaskTracker.Views.MainPage"
              Title="{Binding SelectedBoard.Name}"
              BackgroundImage="background.jpg">
@@ -11,19 +12,31 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Primary" Icon="reload.xml" Command="{Binding RefreshCommand}"/>
         <ToolbarItem Order="Secondary" Text="{resources:Translate Refresh}" Command="{Binding RefreshCommand}"/>
-        <ToolbarItem Order="Secondary" Text="{resources:Translate AddTask}" Command="{Binding AddTaskCommand}"/>
-        <ToolbarItem Order="Secondary" Text="{resources:Translate AddColumn}" Command="{Binding AddColumnCommand}"/>
+        <ToolbarItem Order="Secondary" Text="{resources:Translate AddTask}" Command="{Binding AddTaskButtonCommand}"/>
+        <ToolbarItem Order="Secondary" Text="{resources:Translate AddColumn}" Command="{Binding AddColumnButtonCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <Grid>
-            <xForms:SfCarousel ItemsSource="{Binding SelectedBoard.ColumnsCollection}">
-                <xForms:SfCarousel.ItemTemplate>
-                    <DataTemplate>
-                        <controls:CarouselItem/>
-                    </DataTemplate>
-                </xForms:SfCarousel.ItemTemplate>
-            </xForms:SfCarousel>
+            <popupLayout:SfPopupLayout x:Name="MainPopup">
+
+                <popupLayout:SfPopupLayout.Content>
+
+                    <xForms:SfCarousel SelectedIndex="{Binding SelectedColumnPosition}" ItemsSource="{Binding SelectedBoard.ColumnsCollection}">
+                        <xForms:SfCarousel.ItemTemplate>
+                            <DataTemplate>
+                                <controls:CarouselItem/>
+                            </DataTemplate>
+                        </xForms:SfCarousel.ItemTemplate>
+                    </xForms:SfCarousel>
+
+                </popupLayout:SfPopupLayout.Content>
+
+                <popupLayout:SfPopupLayout.PopupView>
+                    <popupLayout:PopupView AppearanceMode="TwoButton" HeightRequest="150"/>
+                </popupLayout:SfPopupLayout.PopupView>
+
+            </popupLayout:SfPopupLayout>
 
             <ActivityIndicator IsRunning="{Binding ShowWaitForm}" HorizontalOptions="Center"/>
         </Grid>

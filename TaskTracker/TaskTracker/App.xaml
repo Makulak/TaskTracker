@@ -25,5 +25,19 @@
             </Grid>
         </DataTemplate>
 
+        <DataTemplate x:Key="AddTaskPopup">
+            <Grid>
+                <Entry Text="{Binding Path=TaskName}" Placeholder="{resources:Translate NewTaskName}" 
+                       Keyboard="Text" TextColor="Black" HeightRequest="50"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="AddColumnPopup">
+            <Grid>
+                <Entry Text="{Binding Path=ColumnName}" Placeholder="{resources:Translate NewBColumnName}" 
+                       Keyboard="Text" TextColor="Black" HeightRequest="50"/>
+            </Grid>
+        </DataTemplate>
+
     </Application.Resources>
 </Application>

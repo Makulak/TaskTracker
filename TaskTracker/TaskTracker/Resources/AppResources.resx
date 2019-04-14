@@ -126,6 +126,9 @@
   <data name="AddNewBoard" xml:space="preserve">
     <value>Dodaj nową tablicę</value>
   </data>
+  <data name="AddNewColumn" xml:space="preserve">
+    <value>Dodaj nową kolumnę</value>
+  </data>
   <data name="AddNewTask" xml:space="preserve">
     <value>Dodaj nowe zadanie</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Anuluj</value>
+  </data>
+  <data name="ColumnName" xml:space="preserve">
+    <value>Nazwa kolumny</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Usuń</value>

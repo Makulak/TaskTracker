@@ -16,7 +16,6 @@ namespace TaskTracker.ViewModels.Page
 {
     class BoardPageViewModel : BaseViewModel
     {
-        private bool _editBoard; //TODO: Change that
         private BoardVM _selectedBoard;
 
         public ObservableCollection<BoardVM> UserBoards {
@@ -187,12 +186,14 @@ namespace TaskTracker.ViewModels.Page
             try
             {
                 await _manager.DeleteBoard(board.Id);
-
-                GetUserBoards();
             }
             catch (RestException ex)
             {
                 DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
+            }
+            finally
+            {
+                GetUserBoards();
             }
         }
 
@@ -201,12 +202,14 @@ namespace TaskTracker.ViewModels.Page
             try
             {
                 await _manager.EditBoard(board);
-
-                GetUserBoards();
             }
             catch (RestException ex)
             {
                 DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
+            }
+            finally
+            {
+                GetUserBoards();
             }
         }
 
@@ -215,12 +218,14 @@ namespace TaskTracker.ViewModels.Page
             try
             {
                 await _manager.AddNewBoard(boardName);
-
-                GetUserBoards();
             }
             catch (RestException ex)
             {
                 DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
+            }
+            finally
+            {
+                GetUserBoards();
             }
         }
 

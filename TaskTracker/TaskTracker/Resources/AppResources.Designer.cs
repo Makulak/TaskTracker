@@ -88,6 +88,15 @@ namespace TaskTracker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dodaj nową kolumnę.
+        /// </summary>
+        public static string AddNewColumn {
+            get {
+                return ResourceManager.GetString("AddNewColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dodaj nowe zadanie.
         /// </summary>
         public static string AddNewTask {
@@ -120,6 +129,15 @@ namespace TaskTracker.Resources {
         public static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nazwa kolumny.
+        /// </summary>
+        public static string ColumnName {
+            get {
+                return ResourceManager.GetString("ColumnName", resourceCulture);
             }
         }
         
