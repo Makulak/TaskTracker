@@ -27,7 +27,7 @@ namespace TaskTracker.Views
         private void SetAddColumnPopup()
         {
             MainPopup.PopupView.AcceptCommand = _viewModel.AddNewColumnCommand;
-            MainPopup.PopupView.HeaderTitle = AppResources.AddNewCoumn;
+            MainPopup.PopupView.HeaderTitle = AppResources.AddNewColumn;
             MainPopup.PopupView.AcceptButtonText = AppResources.Accept;
             MainPopup.PopupView.DeclineButtonText = AppResources.Cancel;
             MainPopup.PopupView.ContentTemplate = Application.Current.Resources["AddColumnPopup"] as DataTemplate;

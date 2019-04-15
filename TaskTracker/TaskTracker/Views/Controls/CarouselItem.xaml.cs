@@ -7,13 +7,13 @@ using Xamarin.Forms.Xaml;
 
 namespace TaskTracker.Views.Controls
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class CarouselItem : ContentView
-	{
-		public CarouselItem ()
-		{
-			InitializeComponent();
-		}
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class CarouselItem : ContentView
+    {
+        public CarouselItem()
+        {
+            InitializeComponent();
+        }
 
         private void CarouselItem_OnBindingContextChanged(object sender, EventArgs e)
         {
@@ -29,7 +29,43 @@ namespace TaskTracker.Views.Controls
 
         private void LvTasks_OnItemDragging(object sender, ItemDraggingEventArgs e)
         {
-            
+            if (e.Action == DragAction.Start)
+            {
+            }
+
+            if (e.Action == DragAction.Dragging)
+            {
+                var position = new Point(e.Position.X - this.lvTasks.Bounds.X - this.lvTasks.Bounds.X, e.Position.Y - this.lvTasks.Bounds.Y - this.lvTasks.ItemSize);
+
+                if (Header.Bounds.Contains(position))
+                {
+                    DeleteImage.IsVisible = true;
+                }
+                else
+                {
+                    DeleteImage.IsVisible = false;
+                }
+            }
+
+            if (e.Action == DragAction.Drop)
+            {
+                var position = new Point(e.Position.X - this.lvTasks.Bounds.X - this.Bounds.X, e.Position.Y - this.lvTasks.Bounds.Y - this.Bounds.Y);
+
+                if (Header.Bounds.Contains(position))
+                {
+                    ColumnVM column = BindingContext as ColumnVM;
+                    TaskVM task = e.ItemData as TaskVM;
+
+                    if (column == null || task == null)
+                        return;
+
+                    column.RemoveTask(task);
+                }
+                else
+                {
+                    DeleteImage.IsVisible = false;
+                }
+            }
         }
     }
 }
