@@ -52,6 +52,16 @@ namespace TaskTracker.ViewModels.VM
             }
         }
 
+        public bool IsDone
+        {
+            get => Base.IsDone;
+            set
+            {
+                Base.IsDone = value;
+                OnPropertyChanged(nameof(IsDone));
+            }
+        }
+
         #endregion
 
         #region ViewModelProperties

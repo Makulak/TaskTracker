@@ -14,6 +14,7 @@
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="17.1.0.40" />
     <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator" Version="17.1.0.40" />
     <PackageReference Include="Syncfusion.Xamarin.SfCarousel" Version="17.1.0.40" />
+    <PackageReference Include="Syncfusion.Xamarin.SfDataForm" Version="17.1.0.40" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="17.1.0.40" />
     <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="17.1.0.40" />
     <PackageReference Include="Syncfusion.Xamarin.SfPullToRefresh" Version="17.1.0.40" />

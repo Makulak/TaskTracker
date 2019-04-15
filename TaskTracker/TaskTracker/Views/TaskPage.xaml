@@ -1,12 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:TaskTracker.Resources"
+             xmlns:textInputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
              x:Class="TaskTracker.Views.TaskPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Primary" Text="{resources:Translate Accept}" Command="{Binding SaveTaskCommand}"/>
+        <ToolbarItem Order="Secondary" Text="{resources:Translate Move}" Command="{Binding MoveTaskButtonCommand}"/>
+        <ToolbarItem Order="Secondary" Text="{resources:Translate Delete}" Command="{Binding DeleteTaskButtonCommand}"/>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
+
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+
+            <StackLayout Spacing="10" Padding="5,30">
+                <Frame>
+                    <textInputLayout:SfTextInputLayout BackgroundColor="Transparent" HeightRequest="50" FocusedStrokeWidth="2" UnfocusedStrokeWidth="0">
+                        <Entry BackgroundColor="Transparent" Text="{Binding SelectedTask.Name}"/>
+                    </textInputLayout:SfTextInputLayout>
+                </Frame>
+
+                <Frame>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width=".9*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <FlexLayout Grid.Column="0" HorizontalOptions="Start" >
+                            <Frame HeightRequest="40" WidthRequest="40" CornerRadius="20" Padding="1" BackgroundColor="LightBlue">
+                                <Image Scale="0.7" Source="{Binding SelectedTask.AssignedUser.Image}"/>
+                            </Frame>
+                        </FlexLayout>
+
+                        <Label Grid.Column="1" Text="{Binding SelectedTask.AssignedUser.Login}" TextColor="Black" FontSize="Medium" 
+                               HorizontalTextAlignment="Start" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"/>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditAssignedUserButtonCommand}"/>
+                        </Grid.GestureRecognizers>
+
+                    </Grid>
+                </Frame>
+            </StackLayout>
+
         </StackLayout>
+
     </ContentPage.Content>
+
 </ContentPage>

@@ -39,12 +39,12 @@
 
                         <xForms:SfListView.ItemTemplate>
                             <DataTemplate>
-                                <FlexLayout Padding="5,5,5,5" AlignItems="Start" JustifyContent="SpaceBetween" Direction="Column" BackgroundColor="#FAFAFA">
-                                    <Label TextColor="Black" Text="{Binding Name}"/>
-                                    <BoxView HeightRequest="1" HorizontalOptions="CenterAndExpand" Color="#616161"/>
-                                    <Frame HeightRequest="30" WidthRequest="30" CornerRadius="15" Padding="1" BackgroundColor="LightBlue">
+                                <FlexLayout Padding="5,5,5,5" AlignItems="Start" JustifyContent="SpaceBetween" Direction="Row" BackgroundColor="#FAFAFA">
+                                    <Frame HeightRequest="60" WidthRequest="60" CornerRadius="30" Padding="1" BackgroundColor="LightBlue">
                                         <Image Scale="0.7" Source="{Binding AssignedUser.Image}"/>
                                     </Frame>
+
+                                    <Label TextColor="Black" Text="{Binding Name}" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand"/>
                                 </FlexLayout>
                             </DataTemplate>
                         </xForms:SfListView.ItemTemplate>

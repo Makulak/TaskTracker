@@ -171,6 +171,9 @@
   <data name="Mail" xml:space="preserve">
     <value>Mail</value>
   </data>
+  <data name="Move" xml:space="preserve">
+    <value>Przesuń</value>
+  </data>
   <data name="NameCannotBeEmpty" xml:space="preserve">
     <value>Nazwa nie może być pusta.</value>
   </data>

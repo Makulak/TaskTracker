@@ -64,6 +64,9 @@
     <PackageReference Include="Syncfusion.Xamarin.SfCarousel">
       <Version>17.1.0.40</Version>
     </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfDataForm">
+      <Version>17.1.0.40</Version>
+    </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfListView">
       <Version>17.1.0.40</Version>
     </PackageReference>
@@ -159,6 +162,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\reload.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\pencil.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\check.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
