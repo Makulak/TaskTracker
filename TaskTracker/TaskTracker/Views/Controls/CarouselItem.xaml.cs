@@ -49,22 +49,24 @@ namespace TaskTracker.Views.Controls
 
             if (e.Action == DragAction.Drop)
             {
-                var position = new Point(e.Position.X - this.lvTasks.Bounds.X - this.Bounds.X, e.Position.Y - this.lvTasks.Bounds.Y - this.Bounds.Y);
+                var position = new Point(e.Position.X - this.lvTasks.Bounds.X - this.lvTasks.Bounds.X, e.Position.Y - this.lvTasks.Bounds.Y - this.lvTasks.ItemSize);
+
+                ColumnVM column = BindingContext as ColumnVM;
+                TaskVM task = e.ItemData as TaskVM;
+
+                if (column == null || task == null)
+                    return;
 
                 if (Header.Bounds.Contains(position))
                 {
-                    ColumnVM column = BindingContext as ColumnVM;
-                    TaskVM task = e.ItemData as TaskVM;
-
-                    if (column == null || task == null)
-                        return;
-
                     column.RemoveTask(task);
                 }
                 else
                 {
-                    DeleteImage.IsVisible = false;
+                    column.MoveTask(task.Id, e.NewIndex);
                 }
+
+                DeleteImage.IsVisible = false;
             }
         }
     }

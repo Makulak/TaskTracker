@@ -259,7 +259,7 @@ namespace TaskTracker.Data
 
         public async Task<Column> AddNewColumn(Column column)
         {
-            var uri = UriFactory.CreateEndpointUri("column/add");
+            var uri = UriFactory.CreateEndpointUri("columns/add");
             var param = JsonContentFactory.CreateContent(column);
             HttpResponseMessage response;
 

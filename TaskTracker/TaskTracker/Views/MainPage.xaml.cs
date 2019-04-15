@@ -20,6 +20,8 @@ namespace TaskTracker.Views
             vm.DisplayAddColumn += SetAddColumnPopup;
             vm.DisplayAddTask += SetAddTaskPopup;
 
+            vm.DisplayExceptionMessage += (exMessage) => DisplayAlert(AppResources.Error, exMessage, AppResources.Ok);
+
             BindingContext = vm;
             _viewModel = vm;
         }

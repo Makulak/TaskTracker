@@ -160,11 +160,11 @@ namespace TaskTracker.ViewModels.VM
         {
             try
             {
-                Task newTask = new Task(BoardId, this.Id, NewTaskName);
+                TaskVM returnedTask = await _manager.AddNewTask(new Task(BoardId, this.Id, NewTaskName));
 
-                await _manager.AddNewTask(newTask);
+                returnedTask.AssignedUser = await _manager.GetUser(returnedTask.AssignedUserId);
 
-                TaskCollection.Add(newTask);
+                TaskCollection.Add(returnedTask);
             }
             catch (RestException ex)
             {
