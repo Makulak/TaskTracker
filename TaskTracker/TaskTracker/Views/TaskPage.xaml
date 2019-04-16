@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resources="clr-namespace:TaskTracker.Resources"
              xmlns:textInputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             xmlns:popupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              x:Class="TaskTracker.Views.TaskPage">
 
     <ContentPage.ToolbarItems>
@@ -13,40 +15,49 @@
 
     <ContentPage.Content>
 
-        <StackLayout>
+        <popupLayout:SfPopupLayout x:Name="TaskPopup">
+            <popupLayout:SfPopupLayout.Content>
 
-            <StackLayout Spacing="10" Padding="5,30">
-                <Frame>
-                    <textInputLayout:SfTextInputLayout BackgroundColor="Transparent" HeightRequest="50" FocusedStrokeWidth="2" UnfocusedStrokeWidth="0">
-                        <Entry BackgroundColor="Transparent" Text="{Binding SelectedTask.Name}"/>
+                <StackLayout Spacing="10" Padding="5,30">
+                    <Frame>
+                        <textInputLayout:SfTextInputLayout BackgroundColor="Transparent" HeightRequest="50" FocusedStrokeWidth="2" UnfocusedStrokeWidth="0">
+                            <Entry BackgroundColor="Transparent" Text="{Binding SelectedTask.Name}"/>
+                        </textInputLayout:SfTextInputLayout>
+                    </Frame>
+
+                    <textInputLayout:SfTextInputLayout Hint="{resources:Translate TaskDescription}" HeightRequest="50" FocusedStrokeWidth="2" UnfocusedStrokeWidth="0">
+                        <Entry Text="{Binding SelectedTask.Description}"/>
                     </textInputLayout:SfTextInputLayout>
-                </Frame>
 
-                <Frame>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width=".9*"/>
-                        </Grid.ColumnDefinitions>
+                    <Frame>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width=".9*"/>
+                            </Grid.ColumnDefinitions>
 
-                        <FlexLayout Grid.Column="0" HorizontalOptions="Start" >
-                            <Frame HeightRequest="40" WidthRequest="40" CornerRadius="20" Padding="1" BackgroundColor="LightBlue">
-                                <Image Scale="0.7" Source="{Binding SelectedTask.AssignedUser.Image}"/>
-                            </Frame>
-                        </FlexLayout>
+                            <FlexLayout Grid.Column="0" HorizontalOptions="Start" >
+                                <Frame HeightRequest="40" WidthRequest="40" CornerRadius="20" Padding="1" BackgroundColor="LightBlue">
+                                    <Image Scale="0.7" Source="{Binding SelectedTask.AssignedUser.Image}"/>
+                                </Frame>
+                            </FlexLayout>
 
-                        <Label Grid.Column="1" Text="{Binding SelectedTask.AssignedUser.Login}" TextColor="Black" FontSize="Medium" 
+                            <Label Grid.Column="1" Text="{Binding SelectedTask.AssignedUser.Login}" TextColor="Black" FontSize="Medium" 
                                HorizontalTextAlignment="Start" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"/>
 
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding EditAssignedUserButtonCommand}"/>
-                        </Grid.GestureRecognizers>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding EditAssignedUserButtonCommand}"/>
+                            </Grid.GestureRecognizers>
 
-                    </Grid>
-                </Frame>
-            </StackLayout>
+                        </Grid>
+                    </Frame>
 
-        </StackLayout>
+                    <buttons:SfCheckBox Text="{resources:Translate IsTaskDone}" IsChecked="{Binding SelectedTask.IsDone}"/>
+
+                </StackLayout>
+
+            </popupLayout:SfPopupLayout.Content>
+        </popupLayout:SfPopupLayout>
 
     </ContentPage.Content>
 

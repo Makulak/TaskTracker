@@ -362,13 +362,13 @@ namespace TaskTracker.Data
 
         public async Task<Models.Task> EditTask(Models.Task task)
         {
-            var uri = UriFactory.CreateEndpointUri("tasks/edit"); //TODO[JM]: Nazwa endpointa
+            var uri = UriFactory.CreateEndpointUri("tasks/update");
             var param = JsonContentFactory.CreateContent(task);
             HttpResponseMessage response;
 
             try
             {
-                response = await Client.PostAsync(uri, param);
+                response = await Client.PutAsync(uri, param);
             }
             catch (Exception ex)
             {

@@ -27,6 +27,9 @@ namespace TaskTracker.Models
         [JsonProperty(PropertyName = "isDone")]
         public bool IsDone { get; set; }
 
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
         public Task(int boardId, int columnId, string name)
         {
             BoardId = boardId;

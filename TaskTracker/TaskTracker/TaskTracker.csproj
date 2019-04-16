@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.1.0.40" />
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="17.1.0.40" />
     <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator" Version="17.1.0.40" />
     <PackageReference Include="Syncfusion.Xamarin.SfCarousel" Version="17.1.0.40" />

@@ -115,6 +115,15 @@ namespace TaskTracker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Przypisz użytkownika.
+        /// </summary>
+        public static string AssignUser {
+            get {
+                return ResourceManager.GetString("AssignUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nazwa tablicy.
         /// </summary>
         public static string BoardName {
@@ -192,6 +201,15 @@ namespace TaskTracker.Resources {
         public static string InvalidPassword {
             get {
                 return ResourceManager.GetString("InvalidPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zadanie zrobione.
+        /// </summary>
+        public static string IsTaskDone {
+            get {
+                return ResourceManager.GetString("IsTaskDone", resourceCulture);
             }
         }
         
@@ -327,6 +345,15 @@ namespace TaskTracker.Resources {
         public static string Tables {
             get {
                 return ResourceManager.GetString("Tables", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opis zadania.
+        /// </summary>
+        public static string TaskDescription {
+            get {
+                return ResourceManager.GetString("TaskDescription", resourceCulture);
             }
         }
         

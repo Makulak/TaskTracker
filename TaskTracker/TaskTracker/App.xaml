@@ -2,6 +2,7 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resources="clr-namespace:TaskTracker.Resources;assembly=TaskTracker"
+             xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              x:Class="TaskTracker.App">
     <Application.Resources>
 
@@ -37,6 +38,30 @@
                 <Entry Text="{Binding Path=ColumnName}" Placeholder="{resources:Translate NewBColumnName}" 
                        Keyboard="Text" TextColor="Black" HeightRequest="50"/>
             </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="AssignUserPopup">
+            <xForms:SfListView ItemSpacing="5" WidthRequest="350" ItemSize="50" SelectionMode="None" TapCommand="{Binding EditAssignedUserCommand}" ItemsSource="{Binding AvailableUsers}">
+                <xForms:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width=".9*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <FlexLayout Grid.Column="0" HorizontalOptions="Start" >
+                                <Frame HeightRequest="40" WidthRequest="40" CornerRadius="20" Padding="1" BackgroundColor="LightBlue">
+                                    <Image Scale="0.7" Source="{Binding Image}"/>
+                                </Frame>
+                            </FlexLayout>
+
+                            <Label Grid.Column="1" Text="{Binding Login}" TextColor="Black" FontSize="Medium" 
+                                           HorizontalTextAlignment="Start" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"/>
+                        </Grid>
+                    </DataTemplate>
+                </xForms:SfListView.ItemTemplate>
+            </xForms:SfListView>
         </DataTemplate>
 
     </Application.Resources>

@@ -62,6 +62,15 @@ namespace TaskTracker.ViewModels.VM
             }
         }
 
+        public string Description {
+            get => Base.Description;
+            set
+            {
+                Base.Description = value;
+                OnPropertyChanged(nameof(Description));
+            }
+        }
+
         #endregion
 
         #region ViewModelProperties

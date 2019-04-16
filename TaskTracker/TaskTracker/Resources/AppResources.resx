@@ -135,6 +135,9 @@
   <data name="AddTask" xml:space="preserve">
     <value>Dodaj zadanie</value>
   </data>
+  <data name="AssignUser" xml:space="preserve">
+    <value>Przypisz użytkownika</value>
+  </data>
   <data name="BoardName" xml:space="preserve">
     <value>Nazwa tablicy</value>
   </data>
@@ -161,6 +164,9 @@
   </data>
   <data name="InvalidPassword" xml:space="preserve">
     <value>Hasła muszą być identyczne.</value>
+  </data>
+  <data name="IsTaskDone" xml:space="preserve">
+    <value>Zadanie zrobione</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
@@ -206,6 +212,9 @@
   </data>
   <data name="Tables" xml:space="preserve">
     <value>Tablice</value>
+  </data>
+  <data name="TaskDescription" xml:space="preserve">
+    <value>Opis zadania</value>
   </data>
   <data name="TaskName" xml:space="preserve">
     <value>Nazwa zadania</value>
