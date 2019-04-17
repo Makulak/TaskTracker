@@ -38,8 +38,8 @@ namespace TaskTracker.ViewModels.Page
         public ICommand DeleteBoardCommand { get; set; }
 
         public Action<BoardVM> DisplayMainPage;
+        public Action<BoardVM> DisplayEditBoardPage;
         public Action DisplayAddBoardPopup;
-        public Action DisplayEditBoardPopup;
         public Action DisplayDeleteBoardPopup;
 
         private readonly RestManager _manager;
@@ -97,7 +97,7 @@ namespace TaskTracker.ViewModels.Page
                 _selectedBoard = board;
 
                 BoardName = board.Name;
-                DisplayEditBoardPopup();
+                DisplayEditBoardPage(obj as BoardVM);
 
                 GetUserBoards();
             }

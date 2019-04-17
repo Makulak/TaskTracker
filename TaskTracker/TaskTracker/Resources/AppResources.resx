@@ -225,4 +225,7 @@
   <data name="Yes" xml:space="preserve">
     <value>Tak</value>
   </data>
+  <data name="AssignedUsers" xml:space="preserve">
+    <value>Przypisani użytkownicy:</value>
+  </data>
 </root>

@@ -44,7 +44,13 @@
                                         <Image Scale="0.7" Source="{Binding AssignedUser.Image}"/>
                                     </Frame>
 
-                                    <Label TextColor="Black" Text="{Binding Name}" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand"/>
+                                    <StackLayout>
+
+                                        <Label TextColor="Black" Text="{Binding Name}" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand"/>
+                                        <Button Image="arrows.xml" VerticalOptions="End" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" 
+                                                CornerRadius="20" Command="{Binding Path=MoveTaskButtonCommand}"/>
+
+                                    </StackLayout>
                                 </FlexLayout>
                             </DataTemplate>
                         </xForms:SfListView.ItemTemplate>

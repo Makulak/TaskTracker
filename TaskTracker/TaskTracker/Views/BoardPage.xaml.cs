@@ -21,7 +21,7 @@ namespace TaskTracker.Views
             vm.DisplayMainPage = (selectedBoard) => Navigation.PushAsync(new MainPage(selectedBoard));
             vm.DisplayExceptionMessage += (exMessage) => DisplayAlert(AppResources.Error, exMessage, AppResources.Ok);
             vm.DisplayAddBoardPopup += SetAddNewBoardPopup;
-            vm.DisplayEditBoardPopup += SetEditBoardPopup;
+            vm.DisplayEditBoardPage = (selectedBoard) => Navigation.PushAsync(new BoardManagementPage(selectedBoard));
             vm.DisplayDeleteBoardPopup += SetDeleteBoardPopup;
 
             BindingContext = vm;
