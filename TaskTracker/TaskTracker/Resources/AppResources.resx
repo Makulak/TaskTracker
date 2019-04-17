@@ -135,6 +135,9 @@
   <data name="AddTask" xml:space="preserve">
     <value>Dodaj zadanie</value>
   </data>
+  <data name="AssignedUser" xml:space="preserve">
+    <value>Przypisany użytkownik:</value>
+  </data>
   <data name="AssignUser" xml:space="preserve">
     <value>Przypisz użytkownika</value>
   </data>

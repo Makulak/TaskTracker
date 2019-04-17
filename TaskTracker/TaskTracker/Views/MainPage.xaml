@@ -12,7 +12,6 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Primary" Icon="reload.xml" Command="{Binding RefreshCommand}"/>
         <ToolbarItem Order="Secondary" Text="{resources:Translate Refresh}" Command="{Binding RefreshCommand}"/>
-        <ToolbarItem Order="Secondary" Text="{resources:Translate AddTask}" Command="{Binding AddTaskButtonCommand}"/>
         <ToolbarItem Order="Secondary" Text="{resources:Translate AddColumn}" Command="{Binding AddColumnButtonCommand}"/>
     </ContentPage.ToolbarItems>
 
@@ -22,7 +21,7 @@
 
                 <popupLayout:SfPopupLayout.Content>
 
-                    <xForms:SfCarousel SelectedIndex="{Binding SelectedColumnPosition}" ItemsSource="{Binding SelectedBoard.ColumnsCollection}">
+                    <xForms:SfCarousel ItemsSource="{Binding SelectedBoard.ColumnsCollection}">
                         <xForms:SfCarousel.ItemTemplate>
                             <DataTemplate>
                                 <controls:CarouselItem/>

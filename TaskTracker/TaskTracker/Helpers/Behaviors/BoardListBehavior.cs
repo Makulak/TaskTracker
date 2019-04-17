@@ -66,7 +66,6 @@ namespace TaskTracker.Helpers
             _popup.PopupView.ContentTemplate = new DataTemplate(() =>
             {
                 var mainStack = new FlexLayout();
-                mainStack.BackgroundColor = Color.FromHex("#ECEFF1");
                 mainStack.Direction = FlexDirection.Column;
 
                 var deleteButton = new Button()
@@ -76,6 +75,7 @@ namespace TaskTracker.Helpers
                     HeightRequest = 50,
                 };
                 deleteButton.Clicked += DeleteButtonClicked;
+                deleteButton.VerticalOptions = LayoutOptions.StartAndExpand;
 
                 var editButton = new Button()
                 {
@@ -84,9 +84,10 @@ namespace TaskTracker.Helpers
                     HeightRequest = 50,
                 };
                 editButton.Clicked += EditButtonClicked;
+                deleteButton.VerticalOptions = LayoutOptions.EndAndExpand;
 
-                mainStack.Children.Add(deleteButton);
                 mainStack.Children.Add(editButton);
+                mainStack.Children.Add(deleteButton);
 
                 return mainStack;
             });

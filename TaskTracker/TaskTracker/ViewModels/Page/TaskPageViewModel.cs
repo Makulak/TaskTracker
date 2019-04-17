@@ -46,6 +46,7 @@ namespace TaskTracker.ViewModels.Page
         public ICommand DeleteTaskCommand { get; set; }
         public ICommand EditAssignedUserButtonCommand { get; set; }
         public ICommand EditAssignedUserCommand { get; set; }
+        public ICommand RefreshCommand { get; set; }
 
         public TaskPageViewModel(TaskVM task)
         {
@@ -58,8 +59,11 @@ namespace TaskTracker.ViewModels.Page
             DeleteTaskCommand = new Command(OnDeleteTask);
             EditAssignedUserButtonCommand = new Command(OnEditAssignedUserButton);
             EditAssignedUserCommand = new Command(OnEditAssignedUser);
+            RefreshCommand = new Command(OnRefresh);
 
             _manager = new RestManager(new RestService());
+
+            GetAvailableUsers();
         }
 
         #region Commands
@@ -91,7 +95,6 @@ namespace TaskTracker.ViewModels.Page
 
         private void OnEditAssignedUserButton()
         {
-            GetAvailableUsers();
             ShowUserListPopup?.Invoke();
         }
 
@@ -109,6 +112,12 @@ namespace TaskTracker.ViewModels.Page
             SelectedTask.AssignedUser = selectedUser;
         }
 
+        private void OnRefresh()
+        {
+            GetTask();
+            GetAvailableUsers();
+        }
+
         #endregion
 
 
@@ -118,6 +127,8 @@ namespace TaskTracker.ViewModels.Page
         {
             try
             {
+                ShowWaitForm = true;
+
                 List<User> users = await _manager.GetUsersAssignedToBoard(SelectedTask.BoardId);
                 AvailableUsers = new ObservableCollection<UserVM>(users.ConvertAll<UserVM>(x => x));
             }
@@ -137,6 +148,25 @@ namespace TaskTracker.ViewModels.Page
             {
                 await _manager.EditTask(SelectedTask.Base);
                 ClosePage();
+            }
+            catch (RestException ex)
+            {
+                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
+            }
+            finally
+            {
+                ShowWaitForm = false;
+            }
+        }
+
+        private async void GetTask()
+        {
+            try
+            {
+                ShowWaitForm = true;
+
+                SelectedTask = await _manager.GetTask(SelectedTask.Id);
+                SelectedTask.AssignedUser = await _manager.GetUser(SelectedTask.AssignedUserId);
             }
             catch (RestException ex)
             {

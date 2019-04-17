@@ -26,5 +26,6 @@ namespace TaskTracker.Data
         Task<Models.Task> EditTask(Models.Task task);
         Task DeleteTask(int taskId);
         Task MoveTask(int taskId, int position);
+        Task<Models.Task> GetTask(int taskId);
     }
 }

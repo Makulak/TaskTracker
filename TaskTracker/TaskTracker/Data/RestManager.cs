@@ -109,6 +109,11 @@ namespace TaskTracker.Data
             await _restService.MoveTask(taskId, position);
         }
 
+        public async Task<Models.Task> GetTask(int taskId)
+        {
+            return await _restService.GetTask(taskId);
+        }
+
         #endregion
     }
 }

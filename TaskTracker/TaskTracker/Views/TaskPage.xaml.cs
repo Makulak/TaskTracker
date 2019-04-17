@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Syncfusion.XForms.PopupLayout;
+﻿using Syncfusion.XForms.PopupLayout;
 using TaskTracker.Resources;
 using TaskTracker.ViewModels.Page;
 using TaskTracker.ViewModels.VM;
@@ -33,6 +28,7 @@ namespace TaskTracker.Views
         {
             TaskPopup.PopupView.HeaderTitle = AppResources.AssignUser;
             TaskPopup.PopupView.AppearanceMode = AppearanceMode.OneButton;
+            TaskPopup.PopupView.ShowFooter = false;
             TaskPopup.PopupView.ContentTemplate = Application.Current.Resources["AssignUserPopup"] as DataTemplate;
 
             TaskPopup.Show();

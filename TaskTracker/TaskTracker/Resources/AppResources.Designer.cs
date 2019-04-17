@@ -115,6 +115,15 @@ namespace TaskTracker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Przypisany użytkownik:.
+        /// </summary>
+        public static string AssignedUser {
+            get {
+                return ResourceManager.GetString("AssignedUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Przypisz użytkownika.
         /// </summary>
         public static string AssignUser {

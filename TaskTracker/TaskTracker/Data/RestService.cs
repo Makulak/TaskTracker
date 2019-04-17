@@ -428,6 +428,36 @@ namespace TaskTracker.Data
             }
         }
 
+        public async Task<Models.Task> GetTask(int taskId)
+        {
+            var uri = UriFactory.CreateEndpointUri($"tasks/show/id={taskId}");
+
+            HttpResponseMessage response;
+
+            try
+            {
+                response = await Client.GetAsync(uri);
+
+            }
+            catch (Exception ex)
+            {
+                throw new ServerResponseException(ex.Message);
+            }
+
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var task = JsonConvert.DeserializeObject<Models.Task>(content);
+
+                return task;
+            }
+            else
+            {
+                throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
+            }
+        }
+
         #endregion
     }
 }

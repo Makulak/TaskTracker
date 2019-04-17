@@ -53,11 +53,8 @@ namespace TaskTracker.ViewModels.Page
 
         public ICommand RefreshCommand { get; set; }
         public ICommand AddColumnButtonCommand { get; set; }
-        public ICommand AddTaskButtonCommand { get; set; }
-        public ICommand AddNewTaskCommand { get; set; }
         public ICommand AddNewColumnCommand { get; set; }
 
-        public Action DisplayAddTask;
         public Action DisplayAddColumn;
 
         public MainPageViewModel(BoardVM selectedBoard)
@@ -66,10 +63,8 @@ namespace TaskTracker.ViewModels.Page
 
             RefreshCommand = new Command(OnRefresh);
             AddColumnButtonCommand = new Command(OnAddColumnButton);
-            AddTaskButtonCommand = new Command(OnAddTaskButton);
 
             AddNewColumnCommand = new Command(OnAddColumn);
-            AddNewTaskCommand = new Command(OnAddTask);
 
             GetDetailedInfoAboutBoard(selectedBoard);
         }
@@ -84,21 +79,6 @@ namespace TaskTracker.ViewModels.Page
         private void OnAddColumnButton()
         {
             DisplayAddColumn?.Invoke();
-        }
-
-        private void OnAddTaskButton()
-        {
-            DisplayAddTask?.Invoke();
-        }
-
-        private void OnAddTask()
-        {
-            if (string.IsNullOrEmpty(ColumnName))
-                DisplayExceptionMessage?.Invoke(AppResources.NameCannotBeEmpty);
-            else
-                AddTask();
-
-            TaskName = string.Empty;
         }
 
         private void OnAddColumn()
@@ -156,29 +136,6 @@ namespace TaskTracker.ViewModels.Page
                     return;
 
                 SelectedBoard.ColumnsCollection.Add(newColumn);
-            }
-            catch (RestException ex)
-            {
-                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
-            }
-            finally
-            {
-                ShowWaitForm = false;
-            }
-        }
-
-        private async void AddTask()
-        {
-            try
-            {
-                ShowWaitForm = true;
-
-                ColumnVM column =
-                    SelectedBoard.ColumnsCollection.SingleOrDefault(col => col.Position == SelectedColumnPosition);
-
-                if (column == null)
-                    return;
-
             }
             catch (RestException ex)
             {

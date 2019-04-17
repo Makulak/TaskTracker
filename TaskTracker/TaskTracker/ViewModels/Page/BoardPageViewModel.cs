@@ -67,6 +67,7 @@ namespace TaskTracker.ViewModels.Page
             EditBoardCommand = new Command(OnEditBoard);
             DeleteBoardCommand = new Command(OnDeleteBoard);
 
+            ShowWaitForm = true;
             GetUserBoards();
         }
 
@@ -83,7 +84,6 @@ namespace TaskTracker.ViewModels.Page
 
             DisplayMainPage(board);
         }
-
 
         private void OnAddBoardButton()
         {

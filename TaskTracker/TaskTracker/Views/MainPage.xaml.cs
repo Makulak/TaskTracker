@@ -18,8 +18,6 @@ namespace TaskTracker.Views
             MainPageViewModel vm = new MainPageViewModel(board);
 
             vm.DisplayAddColumn += SetAddColumnPopup;
-            vm.DisplayAddTask += SetAddTaskPopup;
-
             vm.DisplayExceptionMessage += (exMessage) => DisplayAlert(AppResources.Error, exMessage, AppResources.Ok);
 
             BindingContext = vm;
@@ -33,17 +31,6 @@ namespace TaskTracker.Views
             MainPopup.PopupView.AcceptButtonText = AppResources.Accept;
             MainPopup.PopupView.DeclineButtonText = AppResources.Cancel;
             MainPopup.PopupView.ContentTemplate = Application.Current.Resources["AddColumnPopup"] as DataTemplate;
-
-            MainPopup.Show();
-        }
-
-        private void SetAddTaskPopup()
-        {
-            MainPopup.PopupView.AcceptCommand = _viewModel.AddNewTaskCommand;
-            MainPopup.PopupView.HeaderTitle = AppResources.AddNewTask;
-            MainPopup.PopupView.AcceptButtonText = AppResources.Accept;
-            MainPopup.PopupView.DeclineButtonText = AppResources.Cancel;
-            MainPopup.PopupView.ContentTemplate = Application.Current.Resources["AddTaskPopup"] as DataTemplate;
 
             MainPopup.Show();
         }
