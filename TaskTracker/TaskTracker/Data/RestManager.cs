@@ -32,6 +32,11 @@ namespace TaskTracker.Data
             return await _restService.GetUser(userId);
         }
 
+        public async Task<List<User>> GetUserListByLogin(string pattern)
+        {
+            return await _restService.GetUserListByLogin(pattern);
+        }
+
         #endregion
 
         #region Boards

@@ -6,6 +6,7 @@
              xmlns:popupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
              xmlns:textInputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
              xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:comboBox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
              x:Class="TaskTracker.Views.BoardManagementPage">
 
     <ContentPage.Resources>
@@ -29,34 +30,39 @@
                         <Frame>
                             <textInputLayout:SfTextInputLayout BackgroundColor="Transparent" HeightRequest="50" 
                                                                FocusedStrokeWidth="2" UnfocusedStrokeWidth="0">
-                                <Entry BackgroundColor="Transparent" Text="{Binding SelectedTask.Name}"/>
+                                <Entry BackgroundColor="Transparent" Text="{Binding SelectedBoard.Name}"/>
                             </textInputLayout:SfTextInputLayout>
                         </Frame>
 
                         <Frame>
                             <StackLayout Orientation="Vertical">
+                                <Label Text="{resources:Translate AssignUsers}" FontSize="Medium"/>
+                                <comboBox:SfComboBox x:Name="userSelectionComboBox" Text="{Binding SearchText}" SelectionChanged="userSelectionComboBox_SelectionChanged"  IsEditableMode="True" DisplayMemberPath="Login"
+                                                     HeightRequest="40" DataSource="{Binding Path=UserList, UpdateSourceEventName=PropertyChanged}"/>
+
                                 <Label Text="{resources:Translate AssignedUsers}" FontSize="Medium"/>
-                                <xForms:SfListView ItemsSource="{Binding SelectedBoard.AssignedUsers}">
+                                <xForms:SfListView ItemsSource="{Binding SelectedBoard.AssignedUsers}" SelectionMode="None" ItemSpacing="5">
                                     <xForms:SfListView.ItemTemplate>
                                         <DataTemplate>
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition/>
-                                                    <ColumnDefinition Width=".9*"/>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
                                                 </Grid.ColumnDefinitions>
 
-                                                <FlexLayout Grid.Column="0" HorizontalOptions="Start" >
-                                                    <Frame HeightRequest="40" WidthRequest="40" CornerRadius="20" Padding="1" BackgroundColor="LightBlue">
-                                                        <Image Scale="0.7" Source="{Binding SelectedTask.AssignedUser.Image}"/>
+                                                <FlexLayout Grid.Column="0" HorizontalOptions="Start">
+                                                    <Frame HeightRequest="32" WidthRequest="32" CornerRadius="16" Padding="1" BackgroundColor="LightBlue">
+                                                        <Image Scale="0.7" Source="{Binding Image}"/>
                                                     </Frame>
                                                 </FlexLayout>
 
-                                                <Label Grid.Column="1" Text="{Binding SelectedTask.AssignedUser.Login}" TextColor="Black" FontSize="Medium" 
-               HorizontalTextAlignment="Start" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"/>
+                                                <Label Grid.Column="1" Text="{Binding Login}" TextColor="Black" FontSize="Medium" 
+                                                    HorizontalTextAlignment="Start" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"/>
 
-                                                <Grid.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding EditAssignedUserButtonCommand}"/>
-                                                </Grid.GestureRecognizers>
+                                                <FlexLayout Grid.Column="2" HorizontalOptions="End">
+                                                    <Button HeightRequest="32" WidthRequest="32" CornerRadius="16" Image="delete.xml" Command="{Binding DeleteBoardButtonCommand}"/>
+                                                </FlexLayout>
 
                                             </Grid>
                                         </DataTemplate>

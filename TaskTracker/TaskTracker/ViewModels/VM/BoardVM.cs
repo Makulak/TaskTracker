@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Xml;
 using TaskTracker.Models;
 using TaskTracker.ViewModels.VM.Base;
@@ -63,7 +64,7 @@ namespace TaskTracker.ViewModels.VM
                 OnPropertyChanged(nameof(AssignedUsers));
             }
         }
-        private ObservableCollection<UserVM> _assignedUsers { get; set; }
+        private ObservableCollection<UserVM> _assignedUsers;
 
         public ObservableCollection<ColumnVM> ColumnsCollection {
             get => _columnsCollection;

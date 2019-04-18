@@ -4,6 +4,7 @@
              x:Class="TaskTracker.Views.BoardPage"
              x:Name="_BoardPage"
              Title="{resources:Translate Tables}"
+             Appearing="BoardPage_OnAppearing"
              xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
              xmlns:pulltoRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
              xmlns:sflistview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"

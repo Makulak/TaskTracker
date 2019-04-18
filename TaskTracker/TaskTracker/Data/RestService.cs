@@ -98,6 +98,33 @@ namespace TaskTracker.Data
             }
         }
 
+        public async Task<List<User>> GetUserListByLogin(string pattern)
+        {
+            var uri = UriFactory.CreateEndpointUri($"users/all/query={pattern}");
+            HttpResponseMessage response;
+
+            try
+            {
+                response = await Client.GetAsync(uri);
+            }
+            catch (Exception ex)
+            {
+                throw new ServerResponseException(ex.Message);
+            }
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var list = JsonConvert.DeserializeObject<List<User>>(content);
+
+                return list;
+            }
+            else
+            {
+                throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
+            }
+        }
+
         #endregion
 
         #region Boards

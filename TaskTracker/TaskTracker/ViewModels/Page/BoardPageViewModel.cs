@@ -68,7 +68,6 @@ namespace TaskTracker.ViewModels.Page
             DeleteBoardCommand = new Command(OnDeleteBoard);
 
             ShowWaitForm = true;
-            GetUserBoards();
         }
 
         #region Commands 

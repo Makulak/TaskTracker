@@ -228,4 +228,7 @@
   <data name="AssignedUsers" xml:space="preserve">
     <value>Przypisani użytkownicy:</value>
   </data>
+  <data name="AssignUsers" xml:space="preserve">
+    <value>Przypisz użytkowników:</value>
+  </data>
 </root>

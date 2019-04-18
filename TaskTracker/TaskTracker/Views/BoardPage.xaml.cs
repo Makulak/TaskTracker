@@ -81,5 +81,10 @@ namespace TaskTracker.Views
 
             PullToRefresh.IsRefreshing = false;
         }
+
+        private void BoardPage_OnAppearing(object sender, EventArgs e)
+        {
+            _viewModel.GetUserBoards();
+        }
     }
 }
