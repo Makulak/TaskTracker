@@ -13,7 +13,7 @@
         <ToolbarItem Order="Primary" Icon="reload.xml" Command="{Binding RefreshCommand}"/>
         <ToolbarItem Order="Secondary" Text="{resources:Translate Refresh}" Command="{Binding RefreshCommand}"/>
         <ToolbarItem Order="Secondary" Text="{resources:Translate AddColumn}" Command="{Binding AddColumnButtonCommand}"/>
-    </ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems> 
 
     <ContentPage.Content>
         <Grid>

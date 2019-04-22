@@ -231,4 +231,13 @@
   <data name="AssignUsers" xml:space="preserve">
     <value>Przypisz użytkowników:</value>
   </data>
+  <data name="RenameColumn" xml:space="preserve">
+    <value>Zmień nazwę kolumny</value>
+  </data>
+  <data name="NewColumnName" xml:space="preserve">
+    <value>Nazwa nowej kolumny</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
 </root>

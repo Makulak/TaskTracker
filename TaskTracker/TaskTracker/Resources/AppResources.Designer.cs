@@ -286,6 +286,15 @@ namespace TaskTracker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nazwa nowej kolumny.
+        /// </summary>
+        public static string NewColumnName {
+            get {
+                return ResourceManager.GetString("NewColumnName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nie.
         /// </summary>
         public static string No {
@@ -349,6 +358,15 @@ namespace TaskTracker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zmień nazwę kolumny.
+        /// </summary>
+        public static string RenameColumn {
+            get {
+                return ResourceManager.GetString("RenameColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Powtórz hasło.
         /// </summary>
         public static string RepeatPassword {
@@ -363,6 +381,15 @@ namespace TaskTracker.Resources {
         public static string RestError {
             get {
                 return ResourceManager.GetString("RestError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
         

@@ -13,13 +13,6 @@
             </Grid>
         </DataTemplate>
 
-        <DataTemplate x:Key="EditBoardPopup">
-            <Grid>
-                <Entry Text="{Binding Path=BoardName}" Placeholder="{resources:Translate BoardName}" 
-                       Keyboard="Text" TextColor="Black" HeightRequest="50"/>
-            </Grid>
-        </DataTemplate>
-
         <DataTemplate x:Key="DeleteBoardPopup">
             <Grid>
                 <Label Text="{resources:Translate Question_DeleteBoard}" TextColor="Black" HeightRequest="50"/>
@@ -28,14 +21,21 @@
 
         <DataTemplate x:Key="AddTaskPopup">
             <Grid>
-                <Entry Text="{Binding Path=TaskName}" Placeholder="{resources:Translate NewTaskName}" 
+                <Entry Text="{Binding NewTaskName, Mode=TwoWay}" Placeholder="{resources:Translate TaskName}" 
                        Keyboard="Text" TextColor="Black" HeightRequest="50"/>
             </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="AddColumnPopup">
             <Grid>
-                <Entry Text="{Binding Path=ColumnName}" Placeholder="{resources:Translate NewBColumnName}" 
+                <Entry Text="{Binding Path=ColumnName}" Placeholder="{resources:Translate NewColumnName}" 
+                       Keyboard="Text" TextColor="Black" HeightRequest="50"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="RenameColumnPopup">
+            <Grid>
+                <Entry Text="{Binding Path=Name}" Placeholder="{resources:Translate ColumnName}" 
                        Keyboard="Text" TextColor="Black" HeightRequest="50"/>
             </Grid>
         </DataTemplate>

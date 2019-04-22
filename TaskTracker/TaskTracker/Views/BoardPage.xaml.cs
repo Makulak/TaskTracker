@@ -47,17 +47,6 @@ namespace TaskTracker.Views
             BoardPopup.Show();
         }
 
-        private void SetEditBoardPopup()
-        {
-            BoardPopup.PopupView.AcceptCommand = _viewModel.EditBoardCommand;
-            BoardPopup.PopupView.HeaderTitle = AppResources.EditBoard;
-            BoardPopup.PopupView.AcceptButtonText = AppResources.Accept;
-            BoardPopup.PopupView.DeclineButtonText = AppResources.Cancel;
-            BoardPopup.PopupView.ContentTemplate = Application.Current.Resources["EditBoardPopup"] as DataTemplate;
-
-            BoardPopup.Show();
-        }
-
         private void SetDeleteBoardPopup()
         {
             BoardPopup.PopupView.AcceptCommand = _viewModel.DeleteBoardCommand;

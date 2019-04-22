@@ -78,11 +78,14 @@ namespace TaskTracker.ViewModels.VM
         public Action<string> DisplayExceptionMessage;
         public Action DisplayAddTask;
         public Action<TaskVM> DisplayTaskPage;
+        public Action DisplayRenamePopup;
 
         private readonly RestManager _manager;
 
+        public ICommand AddTaskButtonCommand { get; set; }
         public ICommand AddTaskCommand { get; set; }
-        public ICommand ConfirmPopupCommand { get; set; }
+        public ICommand RenameColumnCommand { get; set; }
+        public ICommand RenameColumnButtonCommand { get; set; }
         public ICommand TaskSelectedCommand { get; set; }
 
         public string NewTaskName {
@@ -99,9 +102,11 @@ namespace TaskTracker.ViewModels.VM
             _manager = new RestManager(new RestService());
             TaskCollection = new ObservableCollection<TaskVM>();
 
-            AddTaskCommand = new Command(OnAddTaskButton);
-            ConfirmPopupCommand = new Command(OnConfirmPopup);
+            AddTaskButtonCommand = new Command(OnAddTaskButton);
+            AddTaskCommand = new Command(OnAddTask);
             TaskSelectedCommand = new Command(OnTaskSelected);
+            RenameColumnCommand = new Command(OnRenameColumn);
+            RenameColumnButtonCommand = new Command(OnRenameColumnButton);
         }
 
         public static implicit operator ColumnVM(Column column)
@@ -114,7 +119,7 @@ namespace TaskTracker.ViewModels.VM
 
         #region Commands
 
-        private void OnConfirmPopup()
+        private void OnAddTask()
         {
             AddTask();
         }
@@ -134,6 +139,16 @@ namespace TaskTracker.ViewModels.VM
                 return;
 
             DisplayTaskPage?.Invoke(task);
+        }
+
+        private void OnRenameColumn()
+        {
+            RenameColumn();
+        }
+
+        private void OnRenameColumnButton()
+        {
+            DisplayRenamePopup?.Invoke();
         }
 
         #endregion
@@ -181,6 +196,19 @@ namespace TaskTracker.ViewModels.VM
             try
             {
                 await _manager.MoveTask(taskId, position);
+            }
+            catch (RestException ex)
+            {
+                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
+            }
+        }
+
+        internal async void RenameColumn()
+        {
+            try
+            {
+
+                await _manager.EditColumn(Base);
             }
             catch (RestException ex)
             {
