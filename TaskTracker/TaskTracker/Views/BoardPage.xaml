@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TaskTracker.Views.BoardPage"
-             x:Name="_BoardPage"
+             x:Name="brdPage"
              Title="{resources:Translate Tables}"
              Appearing="BoardPage_OnAppearing"
              xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
@@ -29,7 +29,7 @@
                             <pulltoRefresh:SfPullToRefresh.PullableContent>
 
                                 <sflistview:SfListView x:Name="LvBoard" TapCommand="{Binding BoardSelectedCommand}" 
-                                                       SelectionMode="None" ItemSize="70" ItemSpacing="0,10,0,0" ItemsSource="{Binding UserBoards}">
+                                                       SelectionMode="None" ItemSize="80" ItemSpacing="5" ItemsSource="{Binding UserBoards}">
 
                                     <sflistview:SfListView.ItemTemplate>
                                         <DataTemplate >

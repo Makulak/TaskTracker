@@ -67,12 +67,14 @@ namespace TaskTracker.Helpers
             {
                 var mainStack = new FlexLayout();
                 mainStack.Direction = FlexDirection.Column;
+                mainStack.BackgroundColor = Color.FromHex("#E0E0E0");
 
                 var deleteButton = new Button()
                 {
                     Text = AppResources.Delete,
                     TextColor = Color.Black,
                     HeightRequest = 50,
+                    BackgroundColor =  Color.FromHex("#E0E0E0")
                 };
                 deleteButton.Clicked += DeleteButtonClicked;
                 deleteButton.VerticalOptions = LayoutOptions.StartAndExpand;
@@ -82,6 +84,7 @@ namespace TaskTracker.Helpers
                     Text = AppResources.Edit,
                     TextColor = Color.Black,
                     HeightRequest = 50,
+                    BackgroundColor = Color.FromHex("#E0E0E0")
                 };
                 editButton.Clicked += EditButtonClicked;
                 deleteButton.VerticalOptions = LayoutOptions.EndAndExpand;

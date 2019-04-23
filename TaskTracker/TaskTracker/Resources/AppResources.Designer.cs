@@ -214,6 +214,15 @@ namespace TaskTracker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wpisz nazwę użytkownika.
+        /// </summary>
+        public static string EnterUserName {
+            get {
+                return ResourceManager.GetString("EnterUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Błąd.
         /// </summary>
         public static string Error {
@@ -381,15 +390,6 @@ namespace TaskTracker.Resources {
         public static string RestError {
             get {
                 return ResourceManager.GetString("RestError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
         

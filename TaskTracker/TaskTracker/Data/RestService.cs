@@ -312,13 +312,13 @@ namespace TaskTracker.Data
 
         public async Task<Column> EditColumn(Column column)
         {
-            var uri = UriFactory.CreateEndpointUri("column/edit"); //TODO[JM]: Nazwa endpointa
+            var uri = UriFactory.CreateEndpointUri("columns/update");
             var param = JsonContentFactory.CreateContent(column);
             HttpResponseMessage response;
 
             try
             {
-                response = await Client.PostAsync(uri, param);
+                response = await Client.PutAsync(uri, param);
             }
             catch (Exception ex)
             {
@@ -338,7 +338,7 @@ namespace TaskTracker.Data
 
         public async Task DeleteColumn(int columnId)
         {
-            var uri = UriFactory.CreateEndpointUri("column/delete"); //TODO[JM]: Nazwa endpointa
+            var uri = UriFactory.CreateEndpointUri($"columns/delete/id={columnId}");
             var param = JsonContentFactory.CreateContent(columnId);
             HttpResponseMessage response;
 

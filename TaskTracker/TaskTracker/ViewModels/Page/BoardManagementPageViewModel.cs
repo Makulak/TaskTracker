@@ -36,11 +36,9 @@ namespace TaskTracker.ViewModels.Page
         }
         private string _searchText;
 
-        public ObservableCollection<UserVM> UserList
-        {
+        public ObservableCollection<UserVM> UserList {
             get => _userList;
-            set
-            {
+            set {
                 _userList = value;
                 OnPropertyChanged(nameof(UserList));
             }
@@ -51,6 +49,7 @@ namespace TaskTracker.ViewModels.Page
         public ICommand DeleteBoardButtonCommand { get; set; }
         public ICommand DeleteBoardCommand { get; set; }
         public ICommand SaveBoardCommand { get; set; }
+        public ICommand RemoveUserCommand { get; set; }
 
         public Action ShowConfirmDeletePopup;
         public Action ShowBoardPage;
@@ -65,6 +64,7 @@ namespace TaskTracker.ViewModels.Page
             DeleteBoardButtonCommand = new Command(OnDeleteBoardButton);
             DeleteBoardCommand = new Command(OnDeleteBoard);
             SaveBoardCommand = new Command(OnSaveBoard);
+            RemoveUserCommand = new Command(OnDeleteUser);
 
             _manager = new RestManager(new RestService());
 
@@ -95,6 +95,16 @@ namespace TaskTracker.ViewModels.Page
             SaveBoard();
         }
 
+        private void OnDeleteUser(object obj)
+        {
+            UserVM user = obj as UserVM;
+
+            if (user == null)
+                return;
+
+            DeleteUserFromBoard(user);
+        }
+
         #endregion
 
         #region Methods
@@ -107,14 +117,9 @@ namespace TaskTracker.ViewModels.Page
 
                 BoardVM brd = await _manager.GetBoard(SelectedBoard.Id);
 
-                foreach (ColumnVM column in brd.ColumnsCollection)
-                {
-                    foreach (TaskVM task in column.TaskCollection)
-                    {
-                        User x = await _manager.GetUser(task.Base.AssignedUserId);
-                        task.AssignedUser = x;
-                    }
-                }
+                List<User> users = await _manager.GetUsersAssignedToBoard(SelectedBoard.Id);
+
+                brd.AssignedUsers = new ObservableCollection<UserVM>(users.ConvertAll<UserVM>(x=>x));
 
                 SelectedBoard = brd;
             }
@@ -192,6 +197,12 @@ namespace TaskTracker.ViewModels.Page
             SelectedBoard.AssignedUsers.Add(user);
             SelectedBoard.AssignedUserIds = SelectedBoard.AssignedUsers.Select(usr => usr.Id).ToArray();
             SearchText = string.Empty;
+        }
+
+        private void DeleteUserFromBoard(UserVM user)
+        {
+            SelectedBoard.AssignedUsers.Remove(user);
+            SelectedBoard.AssignedUserIds = SelectedBoard.AssignedUsers.Select(usr => usr.Id).ToArray();
         }
 
         #endregion

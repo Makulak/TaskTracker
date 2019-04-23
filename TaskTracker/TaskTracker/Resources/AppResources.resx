@@ -237,7 +237,7 @@
   <data name="NewColumnName" xml:space="preserve">
     <value>Nazwa nowej kolumny</value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value />
+  <data name="EnterUserName" xml:space="preserve">
+    <value>Wpisz nazwę użytkownika</value>
   </data>
 </root>

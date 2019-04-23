@@ -31,7 +31,13 @@ namespace TaskTracker.Views
 
         private void SetConfirmDeletePopup()
         {
-            //BoardManagementPopup.Show();
+            BoardManagementPopup.PopupView.AcceptCommand = _viewModel.DeleteBoardCommand;
+            BoardManagementPopup.PopupView.HeaderTitle = AppResources.DeleteBoard;
+            BoardManagementPopup.PopupView.AcceptButtonText = AppResources.Yes;
+            BoardManagementPopup.PopupView.DeclineButtonText = AppResources.No;
+            BoardManagementPopup.PopupView.ContentTemplate = Application.Current.Resources["DeleteBoardPopup"] as DataTemplate;
+
+            BoardManagementPopup.Show();
         }
 
         private void userSelectionComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

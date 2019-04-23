@@ -110,8 +110,6 @@ namespace TaskTracker.ViewModels.Page
 
                 BoardName = board.Name;
                 DisplayDeleteBoardPopup();
-
-                GetUserBoards();
             }
         }
 

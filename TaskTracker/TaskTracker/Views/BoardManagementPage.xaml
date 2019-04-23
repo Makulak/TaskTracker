@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:resources="clr-namespace:TaskTracker.Resources;assembly=TaskTracker"
-             xmlns:converters="clr-namespace:TaskTracker.Converters;assembly=TaskTracker"
+             xmlns:resources="clr-namespace:TaskTracker.Resources"
+             xmlns:converters="clr-namespace:TaskTracker.Converters"
              xmlns:popupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
              xmlns:textInputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
              xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:comboBox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             x:Name="brdManagementPage"
              x:Class="TaskTracker.Views.BoardManagementPage">
 
     <ContentPage.Resources>
@@ -28,42 +29,51 @@
                     <StackLayout Spacing="10" Padding="5,30" Opacity="{Binding ControlsOpacity}" 
                                  IsEnabled="{Binding ShowWaitForm, Converter={StaticResource NegateConverter}}">
                         <Frame>
-                            <textInputLayout:SfTextInputLayout BackgroundColor="Transparent" HeightRequest="50" 
+                            <StackLayout>
+                                <Label Text="{resources:Translate BoardName}" TextColor="Black" FontSize="Medium"/>
+
+                                <textInputLayout:SfTextInputLayout BackgroundColor="Transparent" HeightRequest="50" 
                                                                FocusedStrokeWidth="2" UnfocusedStrokeWidth="0">
-                                <Entry BackgroundColor="Transparent" Text="{Binding SelectedBoard.Name}"/>
-                            </textInputLayout:SfTextInputLayout>
+                                    <Entry BackgroundColor="Transparent" Text="{Binding SelectedBoard.Name}"/>
+                                </textInputLayout:SfTextInputLayout>
+                            </StackLayout>
                         </Frame>
 
                         <Frame>
                             <StackLayout Orientation="Vertical">
-                                <Label Text="{resources:Translate AssignUsers}" FontSize="Medium"/>
-                                <comboBox:SfComboBox x:Name="userSelectionComboBox" Text="{Binding SearchText}" SelectionChanged="userSelectionComboBox_SelectionChanged"  IsEditableMode="True" DisplayMemberPath="Login"
-                                                     HeightRequest="40" DataSource="{Binding Path=UserList, UpdateSourceEventName=PropertyChanged}"/>
+                                <Label Text="{resources:Translate AssignUsers}" TextColor="Black" FontSize="Medium"/>
+                                <comboBox:SfComboBox x:Name="userSelectionComboBox" Text="{Binding SearchText}" SelectionChanged="userSelectionComboBox_SelectionChanged" 
+                                                     IsEditableMode="True" DisplayMemberPath="Login" HeightRequest="40" 
+                                                     DataSource="{Binding Path=UserList, UpdateSourceEventName=PropertyChanged}"
+                                                     Watermark="{resources:Translate EnterUserName}"/>
+                            </StackLayout>
+                        </Frame>
 
-                                <Label Text="{resources:Translate AssignedUsers}" FontSize="Medium"/>
+                        <Frame>
+                            <StackLayout Orientation="Vertical">
+                                <Label Text="{resources:Translate AssignedUsers}" TextColor="Black" FontSize="Medium"/>
                                 <xForms:SfListView ItemsSource="{Binding SelectedBoard.AssignedUsers}" SelectionMode="None" ItemSpacing="5">
                                     <xForms:SfListView.ItemTemplate>
                                         <DataTemplate>
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition Width="40"/>
                                                     <ColumnDefinition/>
                                                     <ColumnDefinition/>
                                                 </Grid.ColumnDefinitions>
 
-                                                <FlexLayout Grid.Column="0" HorizontalOptions="Start">
+                                                <FlexLayout Grid.Column="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand">
                                                     <Frame HeightRequest="32" WidthRequest="32" CornerRadius="16" Padding="1" BackgroundColor="LightBlue">
                                                         <Image Scale="0.7" Source="{Binding Image}"/>
                                                     </Frame>
                                                 </FlexLayout>
 
                                                 <Label Grid.Column="1" Text="{Binding Login}" TextColor="Black" FontSize="Medium" 
-                                                    HorizontalTextAlignment="Start" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"/>
+                                                     VerticalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
 
-                                                <FlexLayout Grid.Column="2" HorizontalOptions="End">
-                                                    <Button HeightRequest="32" WidthRequest="32" CornerRadius="16" Image="delete.xml" Command="{Binding DeleteBoardButtonCommand}"/>
-                                                </FlexLayout>
-
+                                                <Button BackgroundColor="Transparent" Grid.Column="2" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" 
+                                                        CornerRadius="20" Image="delete.xml" CommandParameter="{Binding .}" 
+                                                        Command="{Binding Path=BindingContext.RemoveUserCommand, Source={x:Reference Name=brdManagementPage}}"/>
                                             </Grid>
                                         </DataTemplate>
                                     </xForms:SfListView.ItemTemplate>
@@ -79,6 +89,11 @@
                 </Grid>
 
             </popupLayout:SfPopupLayout.Content>
+
+            <popupLayout:SfPopupLayout.PopupView>
+                <popupLayout:PopupView AppearanceMode="TwoButton" HeightRequest="150"/>
+            </popupLayout:SfPopupLayout.PopupView>
+
         </popupLayout:SfPopupLayout>
 
     </ContentPage.Content>
