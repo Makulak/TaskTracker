@@ -51,11 +51,29 @@ namespace TaskTracker.ViewModels.Page
         }
         private int _selectedColumnPosition;
 
+        public string NewTaskName {
+            get => _newTaskName;
+            set {
+                _newTaskName = value;
+                OnPropertyChanged(nameof(NewTaskName));
+            }
+        }
+        private string _newTaskName;
+
         public ICommand RefreshCommand { get; set; }
         public ICommand AddColumnButtonCommand { get; set; }
         public ICommand AddNewColumnCommand { get; set; }
+        public ICommand AddTaskCommand { get; set; }
+        public ICommand RenameColumnCommand { get; set; }
+        public ICommand TaskSelectedCommand { get; set; }
+        public ICommand RenameColumnButtonCommand { get; set; }
+        public ICommand AddTaskButtonCommand { get; set; }
+        public ICommand MoveTaskButtonCommand { get; set; }
 
         public Action DisplayAddColumn;
+        public Action DisplayRenameColumnPopup;
+        public Action DisplayAddTask;
+        public Action<TaskVM> DisplayTaskPage;
 
         public MainPageViewModel(BoardVM selectedBoard)
         {
@@ -63,8 +81,13 @@ namespace TaskTracker.ViewModels.Page
 
             RefreshCommand = new Command(OnRefresh);
             AddColumnButtonCommand = new Command(OnAddColumnButton);
-
+            AddTaskCommand = new Command(OnAddTask);
+            RenameColumnCommand = new Command(OnRenameColumn);
             AddNewColumnCommand = new Command(OnAddColumn);
+            TaskSelectedCommand = new Command(OnTaskSelected);
+            RenameColumnButtonCommand = new Command(OnRenameColumnButton);
+            AddTaskButtonCommand = new Command(OnAddTaskButton);
+            MoveTaskButtonCommand = new Command(OnMoveTaskButton);
 
             GetDetailedInfoAboutBoard(selectedBoard);
         }
@@ -89,6 +112,53 @@ namespace TaskTracker.ViewModels.Page
                 AddColumn();
 
             ColumnName = string.Empty;
+        }
+
+        private void OnAddTask()
+        {
+            AddTask();
+        }
+
+        private void OnRenameColumn()
+        {
+            SelectedBoard.ColumnsCollection[SelectedColumnPosition].Name = ColumnName;
+            ColumnName = string.Empty;
+
+            RenameColumn();
+        }
+
+        private void OnTaskSelected(object obj)
+        {
+            Syncfusion.ListView.XForms.ItemTappedEventArgs arg = obj as Syncfusion.ListView.XForms.ItemTappedEventArgs;
+
+            TaskVM task = arg?.ItemData as TaskVM;
+
+            if (task == null)
+                return;
+
+            DisplayTaskPage?.Invoke(task);
+        }
+
+        private void OnRenameColumnButton(object obj)
+        {
+            ColumnVM column = obj as ColumnVM;
+
+            if (column == null)
+                return;
+
+            ColumnName = column.Name;
+
+            DisplayRenameColumnPopup?.Invoke();
+        }
+
+        private void OnAddTaskButton()
+        {
+            DisplayAddTask?.Invoke();
+        }
+
+        private void OnMoveTaskButton()
+        {
+
         }
 
         #endregion
@@ -147,14 +217,46 @@ namespace TaskTracker.ViewModels.Page
             }
         }
 
-        void MoveTask(int boardId, int taskId, int sourceColumn, int destinationColumn)
+        private void MoveTask(int boardId, int taskId, int sourceColumn, int destinationColumn)
         {
 
         }
 
-        void MoveColumn(int boardId, int columnId, int sourcePosition, int destinationPosition)
+        private void MoveColumn(int boardId, int columnId, int sourcePosition, int destinationPosition)
         {
 
+        }
+
+        internal async void RenameColumn()
+        {
+            try
+            {
+                await _manager.EditColumn(SelectedBoard.ColumnsCollection[SelectedColumnPosition].Base);
+            }
+            catch (RestException ex)
+            {
+                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
+            }
+        }
+
+        private async void AddTask()
+        {
+            try
+            {
+                TaskVM returnedTask = await _manager.AddNewTask(new Task(SelectedBoard.Id, SelectedBoard.ColumnsCollection[SelectedColumnPosition].Id, NewTaskName));
+
+                returnedTask.AssignedUser = await _manager.GetUser(returnedTask.AssignedUserId);
+
+                SelectedBoard.ColumnsCollection[SelectedColumnPosition].TaskCollection.Add(returnedTask);
+            }
+            catch (RestException ex)
+            {
+                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
+            }
+            finally
+            {
+                NewTaskName = string.Empty;
+            }
         }
 
         #endregion

@@ -24,71 +24,70 @@ namespace TaskTracker.Views.Controls
             if (_viewModel == null)
                 return;
 
-            _viewModel.DisplayAddTask = SetNewTaskPopup;
-            _viewModel.DisplayRenamePopup = SetRenameColumnPopup;
+            
             _viewModel.DisplayExceptionMessage = (exMessage) => Application.Current.MainPage.DisplayAlert(AppResources.Error, exMessage, AppResources.Ok);
-            _viewModel.DisplayTaskPage = (task) => Navigation.PushAsync(new TaskPage(task));
+            
         }
 
-        private void LvTasks_OnItemDragging(object sender, ItemDraggingEventArgs e)
-        {
-            if (e.Action == DragAction.Start)
-            {
-            }
+        //private void LvTasks_OnItemDragging(object sender, ItemDraggingEventArgs e)
+        //{
+        //    if (e.Action == DragAction.Start)
+        //    {
+        //    }
 
-            if (e.Action == DragAction.Dragging)
-            {
-                var position = new Point(e.Position.X - this.lvTasks.Bounds.X - this.lvTasks.Bounds.X, e.Position.Y - this.lvTasks.Bounds.Y - this.lvTasks.ItemSize);
+        //    if (e.Action == DragAction.Dragging)
+        //    {
+        //        var position = new Point(e.Position.X - this.lvTasks.Bounds.X - this.lvTasks.Bounds.X, e.Position.Y - this.lvTasks.Bounds.Y - this.lvTasks.ItemSize);
 
-                if (Header.Bounds.Contains(position))
-                {
-                    DeleteImage.IsVisible = true;
-                }
-                else
-                {
-                    DeleteImage.IsVisible = false;
-                }
-            }
+        //        if (Header.Bounds.Contains(position))
+        //        {
+        //            DeleteImage.IsVisible = true;
+        //        }
+        //        else
+        //        {
+        //            DeleteImage.IsVisible = false;
+        //        }
+        //    }
 
-            if (e.Action == DragAction.Drop)
-            {
-                var position = new Point(e.Position.X - this.lvTasks.Bounds.X - this.lvTasks.Bounds.X, e.Position.Y - this.lvTasks.Bounds.Y - this.lvTasks.ItemSize);
+        //    if (e.Action == DragAction.Drop)
+        //    {
+        //        var position = new Point(e.Position.X - this.lvTasks.Bounds.X - this.lvTasks.Bounds.X, e.Position.Y - this.lvTasks.Bounds.Y - this.lvTasks.ItemSize);
 
-                ColumnVM column = BindingContext as ColumnVM;
-                TaskVM task = e.ItemData as TaskVM;
+        //        ColumnVM column = BindingContext as ColumnVM;
+        //        TaskVM task = e.ItemData as TaskVM;
 
-                if (column == null || task == null)
-                    return;
+        //        if (column == null || task == null)
+        //            return;
 
-                if (Header.Bounds.Contains(position))
-                {
-                    column.RemoveTask(task);
-                }
-                else
-                {
-                    column.MoveTask(task.Id, e.NewIndex);
-                }
+        //        if (Header.Bounds.Contains(position))
+        //        {
+        //            column.RemoveTask(task);
+        //        }
+        //        else
+        //        {
+        //            column.MoveTask(task.Id, e.NewIndex);
+        //        }
 
-                DeleteImage.IsVisible = false;
-            }
-        }
+        //        DeleteImage.IsVisible = false;
+        //    }
+        //}
 
-        private void SetNewTaskPopup()
-        {
-            CarouselItemPopup.PopupView.AcceptCommand = _viewModel.AddTaskCommand;
-            CarouselItemPopup.PopupView.HeaderTitle = AppResources.AddNewTask;
-            CarouselItemPopup.PopupView.ContentTemplate = Application.Current.Resources["AddTaskPopup"] as DataTemplate;
+        //private void SetNewTaskPopup()
+        //{
+        //    CarouselItemPopup.PopupView.AcceptCommand = _viewModel.AddTaskCommand;
+        //    CarouselItemPopup.PopupView.HeaderTitle = AppResources.AddNewTask;
+        //    CarouselItemPopup.PopupView.ContentTemplate = Application.Current.Resources["AddTaskPopup"] as DataTemplate;
 
-            CarouselItemPopup.Show();
-        }
+        //    CarouselItemPopup.Show();
+        //}
 
-        private void SetRenameColumnPopup()
-        {
-            CarouselItemPopup.PopupView.AcceptCommand = _viewModel.RenameColumnCommand;
-            CarouselItemPopup.PopupView.HeaderTitle = AppResources.RenameColumn;
-            CarouselItemPopup.PopupView.ContentTemplate = Application.Current.Resources["RenameColumnPopup"] as DataTemplate;
+        //private void SetRenameColumnPopup()
+        //{
+        //    CarouselItemPopup.PopupView.AcceptCommand = _viewModel.RenameColumnCommand;
+        //    CarouselItemPopup.PopupView.HeaderTitle = AppResources.RenameColumn;
+        //    CarouselItemPopup.PopupView.ContentTemplate = Application.Current.Resources["RenameColumnPopup"] as DataTemplate;
 
-            CarouselItemPopup.Show();
-        }
+        //    CarouselItemPopup.Show();
+        //}
     }
 }

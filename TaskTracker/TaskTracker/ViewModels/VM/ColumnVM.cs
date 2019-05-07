@@ -76,37 +76,14 @@ namespace TaskTracker.ViewModels.VM
         #endregion
 
         public Action<string> DisplayExceptionMessage;
-        public Action DisplayAddTask;
-        public Action<TaskVM> DisplayTaskPage;
-        public Action DisplayRenamePopup;
-
+        
         private readonly RestManager _manager;
-
-        public ICommand AddTaskButtonCommand { get; set; }
-        public ICommand AddTaskCommand { get; set; }
-        public ICommand RenameColumnCommand { get; set; }
-        public ICommand RenameColumnButtonCommand { get; set; }
-        public ICommand TaskSelectedCommand { get; set; }
-
-        public string NewTaskName {
-            get => _newTaskName;
-            set {
-                _newTaskName = value;
-                OnPropertyChanged(nameof(NewTaskName));
-            }
-        }
-        private string _newTaskName;
 
         public ColumnVM()
         {
             _manager = new RestManager(new RestService());
             TaskCollection = new ObservableCollection<TaskVM>();
 
-            AddTaskButtonCommand = new Command(OnAddTaskButton);
-            AddTaskCommand = new Command(OnAddTask);
-            TaskSelectedCommand = new Command(OnTaskSelected);
-            RenameColumnCommand = new Command(OnRenameColumn);
-            RenameColumnButtonCommand = new Command(OnRenameColumnButton);
         }
 
         public static implicit operator ColumnVM(Column column)
@@ -116,42 +93,6 @@ namespace TaskTracker.ViewModels.VM
                 Base = column
             };
         }
-
-        #region Commands
-
-        private void OnAddTask()
-        {
-            AddTask();
-        }
-
-        private void OnAddTaskButton()
-        {
-            DisplayAddTask?.Invoke();
-        }
-
-        private void OnTaskSelected(object obj)
-        {
-            Syncfusion.ListView.XForms.ItemTappedEventArgs arg = obj as Syncfusion.ListView.XForms.ItemTappedEventArgs;
-
-            TaskVM task = arg?.ItemData as TaskVM;
-
-            if(task == null)
-                return;
-
-            DisplayTaskPage?.Invoke(task);
-        }
-
-        private void OnRenameColumn()
-        {
-            RenameColumn();
-        }
-
-        private void OnRenameColumnButton()
-        {
-            DisplayRenamePopup?.Invoke();
-        }
-
-        #endregion
 
         #region Methods
 
@@ -171,44 +112,11 @@ namespace TaskTracker.ViewModels.VM
             }
         }
 
-        private async void AddTask()
-        {
-            try
-            {
-                TaskVM returnedTask = await _manager.AddNewTask(new Task(BoardId, this.Id, NewTaskName));
-
-                returnedTask.AssignedUser = await _manager.GetUser(returnedTask.AssignedUserId);
-
-                TaskCollection.Add(returnedTask);
-            }
-            catch (RestException ex)
-            {
-                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
-            }
-            finally
-            {
-                NewTaskName = string.Empty;
-            }
-        }
-
         internal async void MoveTask(int taskId, int position)
         {
             try
             {
                 await _manager.MoveTask(taskId, position);
-            }
-            catch (RestException ex)
-            {
-                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
-            }
-        }
-
-        internal async void RenameColumn()
-        {
-            try
-            {
-
-                await _manager.EditColumn(Base);
             }
             catch (RestException ex)
             {

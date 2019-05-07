@@ -35,7 +35,7 @@
 
         <DataTemplate x:Key="RenameColumnPopup">
             <Grid>
-                <Entry Text="{Binding Path=Name}" Placeholder="{resources:Translate ColumnName}" 
+                <Entry Text="{Binding Path=ColumnName}" Placeholder="{resources:Translate ColumnName}" 
                        Keyboard="Text" TextColor="Black" HeightRequest="50"/>
             </Grid>
         </DataTemplate>

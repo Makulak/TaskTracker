@@ -11,6 +11,7 @@ namespace TaskTracker.Views
     public partial class TaskPage : ContentPage
     {
         private TaskPageViewModel _viewModel;
+
         internal TaskPage(TaskVM selectedTask)
         {
             _viewModel = new TaskPageViewModel(selectedTask);

@@ -1,4 +1,5 @@
-﻿using TaskTracker.Resources;
+﻿using Syncfusion.ListView.XForms;
+using TaskTracker.Resources;
 using TaskTracker.ViewModels.Page;
 using TaskTracker.ViewModels.VM;
 using Xamarin.Forms;
@@ -15,13 +16,15 @@ namespace TaskTracker.Views
         {
             InitializeComponent();
 
-            MainPageViewModel vm = new MainPageViewModel(board);
+            _viewModel = new MainPageViewModel(board);
 
-            vm.DisplayAddColumn += SetAddColumnPopup;
-            vm.DisplayExceptionMessage += (exMessage) => DisplayAlert(AppResources.Error, exMessage, AppResources.Ok);
+            _viewModel.DisplayAddColumn += SetAddColumnPopup;
+            _viewModel.DisplayExceptionMessage += (exMessage) => DisplayAlert(AppResources.Error, exMessage, AppResources.Ok);
+            _viewModel.DisplayAddTask = SetNewTaskPopup;
+            _viewModel.DisplayRenameColumnPopup = SetRenameColumnPopup;
+            _viewModel.DisplayTaskPage = (task) => Navigation.PushAsync(new TaskPage(task));
 
-            BindingContext = vm;
-            _viewModel = vm;
+            BindingContext = _viewModel;
         }
 
         private void SetAddColumnPopup()
@@ -33,6 +36,28 @@ namespace TaskTracker.Views
             MainPopup.PopupView.ContentTemplate = Application.Current.Resources["AddColumnPopup"] as DataTemplate;
 
             MainPopup.Show();
+        }
+
+        private void SetNewTaskPopup()
+        {
+            MainPopup.PopupView.AcceptCommand = _viewModel.AddTaskCommand;
+            MainPopup.PopupView.HeaderTitle = AppResources.AddNewTask;
+            MainPopup.PopupView.ContentTemplate = Application.Current.Resources["AddTaskPopup"] as DataTemplate;
+
+            MainPopup.Show();
+        }
+
+        private void SetRenameColumnPopup()
+        {
+            MainPopup.PopupView.AcceptCommand = _viewModel.RenameColumnCommand;
+            MainPopup.PopupView.HeaderTitle = AppResources.RenameColumn;
+            MainPopup.PopupView.ContentTemplate = Application.Current.Resources["RenameColumnPopup"] as DataTemplate;
+
+            MainPopup.Show();
+        }
+
+        private void LvTasks_OnItemDragging(object sender, ItemDraggingEventArgs e)
+        {
         }
     }
 }
