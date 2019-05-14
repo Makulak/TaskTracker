@@ -109,9 +109,9 @@ namespace TaskTracker.Data
             await _restService.DeleteTask(taskId);
         }
 
-        public async Task MoveTask(int taskId, int position)
+        public async Task MoveTask(int taskId, int destinationColumn, int destinationPosition)
         {
-            await _restService.MoveTask(taskId, position);
+            await _restService.MoveTask(taskId, destinationColumn, destinationPosition);
         }
 
         public async Task<Models.Task> GetTask(int taskId)

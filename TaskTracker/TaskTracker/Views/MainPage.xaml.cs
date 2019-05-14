@@ -1,4 +1,5 @@
-﻿using Syncfusion.ListView.XForms;
+﻿using System.Collections.Generic;
+using Syncfusion.ListView.XForms;
 using TaskTracker.Resources;
 using TaskTracker.ViewModels.Page;
 using TaskTracker.ViewModels.VM;
@@ -18,11 +19,13 @@ namespace TaskTracker.Views
 
             _viewModel = new MainPageViewModel(board);
 
-            _viewModel.DisplayAddColumn += SetAddColumnPopup;
-            _viewModel.DisplayExceptionMessage += (exMessage) => DisplayAlert(AppResources.Error, exMessage, AppResources.Ok);
+            _viewModel.DisplayAddColumn = SetAddColumnPopup;
+            _viewModel.DisplayExceptionMessage = (exMessage) => DisplayAlert(AppResources.Error, exMessage, AppResources.Ok);
             _viewModel.DisplayAddTask = SetNewTaskPopup;
             _viewModel.DisplayRenameColumnPopup = SetRenameColumnPopup;
             _viewModel.DisplayTaskPage = (task) => Navigation.PushAsync(new TaskPage(task));
+            _viewModel.DisplayMoveTaskPopup = SetColumnChoosePopup;
+            _viewModel.CloseMoveTaskPopup = () => MainPopup.IsOpen = false;
 
             BindingContext = _viewModel;
         }
@@ -56,8 +59,58 @@ namespace TaskTracker.Views
             MainPopup.Show();
         }
 
+        private void SetColumnChoosePopup()
+        {
+            MainPopup.PopupView.AcceptCommand = _viewModel.MoveTaskCommand;
+            MainPopup.PopupView.HeaderTitle = AppResources.MoveTask;
+            MainPopup.PopupView.ContentTemplate = Application.Current.Resources["MoveTaskPopup"] as DataTemplate;
+            MainPopup.PopupView.ShowFooter = false;
+            MainPopup.PopupView.HeightRequest = 350;
+
+            MainPopup.Show();
+        }
+
         private void LvTasks_OnItemDragging(object sender, ItemDraggingEventArgs e)
         {
+            if (e.Action == DragAction.Start)
+            {
+            }
+
+            //    if (e.Action == DragAction.Dragging)
+            //    {
+            //        var position = new Point(e.Position.X - this.lvTasks.Bounds.X - this.lvTasks.Bounds.X, e.Position.Y - this.lvTasks.Bounds.Y - this.lvTasks.ItemSize);
+
+            //        if (Header.Bounds.Contains(position))
+            //        {
+            //            DeleteImage.IsVisible = true;
+            //        }
+            //        else
+            //        {
+            //            DeleteImage.IsVisible = false;
+            //        }
+            //    }
+
+            if (e.Action == DragAction.Drop)
+            {
+                //var position = new Point(e.Position.X - this.lvTasks.Bounds.X - this.lvTasks.Bounds.X, e.Position.Y - this.lvTasks.Bounds.Y - this.lvTasks.ItemSize);
+
+                ColumnVM column = _viewModel.SelectedBoard.ColumnsCollection[_viewModel.SelectedColumnPosition];
+                TaskVM task = e.ItemData as TaskVM;
+
+                if (column == null || task == null)
+                    return;
+
+                //if (Header.Bounds.Contains(position))
+                //{
+                //    column.RemoveTask(task);
+                //}
+                //else
+                //{
+                _viewModel.MoveTask(task.Id, column.Id, e.NewIndex);
+                //}
+
+                //DeleteImage.IsVisible = false;
+            }
         }
     }
 }

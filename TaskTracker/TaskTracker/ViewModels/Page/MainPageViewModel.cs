@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using TaskTracker.Data;
@@ -23,6 +24,16 @@ namespace TaskTracker.ViewModels.Page
             }
         }
         private BoardVM _selectedBoard;
+
+        public TaskVM SelectedTask {
+            get => _selectedTask;
+            set
+            {
+                _selectedTask = value;
+                OnPropertyChanged(nameof(SelectedTask));
+            }
+        }
+        private TaskVM _selectedTask;
 
         public string TaskName {
             get => _taskName;
@@ -69,10 +80,13 @@ namespace TaskTracker.ViewModels.Page
         public ICommand RenameColumnButtonCommand { get; set; }
         public ICommand AddTaskButtonCommand { get; set; }
         public ICommand MoveTaskButtonCommand { get; set; }
+        public ICommand MoveTaskCommand { get; set; }
 
         public Action DisplayAddColumn;
         public Action DisplayRenameColumnPopup;
         public Action DisplayAddTask;
+        public Action DisplayMoveTaskPopup;
+        public Action CloseMoveTaskPopup;
         public Action<TaskVM> DisplayTaskPage;
 
         public MainPageViewModel(BoardVM selectedBoard)
@@ -88,6 +102,7 @@ namespace TaskTracker.ViewModels.Page
             RenameColumnButtonCommand = new Command(OnRenameColumnButton);
             AddTaskButtonCommand = new Command(OnAddTaskButton);
             MoveTaskButtonCommand = new Command(OnMoveTaskButton);
+            MoveTaskCommand = new Command(OnMoveTask);
 
             GetDetailedInfoAboutBoard(selectedBoard);
         }
@@ -156,9 +171,28 @@ namespace TaskTracker.ViewModels.Page
             DisplayAddTask?.Invoke();
         }
 
-        private void OnMoveTaskButton()
+        private void OnMoveTaskButton(object obj)
         {
+            SelectedTask = obj as TaskVM;
+            if (SelectedTask == null)
+                return;
 
+            DisplayMoveTaskPopup?.Invoke();
+        }
+
+        private void OnMoveTask(object obj)
+        {
+            CloseMoveTaskPopup?.Invoke();
+
+            Syncfusion.ListView.XForms.ItemTappedEventArgs args = obj as Syncfusion.ListView.XForms.ItemTappedEventArgs;
+
+            ColumnVM selectedColumn = args?.ItemData as ColumnVM;
+
+            if (selectedColumn == null)
+                return;
+
+            MoveTask(SelectedTask.Id, selectedColumn.Id, 0);
+            GetDetailedInfoAboutBoard(SelectedBoard);
         }
 
         #endregion
@@ -217,9 +251,22 @@ namespace TaskTracker.ViewModels.Page
             }
         }
 
-        private void MoveTask(int boardId, int taskId, int sourceColumn, int destinationColumn)
+        internal async void MoveTask(int taskId, int destinationColumn, int destinationPosition)
         {
+            try
+            {
+                ShowWaitForm = true;
 
+                await _manager.MoveTask(taskId, destinationColumn, destinationPosition);
+            }
+            catch (RestException ex)
+            {
+                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
+            }
+            finally
+            {
+                ShowWaitForm = false;
+            }
         }
 
         private void MoveColumn(int boardId, int columnId, int sourcePosition, int destinationPosition)

@@ -158,7 +158,7 @@ namespace TaskTracker.ViewModels.Page
             {
                 ShowWaitForm = true;
                 await _manager.EditBoard(SelectedBoard.Base);
-
+            
                 ShowBoardPage();
             }
             catch (RestException ex)

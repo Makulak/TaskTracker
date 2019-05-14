@@ -26,7 +26,7 @@ namespace TaskTracker.Data
         Task<Models.Task> AddNewTask(Models.Task task);
         Task<Models.Task> EditTask(Models.Task task);
         Task DeleteTask(int taskId);
-        Task MoveTask(int taskId, int position);
+        Task MoveTask(int taskId, int destinationColumn, int destinationPosition);
         Task<Models.Task> GetTask(int taskId);
     }
 }

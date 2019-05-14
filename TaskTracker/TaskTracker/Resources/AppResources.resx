@@ -240,4 +240,7 @@
   <data name="EnterUserName" xml:space="preserve">
     <value>Wpisz nazwę użytkownika</value>
   </data>
+  <data name="MoveTask" xml:space="preserve">
+    <value>Przenieś zadanie</value>
+  </data>
 </root>

@@ -112,18 +112,6 @@ namespace TaskTracker.ViewModels.VM
             }
         }
 
-        internal async void MoveTask(int taskId, int position)
-        {
-            try
-            {
-                await _manager.MoveTask(taskId, position);
-            }
-            catch (RestException ex)
-            {
-                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
-            }
-        }
-
         #endregion
     }
 }

@@ -64,5 +64,16 @@
             </xForms:SfListView>
         </DataTemplate>
 
+        <DataTemplate x:Key="MoveTaskPopup">
+            <xForms:SfListView ItemSpacing="5" WidthRequest="350" ItemSize="30" SelectionMode="None" TapCommand="{Binding MoveTaskCommand}" ItemsSource="{Binding SelectedBoard.ColumnsCollection}">
+                <xForms:SfListView.ItemTemplate>
+                    <DataTemplate>
+                            <Label Text="{Binding Name}" TextColor="Black" FontSize="Medium" 
+                                   HorizontalTextAlignment="Start" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"/>
+                    </DataTemplate>
+                </xForms:SfListView.ItemTemplate>
+            </xForms:SfListView>
+        </DataTemplate>
+
     </Application.Resources>
 </Application>

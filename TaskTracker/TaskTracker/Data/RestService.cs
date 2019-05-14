@@ -433,11 +433,11 @@ namespace TaskTracker.Data
             }
         }
 
-        public async Task MoveTask(int taskId, int position)
+        public async Task MoveTask(int taskId, int destinationColumn, int destinationPosition)
         {
-            var uri = UriFactory.CreateEndpointUri($"tasks/move/id={taskId}/position={position}");
+            var uri = UriFactory.CreateEndpointUri($"tasks/move/id={taskId}/target_column_id={destinationColumn}/position={destinationPosition}");
             var param = JsonContentFactory.CreateContent(null);
-
+        
             HttpResponseMessage response;
 
             try

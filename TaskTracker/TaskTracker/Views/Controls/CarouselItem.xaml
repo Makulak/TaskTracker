@@ -52,7 +52,7 @@
                                     <StackLayout>
                                         <Label TextColor="Black" Text="{Binding Name}" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand"/>
                                         <Button BackgroundColor="Transparent" Image="arrows.xml" VerticalOptions="End" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" 
-                                                CornerRadius="20" CommandParameter="{Binding .}" Command="{Binding Path=BindingContext.MoveTaskButtonCommands}"/>
+                                                CornerRadius="20" CommandParameter="{Binding .}" Command="{Binding Path=BindingContext.MoveTaskButtonCommand}"/>
                                     </StackLayout>
                                 </FlexLayout>
                             </DataTemplate>

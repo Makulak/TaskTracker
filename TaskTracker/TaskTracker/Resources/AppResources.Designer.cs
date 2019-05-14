@@ -286,6 +286,15 @@ namespace TaskTracker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Przenieś zadanie.
+        /// </summary>
+        public static string MoveTask {
+            get {
+                return ResourceManager.GetString("MoveTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nazwa nie może być pusta..
         /// </summary>
         public static string NameCannotBeEmpty {
