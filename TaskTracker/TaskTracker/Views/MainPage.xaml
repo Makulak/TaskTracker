@@ -5,6 +5,7 @@
              xmlns:resources="clr-namespace:TaskTracker.Resources"
              xmlns:popupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
              xmlns:xForms1="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
              x:Class="TaskTracker.Views.MainPage"
              Title="{Binding SelectedBoard.Name}"
              x:Name="mainPage"
@@ -79,9 +80,9 @@
                                                 <FlexLayout Padding="5,5,5,5" AlignItems="Start" JustifyContent="SpaceBetween" Direction="Column" BackgroundColor="#4BFAFAFA">
                                                     <Label TextColor="Black" Text="{Binding Name}"/>
                                                     <BoxView HeightRequest="1" HorizontalOptions="CenterAndExpand" Color="#616161"/>
-                                                    <Frame HeightRequest="30" WidthRequest="30" CornerRadius="15" Padding="1" BackgroundColor="LightBlue" Opacity=".5">
-                                                        <Image Scale="0.7" Source="{Binding AssignedUser.Image}"/>
-                                                    </Frame>
+                                                    <border:SfBorder HeightRequest="30" WidthRequest="30" CornerRadius="15" BackgroundColor="LightBlue" BorderWidth="0" Opacity=".5">
+                                                        <Image Source="{Binding AssignedUser.Image}"/>
+                                                    </border:SfBorder>
                                                 </FlexLayout>
                                             </DataTemplate>
                                         </xForms1:SfListView.DragItemTemplate>

@@ -26,6 +26,7 @@ namespace TaskTracker.Views
             _viewModel.DisplayTaskPage = (task) => Navigation.PushAsync(new TaskPage(task));
             _viewModel.DisplayMoveTaskPopup = SetColumnChoosePopup;
             _viewModel.CloseMoveTaskPopup = () => MainPopup.IsOpen = false;
+            MainPopup.PopupView.HeightRequest = 150;
 
             BindingContext = _viewModel;
         }
@@ -37,6 +38,7 @@ namespace TaskTracker.Views
             MainPopup.PopupView.AcceptButtonText = AppResources.Accept;
             MainPopup.PopupView.DeclineButtonText = AppResources.Cancel;
             MainPopup.PopupView.ContentTemplate = Application.Current.Resources["AddColumnPopup"] as DataTemplate;
+            MainPopup.PopupView.HeightRequest = 150;
 
             MainPopup.Show();
         }
@@ -46,6 +48,7 @@ namespace TaskTracker.Views
             MainPopup.PopupView.AcceptCommand = _viewModel.AddTaskCommand;
             MainPopup.PopupView.HeaderTitle = AppResources.AddNewTask;
             MainPopup.PopupView.ContentTemplate = Application.Current.Resources["AddTaskPopup"] as DataTemplate;
+            MainPopup.PopupView.HeightRequest = 150;
 
             MainPopup.Show();
         }
@@ -55,6 +58,7 @@ namespace TaskTracker.Views
             MainPopup.PopupView.AcceptCommand = _viewModel.RenameColumnCommand;
             MainPopup.PopupView.HeaderTitle = AppResources.RenameColumn;
             MainPopup.PopupView.ContentTemplate = Application.Current.Resources["RenameColumnPopup"] as DataTemplate;
+            MainPopup.PopupView.HeightRequest = 150;
 
             MainPopup.Show();
         }
@@ -72,44 +76,16 @@ namespace TaskTracker.Views
 
         private void LvTasks_OnItemDragging(object sender, ItemDraggingEventArgs e)
         {
-            if (e.Action == DragAction.Start)
-            {
-            }
-
-            //    if (e.Action == DragAction.Dragging)
-            //    {
-            //        var position = new Point(e.Position.X - this.lvTasks.Bounds.X - this.lvTasks.Bounds.X, e.Position.Y - this.lvTasks.Bounds.Y - this.lvTasks.ItemSize);
-
-            //        if (Header.Bounds.Contains(position))
-            //        {
-            //            DeleteImage.IsVisible = true;
-            //        }
-            //        else
-            //        {
-            //            DeleteImage.IsVisible = false;
-            //        }
-            //    }
 
             if (e.Action == DragAction.Drop)
             {
-                //var position = new Point(e.Position.X - this.lvTasks.Bounds.X - this.lvTasks.Bounds.X, e.Position.Y - this.lvTasks.Bounds.Y - this.lvTasks.ItemSize);
-
                 ColumnVM column = _viewModel.SelectedBoard.ColumnsCollection[_viewModel.SelectedColumnPosition];
                 TaskVM task = e.ItemData as TaskVM;
 
                 if (column == null || task == null)
                     return;
 
-                //if (Header.Bounds.Contains(position))
-                //{
-                //    column.RemoveTask(task);
-                //}
-                //else
-                //{
                 _viewModel.MoveTask(task.Id, column.Id, e.NewIndex);
-                //}
-
-                //DeleteImage.IsVisible = false;
             }
         }
     }

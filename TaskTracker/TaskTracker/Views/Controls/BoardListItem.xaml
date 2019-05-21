@@ -2,6 +2,7 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
              x:Class="TaskTracker.Views.Controls.BoardListItem">
     <ContentView.Content>
         <Frame BackgroundColor="#FAFAFA" HasShadow="False" HeightRequest="80" Padding="1">
@@ -12,9 +13,11 @@
                     <xForms:SfListView.ItemTemplate>
                         <DataTemplate >
                             <FlexLayout AlignItems="Start" JustifyContent="SpaceBetween" Direction="Column">
-                                <Frame HeightRequest="30" WidthRequest="30" CornerRadius="15" Padding="1" BackgroundColor="LightBlue">
-                                    <Image Scale="0.7" Source="{Binding Image}"/>
-                                </Frame>
+                                <border:SfBorder HeightRequest="40" WidthRequest="40" CornerRadius="20" BorderWidth="0"
+                                                 HorizontalOptions="Center" VerticalOptions="Center"
+                                                 BackgroundColor="LightBlue">
+                                    <Image Source="{Binding Image}"/>
+                                </border:SfBorder>
                             </FlexLayout>
                         </DataTemplate>
                     </xForms:SfListView.ItemTemplate>

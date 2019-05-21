@@ -2,7 +2,7 @@
 using System.Text;
 using Newtonsoft.Json;
 
-namespace TaskTracker.Helper
+namespace TaskTracker.Helpers
 {
     public static class JsonContentFactory
     {

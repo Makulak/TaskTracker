@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using TaskTracker.Helpers;
+using TaskTracker.Helpers.Behaviors;
 using TaskTracker.Resources;
 using TaskTracker.ViewModels.Page;
 using TaskTracker.ViewModels.VM;

@@ -6,7 +6,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using TaskTracker.Exceptions;
-using TaskTracker.Helper;
+using TaskTracker.Helpers;
 using TaskTracker.Models;
 using Task = System.Threading.Tasks.Task;
 

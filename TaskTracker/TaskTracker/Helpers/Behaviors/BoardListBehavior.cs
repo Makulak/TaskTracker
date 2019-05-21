@@ -2,12 +2,11 @@
 using System.Windows.Input;
 using Syncfusion.ListView.XForms;
 using Syncfusion.XForms.PopupLayout;
-using TaskTracker.Models;
 using TaskTracker.Resources;
 using TaskTracker.ViewModels.VM;
 using Xamarin.Forms;
 
-namespace TaskTracker.Helpers
+namespace TaskTracker.Helpers.Behaviors
 {
     class BoardListBehavior : Behavior<SfListView>
     {
@@ -74,7 +73,7 @@ namespace TaskTracker.Helpers
                     Text = AppResources.Delete,
                     TextColor = Color.Black,
                     HeightRequest = 50,
-                    BackgroundColor =  Color.FromHex("#E0E0E0")
+                    BackgroundColor = Color.FromHex("#E0E0E0")
                 };
                 deleteButton.Clicked += DeleteButtonClicked;
                 deleteButton.VerticalOptions = LayoutOptions.StartAndExpand;

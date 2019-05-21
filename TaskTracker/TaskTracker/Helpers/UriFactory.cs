@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TaskTracker.Data;
 
-namespace TaskTracker.Helper
+namespace TaskTracker.Helpers
 {
     public static class UriFactory
     {
