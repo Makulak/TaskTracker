@@ -13,10 +13,10 @@
                     <xForms:SfListView.ItemTemplate>
                         <DataTemplate >
                             <FlexLayout AlignItems="Start" JustifyContent="SpaceBetween" Direction="Column">
-                                <border:SfBorder HeightRequest="40" WidthRequest="40" CornerRadius="20" BorderWidth="0"
+                                <border:SfBorder HeightRequest="36" WidthRequest="36" CornerRadius="18" BorderWidth="0"
                                                  HorizontalOptions="Center" VerticalOptions="Center"
                                                  BackgroundColor="LightBlue">
-                                    <Image Source="{Binding Image}"/>
+                                    <Image Scale="1.2" Source="{Binding Image}"/>
                                 </border:SfBorder>
                             </FlexLayout>
                         </DataTemplate>

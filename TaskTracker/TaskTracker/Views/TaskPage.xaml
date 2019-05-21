@@ -6,6 +6,7 @@
              xmlns:popupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              xmlns:converters="clr-namespace:TaskTracker.Converters"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
              x:Class="TaskTracker.Views.TaskPage">
 
     <ContentPage.Resources>
@@ -49,9 +50,9 @@
                                     </Grid.ColumnDefinitions>
 
                                     <FlexLayout Grid.Column="0" HorizontalOptions="Start" >
-                                        <Frame HeightRequest="40" WidthRequest="40" CornerRadius="20" Padding="1" BackgroundColor="LightBlue">
-                                            <Image Scale="0.7" Source="{Binding SelectedTask.AssignedUser.Image}"/>
-                                        </Frame>
+                                        <border:SfBorder HeightRequest="40" WidthRequest="40" CornerRadius="20" BorderWidth="0" BackgroundColor="LightBlue">
+                                            <Image Scale="1.2" Source="{Binding SelectedTask.AssignedUser.Image}"/>
+                                        </border:SfBorder>
                                     </FlexLayout>
 
                                     <Label Grid.Column="1" Text="{Binding SelectedTask.AssignedUser.Login}" TextColor="Black" FontSize="Medium" 

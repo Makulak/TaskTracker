@@ -16,6 +16,10 @@
         <converters:BoolNegateConverter x:Key="NegateConverter"/>
     </ContentPage.Resources>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Secondary" Text="{resources:Translate LogOut}" Command="{Binding LogOutCommand}"/>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <Grid>
             <sfPopup:SfPopupLayout x:Name="BoardPopup" BackgroundColor="#EEEEEE" 

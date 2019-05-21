@@ -7,6 +7,7 @@
              xmlns:textInputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
              xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:comboBox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
              x:Name="brdManagementPage"
              x:Class="TaskTracker.Views.BoardManagementPage">
 
@@ -63,9 +64,9 @@
                                                 </Grid.ColumnDefinitions>
 
                                                 <FlexLayout Grid.Column="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand">
-                                                    <Frame HeightRequest="32" WidthRequest="32" CornerRadius="16" Padding="1" BackgroundColor="LightBlue">
-                                                        <Image Scale="0.7" Source="{Binding Image}"/>
-                                                    </Frame>
+                                                    <border:SfBorder HeightRequest="36" WidthRequest="36" CornerRadius="17" BorderWidth="0" BackgroundColor="LightBlue">
+                                                        <Image Scale="1.2" Source="{Binding Image}"/>
+                                                    </border:SfBorder>
                                                 </FlexLayout>
 
                                                 <Label Grid.Column="1" Text="{Binding Login}" TextColor="Black" FontSize="Medium" 

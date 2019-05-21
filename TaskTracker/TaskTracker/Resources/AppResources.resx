@@ -243,4 +243,7 @@
   <data name="MoveTask" xml:space="preserve">
     <value>Przenieś zadanie</value>
   </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Wyloguj</value>
+  </data>
 </root>

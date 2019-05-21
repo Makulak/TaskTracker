@@ -269,7 +269,7 @@ namespace TaskTracker.ViewModels.Page
             }
         }
 
-        private void MoveColumn(int boardId, int columnId, int sourcePosition, int destinationPosition)
+        private void MoveColumn(int boardId, int columnId, int destinationPosition)
         {
 
         }
@@ -278,11 +278,17 @@ namespace TaskTracker.ViewModels.Page
         {
             try
             {
+                ShowWaitForm = true;
+
                 await _manager.EditColumn(SelectedBoard.ColumnsCollection[SelectedColumnPosition].Base);
             }
             catch (RestException ex)
             {
                 DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
+            }
+            finally
+            {
+                ShowWaitForm = false;
             }
         }
 
@@ -290,6 +296,8 @@ namespace TaskTracker.ViewModels.Page
         {
             try
             {
+                ShowWaitForm = true;
+
                 TaskVM returnedTask = await _manager.AddNewTask(new Task(SelectedBoard.Id, SelectedBoard.ColumnsCollection[SelectedColumnPosition].Id, NewTaskName));
 
                 returnedTask.AssignedUser = await _manager.GetUser(returnedTask.AssignedUserId);
@@ -302,6 +310,8 @@ namespace TaskTracker.ViewModels.Page
             }
             finally
             {
+                ShowWaitForm = false;
+
                 NewTaskName = string.Empty;
             }
         }

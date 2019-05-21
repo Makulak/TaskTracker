@@ -81,6 +81,7 @@ namespace TaskTracker.ViewModels.VM
             set
             {
                 _assignedUser = value;
+                AssignedUserId = AssignedUser.Id;
                 OnPropertyChanged(nameof(AssignedUser));
             }
         }
