@@ -52,6 +52,11 @@ namespace TaskTracker.Data
             }
         }
 
+        public async Task LogOut()
+        {
+            Client.DefaultRequestHeaders.Authorization = null;
+        }
+
         public async Task Register(User user)
         {
             var uri = UriFactory.CreateEndpointUri("users/register");

@@ -17,6 +17,7 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Secondary" Text="{resources:Translate AddImage}" Command="{Binding AddImageCommand}"/>
         <ToolbarItem Order="Secondary" Text="{resources:Translate LogOut}" Command="{Binding LogOutCommand}"/>
     </ContentPage.ToolbarItems>
 

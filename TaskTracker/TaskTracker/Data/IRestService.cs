@@ -9,6 +9,7 @@ namespace TaskTracker.Data
     interface IRestService
     {
         Task LogIn(User user);
+        Task LogOut();
         Task Register(User user);
         Task<User> GetUser(int userId);
         Task<List<User>> GetUserListByLogin(string pattern);

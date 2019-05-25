@@ -24,6 +24,8 @@ namespace TaskTracker.Views
             vm.DisplayAddBoardPopup += SetAddNewBoardPopup;
             vm.DisplayEditBoardPage = (selectedBoard) => Navigation.PushAsync(new BoardManagementPage(selectedBoard));
             vm.DisplayDeleteBoardPopup += SetDeleteBoardPopup;
+            vm.DisplayLoginPage += () => Application.Current.MainPage = new NavigationPage(new LoginPage());
+
 
             BindingContext = vm;
             _viewModel = vm;

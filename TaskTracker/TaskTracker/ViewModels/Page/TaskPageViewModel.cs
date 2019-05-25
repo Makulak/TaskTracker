@@ -120,7 +120,6 @@ namespace TaskTracker.ViewModels.Page
 
         #endregion
 
-
         #region Methods
 
         private async void GetAvailableUsers()

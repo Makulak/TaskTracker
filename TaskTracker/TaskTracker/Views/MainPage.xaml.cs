@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Syncfusion.ListView.XForms;
+﻿using Syncfusion.ListView.XForms;
+using Syncfusion.XForms.PopupLayout;
 using TaskTracker.Resources;
 using TaskTracker.ViewModels.Page;
 using TaskTracker.ViewModels.VM;
@@ -37,6 +37,8 @@ namespace TaskTracker.Views
             MainPopup.PopupView.HeaderTitle = AppResources.AddNewColumn;
             MainPopup.PopupView.AcceptButtonText = AppResources.Accept;
             MainPopup.PopupView.DeclineButtonText = AppResources.Cancel;
+            MainPopup.PopupView.AppearanceMode = AppearanceMode.TwoButton;
+            MainPopup.PopupView.ShowFooter = true;
             MainPopup.PopupView.ContentTemplate = Application.Current.Resources["AddColumnPopup"] as DataTemplate;
             MainPopup.PopupView.HeightRequest = 150;
 
@@ -47,6 +49,10 @@ namespace TaskTracker.Views
         {
             MainPopup.PopupView.AcceptCommand = _viewModel.AddTaskCommand;
             MainPopup.PopupView.HeaderTitle = AppResources.AddNewTask;
+            MainPopup.PopupView.AcceptButtonText = AppResources.Accept;
+            MainPopup.PopupView.DeclineButtonText = AppResources.Cancel;
+            MainPopup.PopupView.AppearanceMode = AppearanceMode.TwoButton;
+            MainPopup.PopupView.ShowFooter = true;
             MainPopup.PopupView.ContentTemplate = Application.Current.Resources["AddTaskPopup"] as DataTemplate;
             MainPopup.PopupView.HeightRequest = 150;
 
@@ -57,6 +63,10 @@ namespace TaskTracker.Views
         {
             MainPopup.PopupView.AcceptCommand = _viewModel.RenameColumnCommand;
             MainPopup.PopupView.HeaderTitle = AppResources.RenameColumn;
+            MainPopup.PopupView.AcceptButtonText = AppResources.Accept;
+            MainPopup.PopupView.DeclineButtonText = AppResources.Cancel;
+            MainPopup.PopupView.AppearanceMode = AppearanceMode.TwoButton;
+            MainPopup.PopupView.ShowFooter = true;
             MainPopup.PopupView.ContentTemplate = Application.Current.Resources["RenameColumnPopup"] as DataTemplate;
             MainPopup.PopupView.HeightRequest = 150;
 
@@ -69,7 +79,7 @@ namespace TaskTracker.Views
             MainPopup.PopupView.HeaderTitle = AppResources.MoveTask;
             MainPopup.PopupView.ContentTemplate = Application.Current.Resources["MoveTaskPopup"] as DataTemplate;
             MainPopup.PopupView.ShowFooter = false;
-            MainPopup.PopupView.HeightRequest = 350;
+            MainPopup.PopupView.HeightRequest = 300;
 
             MainPopup.Show();
         }

@@ -28,6 +28,8 @@ namespace TaskTracker.ViewModels.Page
         private ObservableCollection<BoardVM> _userBoards;
 
         public ICommand BoardSelectedCommand { get; set; }
+        public ICommand LogOutCommand { get; set; }
+        public ICommand AddImageCommand { get; set; }
 
         public ICommand AddBoardButtonCommand { get; set; }
         public ICommand EditBoardButtonCommand { get; set; }
@@ -41,6 +43,7 @@ namespace TaskTracker.ViewModels.Page
         public Action<BoardVM> DisplayEditBoardPage;
         public Action DisplayAddBoardPopup;
         public Action DisplayDeleteBoardPopup;
+        public Action DisplayLoginPage;
 
         private readonly RestManager _manager;
 
@@ -58,6 +61,8 @@ namespace TaskTracker.ViewModels.Page
             _manager = new RestManager(new RestService());
 
             BoardSelectedCommand = new Command(OnBoardSelected);
+            LogOutCommand = new Command(OnLogOut);
+            AddImageCommand = new Command(OnAddImage);
 
             AddBoardButtonCommand = new Command(OnAddBoardButton);
             EditBoardButtonCommand = new Command(OnEditBoardButton);
@@ -81,12 +86,22 @@ namespace TaskTracker.ViewModels.Page
             if (board == null)
                 return;
 
-            DisplayMainPage(board);
+            DisplayMainPage?.Invoke(board);
+        }
+
+        private void OnAddImage()
+        {
+            BrowseImage();
+        }
+
+        private void OnLogOut()
+        {
+            LogOut();
         }
 
         private void OnAddBoardButton()
         {
-            DisplayAddBoardPopup();
+            DisplayAddBoardPopup?.Invoke();
         }
 
         private void OnEditBoardButton(object obj)
@@ -96,7 +111,7 @@ namespace TaskTracker.ViewModels.Page
                 _selectedBoard = board;
 
                 BoardName = board.Name;
-                DisplayEditBoardPage(obj as BoardVM);
+                DisplayEditBoardPage?.Invoke(board);
 
                 GetUserBoards();
             }
@@ -109,10 +124,9 @@ namespace TaskTracker.ViewModels.Page
                 _selectedBoard = board;
 
                 BoardName = board.Name;
-                DisplayDeleteBoardPopup();
+                DisplayDeleteBoardPopup?.Invoke();
             }
         }
-
 
         private void OnAddNewBoard()
         {
@@ -154,6 +168,17 @@ namespace TaskTracker.ViewModels.Page
 
         #region Methods
 
+        private void BrowseImage()
+        {
+
+        }
+
+        private async void LogOut()
+        {
+            await _manager.LogOut();
+            DisplayLoginPage?.Invoke();
+        }
+
         internal async void GetUserBoards()
         {
             try
@@ -182,6 +207,7 @@ namespace TaskTracker.ViewModels.Page
         {
             try
             {
+                ShowWaitForm = true;
                 await _manager.DeleteBoard(board.Id);
             }
             catch (RestException ex)
@@ -191,6 +217,7 @@ namespace TaskTracker.ViewModels.Page
             finally
             {
                 GetUserBoards();
+                ShowWaitForm = false;
             }
         }
 
@@ -198,6 +225,8 @@ namespace TaskTracker.ViewModels.Page
         {
             try
             {
+                ShowWaitForm = true;
+
                 await _manager.EditBoard(board);
             }
             catch (RestException ex)
@@ -207,6 +236,7 @@ namespace TaskTracker.ViewModels.Page
             finally
             {
                 GetUserBoards();
+                ShowWaitForm = false;
             }
         }
 
@@ -214,6 +244,8 @@ namespace TaskTracker.ViewModels.Page
         {
             try
             {
+                ShowWaitForm = true;
+                BoardName = string.Empty;
                 await _manager.AddNewBoard(boardName);
             }
             catch (RestException ex)
@@ -223,6 +255,7 @@ namespace TaskTracker.ViewModels.Page
             finally
             {
                 GetUserBoards();
+                ShowWaitForm = false;
             }
         }
 

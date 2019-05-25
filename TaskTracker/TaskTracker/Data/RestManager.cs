@@ -22,6 +22,11 @@ namespace TaskTracker.Data
             await _restService.LogIn(user);
         }
 
+        public async Task LogOut()
+        {
+            await _restService.LogOut();
+        }
+
         public async Task Register(User user)
         {
             await _restService.Register(user);

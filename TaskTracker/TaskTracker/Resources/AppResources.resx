@@ -246,4 +246,7 @@
   <data name="LogOut" xml:space="preserve">
     <value>Wyloguj</value>
   </data>
+  <data name="AddImage" xml:space="preserve">
+    <value>Dodaj zdjęcie profilowe</value>
+  </data>
 </root>
