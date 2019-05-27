@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using TaskTracker.Exceptions;
 using TaskTracker.Helpers;
 using TaskTracker.Models;
+using Xamarin.Forms;
 using Task = System.Threading.Tasks.Task;
 
 namespace TaskTracker.Data
@@ -125,6 +127,28 @@ namespace TaskTracker.Data
                 return list;
             }
             else
+            {
+                throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
+            }
+        }
+
+        public async Task UploadImage(Stream stream)
+        {
+            var uri = UriFactory.CreateEndpointUri("images/upload");
+            var multi = new MultipartContent();
+            HttpResponseMessage response;
+
+            try
+            {
+                multi.Add(new StreamContent(stream));
+                response = await Client.PostAsync(uri, multi);
+            }
+            catch (Exception ex)
+            {
+                throw new ServerResponseException(ex.Message);
+            }
+
+            if (!response.IsSuccessStatusCode)
             {
                 throw new RestException(response.StatusCode, response.Content.ReadAsStringAsync().Result);
             }

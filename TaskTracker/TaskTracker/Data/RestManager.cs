@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using TaskTracker.Models;
 using Task = System.Threading.Tasks.Task;
@@ -40,6 +41,11 @@ namespace TaskTracker.Data
         public async Task<List<User>> GetUserListByLogin(string pattern)
         {
             return await _restService.GetUserListByLogin(pattern);
+        }
+
+        public async Task UploadImage(Stream stream)
+        {
+            await _restService.UploadImage(stream);
         }
 
         #endregion

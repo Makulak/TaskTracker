@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Input;
 using TaskTracker.Data;
 using TaskTracker.Exceptions;
+using TaskTracker.Helpers;
 using TaskTracker.Models;
 using TaskTracker.Resources;
 using TaskTracker.ViewModels.Page.Base;
 using TaskTracker.ViewModels.VM;
+using TaskTracker.Views;
 using Xamarin.Forms;
 
 namespace TaskTracker.ViewModels.Page
@@ -168,9 +171,33 @@ namespace TaskTracker.ViewModels.Page
 
         #region Methods
 
-        private void BrowseImage()
+        private async void BrowseImage()
         {
+            Stream stream = await DependencyService.Get<IPicturePicker>().GetImageStreamAsync();
 
+            if (stream != null)
+            {
+                Image image = new Image
+                {
+                    Source = ImageSource.FromStream(() => stream),
+                    BackgroundColor = Color.Gray
+                };
+
+                try
+                {
+                    ShowWaitForm = true;
+
+                    await _manager.UploadImage(stream);
+                }
+                catch (RestException ex)
+                {
+                    DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
+                }
+                finally
+                {
+                    ShowWaitForm = false;
+                }
+            }
         }
 
         private async void LogOut()

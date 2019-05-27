@@ -23,7 +23,7 @@
 
                 <popupLayout:SfPopupLayout.Content>
 
-                    <xForms:SfCarousel x:Name="carColumns" SelectedIndex="{Binding SelectedColumnPosition}" ItemsSource="{Binding SelectedBoard.ColumnsCollection}">
+                    <xForms:SfCarousel x:Name="carColumns" SelectedIndex="{Binding SelectedColumnPosition, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}" ItemsSource="{Binding SelectedBoard.ColumnsCollection}">
                         <xForms:SfCarousel.ItemTemplate>
                             <DataTemplate>
 

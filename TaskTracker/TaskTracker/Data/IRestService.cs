@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using TaskTracker.Models;
 using Task = System.Threading.Tasks.Task;
@@ -13,6 +13,7 @@ namespace TaskTracker.Data
         Task Register(User user);
         Task<User> GetUser(int userId);
         Task<List<User>> GetUserListByLogin(string pattern);
+        Task UploadImage(Stream stream);
 
         Task<List<Board>> GetLoggedUserBoards();
         Task<Board> AddNewBoard(string name);

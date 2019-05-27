@@ -14,7 +14,11 @@ namespace TaskTracker.Droid
     [Activity(Label = "TaskTracker", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-        internal static MainActivity Instance { get; private set; }
+        public static MainActivity Instance
+        {
+            get => _instance;
+        }
+        private static MainActivity _instance;
 
         public static readonly int PickImageId = 1000;
 
@@ -33,6 +37,8 @@ namespace TaskTracker.Droid
 
 
             LoadApplication(new App());
+
+            _instance = this;
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent intent)
