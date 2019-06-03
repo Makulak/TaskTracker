@@ -134,14 +134,13 @@ namespace TaskTracker.Data
 
         public async Task UploadImage(Stream stream)
         {
-            var uri = UriFactory.CreateEndpointUri("images/upload");
-            var multi = new MultipartContent();
+            var uri = UriFactory.CreateEndpointUri("images/upload/base64");
+            var param = JsonContentFactory.CreateContent(new XamarinImage(stream));
             HttpResponseMessage response;
 
             try
             {
-                multi.Add(new StreamContent(stream));
-                response = await Client.PostAsync(uri, multi);
+                response = await Client.PostAsync(uri, param);
             }
             catch (Exception ex)
             {

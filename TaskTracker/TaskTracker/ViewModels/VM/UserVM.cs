@@ -71,11 +71,11 @@ namespace TaskTracker.ViewModels.VM
 
             if (string.IsNullOrEmpty(newUser.ImageUrl))
             {
-                newUser.Image = ImageSource.FromFile("user.xml");
+                newUser.Image = ImageSource.FromFile("user.png");
             }
             else
             {
-                newUser.Image = ImageSource.FromUri(new Uri(newUser.ImageUrl));
+                newUser.Image = new UriImageSource{ Uri = new Uri(newUser.ImageUrl), CachingEnabled = false};
             }
 
             return newUser;
