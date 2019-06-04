@@ -9,7 +9,7 @@
              x:Class="TaskTracker.Views.MainPage"
              Title="{Binding SelectedBoard.Name}"
              x:Name="mainPage"
-             BackgroundImage="background.jpg">
+             BackgroundImage="background2.jpg">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Primary" Icon="reload.xml" Command="{Binding RefreshCommand}"/>
@@ -47,7 +47,7 @@
                                     </Grid>
 
                                     <xForms1:SfListView Grid.Row="1" x:Name="lvTasks" ItemsSource="{Binding TaskCollection}" TapCommand="{Binding BindingContext.TaskSelectedCommand, Source={x:Reference Name=mainPage}}" 
-                                       ItemDragging="LvTasks_OnItemDragging"
+                                       ItemDragging="LvTasks_OnItemDragging" SelectionMode="None" BackgroundColor="#4Ba9b7e5"
                                        ItemSize="80" DragStartMode="OnHold" ItemSpacing="0,0,0,5" 
                                        IsStickyFooter="True">
 

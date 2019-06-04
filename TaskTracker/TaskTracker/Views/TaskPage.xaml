@@ -15,7 +15,6 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Primary" Text="{resources:Translate Accept}" Command="{Binding SaveTaskCommand}"/>
-        <ToolbarItem Order="Secondary" Text="{resources:Translate Move}" Command="{Binding MoveTaskButtonCommand}"/>
         <ToolbarItem Order="Secondary" Text="{resources:Translate Delete}" Command="{Binding DeleteTaskButtonCommand}"/>
         <ToolbarItem Order="Secondary" Text="{resources:Translate Refresh}" Command="{Binding RefreshCommand}"/>
     </ContentPage.ToolbarItems>
@@ -71,7 +70,6 @@
                     </StackLayout>
 
                     <ActivityIndicator IsRunning="{Binding ShowWaitForm}" HorizontalOptions="Center"/>
-
                 </Grid>
 
             </popupLayout:SfPopupLayout.Content>

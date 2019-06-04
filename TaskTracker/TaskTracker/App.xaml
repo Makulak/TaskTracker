@@ -19,6 +19,12 @@
             </Grid>
         </DataTemplate>
 
+        <DataTemplate x:Key="DeleteTaskPopup">
+            <Grid Padding="10">
+                <Label Text="{resources:Translate Question_DeleteBoard}" TextColor="Black" HeightRequest="50"/>
+            </Grid>
+        </DataTemplate>
+
         <DataTemplate x:Key="AddTaskPopup">
             <Grid>
                 <Entry Text="{Binding NewTaskName, Mode=TwoWay}" Placeholder="{resources:Translate TaskName}" 

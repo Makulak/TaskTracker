@@ -5,15 +5,15 @@
              xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
              x:Class="TaskTracker.Views.Controls.BoardListItem">
     <ContentView.Content>
-        <Frame BackgroundColor="#FAFAFA" HasShadow="False" HeightRequest="80" Padding="1">
+        <Frame BackgroundColor="#FAFAFA" HasShadow="False" Padding="1">
             <StackLayout>
                 <Label HorizontalTextAlignment="Center" Text="{Binding Name}" TextColor="Black"/>
 
-                <xForms:SfListView Orientation="Horizontal" ItemsSource="{Binding AssignedUsers}" ItemSpacing="0" IsEnabled="false" Margin="10,5,0,5">
+                <xForms:SfListView Orientation="Horizontal" ItemsSource="{Binding AssignedUsers}" ItemSpacing="2" IsEnabled="false" Margin="10,3,0,3">
                     <xForms:SfListView.ItemTemplate>
-                        <DataTemplate >
+                        <DataTemplate>
                             <FlexLayout AlignItems="Start" JustifyContent="SpaceBetween" Direction="Column">
-                                <border:SfBorder HeightRequest="36" WidthRequest="36" CornerRadius="18" BorderWidth="0"
+                                <border:SfBorder HeightRequest="40" WidthRequest="40" CornerRadius="20" BorderWidth="0"
                                                  HorizontalOptions="Center" VerticalOptions="Center"
                                                  BackgroundColor="LightBlue">
                                     <Image Scale="1.2" Source="{Binding Image}"/>

@@ -293,6 +293,7 @@ namespace TaskTracker.ViewModels.Page
         }
 
         private async void AddTask()
+
         {
             try
             {
@@ -308,6 +309,7 @@ namespace TaskTracker.ViewModels.Page
             {
                 DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
             }
+
             finally
             {
                 ShowWaitForm = false;

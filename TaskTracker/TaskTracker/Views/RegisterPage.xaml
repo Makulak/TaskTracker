@@ -12,7 +12,8 @@
     <ContentPage.Content>
 
         <Grid>
-            <StackLayout Padding="5,50" Spacing="20" Opacity="{Binding ControlsOpacity}" IsEnabled="{Binding ShowWaitForm, Converter={StaticResource NegateConverter}}">
+            <StackLayout Padding="5,10" Spacing="20" Opacity="{Binding ControlsOpacity}" IsEnabled="{Binding ShowWaitForm, Converter={StaticResource NegateConverter}}">
+                <Image Source="logo.png"/>
                 <Frame>
                     <StackLayout Spacing="10">
                         <Entry Text="{Binding NewUser.Login}" Placeholder="{resources:Translate Login}" Keyboard="Text" TextColor="Black" HeightRequest="50"/>

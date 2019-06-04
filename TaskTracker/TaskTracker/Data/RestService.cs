@@ -264,8 +264,6 @@ namespace TaskTracker.Data
             try
             {
                 response = await Client.GetAsync(uri);
-
-
             }
             catch (Exception ex)
             {
@@ -465,7 +463,7 @@ namespace TaskTracker.Data
         {
             var uri = UriFactory.CreateEndpointUri($"tasks/move/id={taskId}/target_column_id={destinationColumn}/position={destinationPosition}");
             var param = JsonContentFactory.CreateContent(null);
-        
+
             HttpResponseMessage response;
 
             try

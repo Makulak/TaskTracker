@@ -83,7 +83,6 @@ namespace TaskTracker.ViewModels.VM
         {
             _manager = new RestManager(new RestService());
             TaskCollection = new ObservableCollection<TaskVM>();
-
         }
 
         public static implicit operator ColumnVM(Column column)
@@ -96,21 +95,7 @@ namespace TaskTracker.ViewModels.VM
 
         #region Methods
 
-        internal async void RemoveTask(TaskVM task)
-        {
-            if (task == null)
-                return;
-            try
-            {
-                await _manager.DeleteTask(task.Base.Id);
-
-                TaskCollection.Remove(TaskCollection.SingleOrDefault(t => t.Id == task.Id));
-            }
-            catch (RestException ex)
-            {
-                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
-            }
-        }
+        
 
         #endregion
     }

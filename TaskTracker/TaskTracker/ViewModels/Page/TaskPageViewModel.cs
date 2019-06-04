@@ -38,10 +38,9 @@ namespace TaskTracker.ViewModels.Page
         public Action ShowUserListPopup { get; set; }
         public Action CloseUserListPopup { get; set; }
         public Action ClosePage { get; set; }
+        public Action DeleteTaskPopup { get; set; }
 
         public ICommand SaveTaskCommand { get; set; }
-        public ICommand MoveTaskButtonCommand { get; set; }
-        public ICommand MoveTaskCommand { get; set; }
         public ICommand DeleteTaskButtonCommand { get; set; }
         public ICommand DeleteTaskCommand { get; set; }
         public ICommand EditAssignedUserButtonCommand { get; set; }
@@ -53,8 +52,6 @@ namespace TaskTracker.ViewModels.Page
             SelectedTask = task;
 
             SaveTaskCommand = new Command(OnSaveTask);
-            MoveTaskButtonCommand = new Command(OnMoveTaskButton);
-            MoveTaskCommand = new Command(OnMoveTask);
             DeleteTaskButtonCommand = new Command(OnDeleteTaskButton);
             DeleteTaskCommand = new Command(OnDeleteTask);
             EditAssignedUserButtonCommand = new Command(OnEditAssignedUserButton);
@@ -73,24 +70,14 @@ namespace TaskTracker.ViewModels.Page
             SaveTask();
         }
 
-        private void OnMoveTaskButton()
-        {
-
-        }
-
-        private void OnMoveTask()
-        {
-
-        }
-
         private void OnDeleteTaskButton()
         {
-
+            DeleteTaskPopup?.Invoke();
         }
 
         private void OnDeleteTask()
         {
-
+            RemoveTask();
         }
 
         private void OnEditAssignedUserButton()
@@ -174,6 +161,19 @@ namespace TaskTracker.ViewModels.Page
             finally
             {
                 ShowWaitForm = false;
+            }
+        }
+
+        private async void RemoveTask()
+        {
+            try
+            {
+                await _manager.DeleteTask(SelectedTask.Base.Id);
+                ClosePage();
+            }
+            catch (RestException ex)
+            {
+                DisplayExceptionMessage?.Invoke(ex.CompleteMessage);
             }
         }
 
