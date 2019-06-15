@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using TaskTracker.Exceptions;
 using TaskTracker.Models;
 using Xamarin.Forms;
 using Task = System.Threading.Tasks.Task;
@@ -34,7 +35,7 @@ namespace TaskTracker.Data
             await _restService.Register(user);
         }
 
-        public async Task<User> GetUser(int userId)
+        public async Task<User> GetUser(int? userId = null)
         {
             return await _restService.GetUser(userId);
         }
@@ -89,7 +90,22 @@ namespace TaskTracker.Data
 
         public async Task<Column> AddNewColumn(Column column)
         {
-            return await _restService.AddNewColumn(column);
+            try
+            {
+                return await _restService.AddNewColumn(column);
+            }
+            catch (ServerResponseException)
+            {
+                throw;
+            }
+            catch (RestException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw new ServerResponseException(ex.Message);
+            }
         }
 
         public async Task<Column> EditColumn(Column column)

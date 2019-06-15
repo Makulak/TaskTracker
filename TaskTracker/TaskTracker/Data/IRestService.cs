@@ -12,7 +12,7 @@ namespace TaskTracker.Data
         Task LogIn(User user);
         Task LogOut();
         Task Register(User user);
-        Task<User> GetUser(int userId);
+        Task<User> GetUser(int? userId = null);
         Task<List<User>> GetUserListByLogin(string pattern);
         Task UploadImage(Stream stream);
 

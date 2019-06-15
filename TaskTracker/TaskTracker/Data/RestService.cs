@@ -80,9 +80,9 @@ namespace TaskTracker.Data
             }
         }
 
-        public async Task<User> GetUser(int userId)
+        public async Task<User> GetUser(int? userId = null)
         {
-            var uri = UriFactory.CreateEndpointUri($"users/id={userId}");
+            var uri = UriFactory.CreateEndpointUri(userId == null ? "users/current" : $"users/id={userId}");
             HttpResponseMessage response;
 
             try
